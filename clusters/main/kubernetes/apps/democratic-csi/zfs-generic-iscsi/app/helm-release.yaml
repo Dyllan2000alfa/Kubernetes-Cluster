@@ -1,0 +1,176 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: zfs-iscsi
+    namespace: democratic-csi
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: democratic-csi
+            version: 0.14.6
+            sourceRef:
+                kind: HelmRepository
+                name: democratic-csi
+                namespace: flux-system
+            interval: 15m
+    timeout: 20m
+    maxHistory: 3
+    driftDetection:
+        mode: warn
+    install:
+        createNamespace: true
+        remediation:
+            retries: 3
+    upgrade:
+        cleanupOnFail: true
+        remediation:
+            retries: 3
+    uninstall:
+        keepHistory: false
+    values:
+        csiDriver:
+            #ENC[AES256_GCM,data:pmsnV7BOVhq3BM30bN6nRTYoxA6mRIgzH5kuWk2ffiKdEBXLzXM+VYg/T8jZxA==,iv:x3HElUtrxKBHcEWar4vXEkY0jKK6WK3lR5SbQgHIPtA=,tag:MFGqSKlbHa1mhB0L5DL6tg==,type:comment]
+            name: ENC[AES256_GCM,data:u4c0mzndzZqXKMGtH/dbnac1YUAFwnVm,iv:4j2XBq0m74QTsTezcGKvBIsrA8+LtTD0FcWqz6x01gs=,tag:dH/fv7il82vJSIq3xYowhw==,type:str]
+        # add note here about volume expansion requirements
+        storageClasses:
+            - name: zfs-generic-iscsi-csi
+              defaultClass: false
+              reclaimPolicy: Delete
+              volumeBindingMode: Immediate
+              allowVolumeExpansion: true
+              parameters:
+                # for block-based storage can be ext3, ext4, xfs
+                # for nfs should be nfs
+                fsType: ext4
+                # if true, volumes created from other snapshots will be
+                # zfs send/received instead of zfs cloned
+                # detachedVolumesFromSnapshots: "false"
+                # if true, volumes created from other volumes will be
+                # zfs send/received instead of zfs cloned
+                # detachedVolumesFromVolumes: "false"
+              mountOptions: []
+              secrets:
+                provisioner-secret: null
+                controller-publish-secret: null
+                node-stage-secret: null
+                #ENC[AES256_GCM,data:CWFGKlxOr6Ntz8tCmZyPeW9iGscuSaR/CatAZS2JRPDcAtl93A33FtiYmJy2vjV805W54X3QJUrmk3pD29S59wd0pWYcd6/D5jAS+elcGCJzpIxMLEDgF/2HDSlWc7D+OfYkgTg=,iv:x1bDLwn4+jVgunjYqAGhpxxQWfjc+e5BtjM1oJi7l+E=,tag:OyBD6iuNdLQH9wzNQFocAQ==,type:comment]
+                #ENC[AES256_GCM,data:Xj9lsLc4WENZVF9W74+st5MGH68S,iv:gh3IBr6y9fl3oW0dJfSJk9cgH5wxLP5IziS1iFGrTRU=,tag:RjqqFvax1uwG2dE68uQjhA==,type:comment]
+                #ENC[AES256_GCM,data:wBRDy3PMitZxK/nWHoogMmweHB8S5eCMzIbC87zQehMCherhvqqcWRkRIQWPgltD,iv:73/CIk1lbu1YxMbPgJ+UJC5gh8VWQn2SN7XVV8KK/LQ=,tag:EM2JBr+MDfNzAYRKINlKDg==,type:comment]
+                #ENC[AES256_GCM,data:8dKk1cj8LnyJ0XJxgRG1eNi+uRHlgqcAjuC7NUXoRBJzTDuPYDKkjrfZwguU,iv:br7Z6NuftwkdBh5etGWAhlBrPyQAZd0PIeXKJnB/uFE=,tag:7Jay1vRvk9ttoZwd8LjT1w==,type:comment]
+                #ENC[AES256_GCM,data:aUogj8VgCzK8DbbN18dcmcT8ZnwyfcWQE9gQEhWAZbvITR13zsM6gDwq2+t9,iv:aHqszZJZRe32I8iIdIekshi4Ps3xOyVXc82nxBupRPM=,tag:LgyJbU1hHcdFIbwolYHFEA==,type:comment]
+                #
+                #ENC[AES256_GCM,data:xOV5QMcv3IUNsRBAZix7YjBY51BkJigPnTRZig==,iv:/N+uZzkpkjHU556Wt7Zk9RPtUK8dK0S1FQaLRam/rIE=,tag:4jqWGFhEEDEAIQKwODAyxA==,type:comment]
+                #ENC[AES256_GCM,data:HgArzjD1OW997OR4OyCK0MEqxwvVXOH1yF66j/PkKBZA6/y5U5If9Ndksgdr/V4g,iv:W+0+U76Rf4P9ll1YEBsSvnrhAOXhHH2mgu/pvWZ/t+Y=,tag:OfVcTBJost/ld73k0GO5Ew==,type:comment]
+                #ENC[AES256_GCM,data:QitIaFgw3l49zAa6It7v0ETj0PjN/aN5moXyyyeZURQbeypNTIljwgFyaDbkqVq3,iv:+4vdtsITJTurSPo11GBuC+4hNoNv7RWLzPqMBScxPOA=,tag:e897SDC0r3S/5z8NcuVBjA==,type:comment]
+                node-publish-secret: null
+                controller-expand-secret: null
+        # if your cluster supports snapshots you may enable below
+        volumeSnapshotClasses:
+            - name: zfs-generic-iscsi-snapshot-csi
+              parameters:
+                #  # if true, snapshots will be created with zfs send/receive
+                detachedSnapshots: "true"
+        #  secrets:
+        #    snapshotter-secret:
+        driver:
+            config:
+                driver: zfs-generic-iscsi
+                sshConnection:
+                    host: 10.1.0.63
+                    port: 22
+                    username: root
+                    # use either password or key
+                    privateKey: ENC[AES256_GCM,data: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,iv:5MjVB/uWJn9CNO4YBQruMEdP4t/hXcZXhY+ZoUrtDq8=,tag:pFq6dLsq9NkZZ3rj0uyYzg==,type:str]
+                zfs:
+                    # can be used to override defaults if necessary
+                    # the example below is useful for TrueNAS 12
+                    cli:
+                        #  sudoEnabled: true
+                        paths:
+                            zfs: /usr/sbin/zfs
+                            zpool: /usr/sbin/zpool
+                            sudo: /usr/bin/sudo
+                            chroot: /usr/sbin/chroot
+                    # can be used to set arbitrary values on the dataset/zvol
+                    # can use handlebars templates with the parameters from the storage class/CO
+                    #datasetProperties:
+                    #  "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+                    #  "org.freenas:test": "{{ parameters.foo }}"
+                    #  "org.freenas:test2": "some value"
+                    datasetParentName: Heimdall/k8s/main-cluster
+                    # do NOT make datasetParentName and detachedSnapshotsDatasetParentName overlap
+                    # they may be siblings, but neither should be nested in the other
+                    # do NOT comment this option out even if you don't plan to use snapshots, just leave it with dummy value
+                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster-snapshots
+                    # "" (inherit), lz4, gzip-9, etc
+                    zvolCompression: inherit
+                    # "" (inherit), on, off, verify
+                    zvolDedup: inherit
+                    zvolEnableReservation: false
+                    # 512, 1K, 2K, 4K, 8K, 16K, 64K, 128K default is 16K
+                    zvolBlocksize: null
+                iscsi:
+                    shareStrategy: targetCli
+                    # https://kifarunix.com/how-to-install-and-configure-iscsi-storage-server-on-ubuntu-18-04/
+                    # https://kifarunix.com/how-install-and-configure-iscsi-storage-server-on-centos-7/
+                    # https://linuxlasse.net/linux/howtos/ISCSI_and_ZFS_ZVOL
+                    # http://www.linux-iscsi.org/wiki/ISCSI
+                    # https://bugzilla.redhat.com/show_bug.cgi?id=1659195
+                    # http://atodorov.org/blog/2015/04/07/how-to-configure-iscsi-target-on-red-hat-enterprise-linux-7/
+                    shareStrategyTargetCli:
+                        #sudoEnabled: true
+                        basename: iqn.2003-01.org.linux-iscsi.proxmox-82.x8664
+                        tpg:
+                            attributes:
+                                # set to 1 to enable CHAP
+                                authentication: ENC[AES256_GCM,data:cA==,iv:0k8xVi7DU6LQP6bwd71QIXXnkyo9bnQlJ3tcNJt9mAw=,tag:0+8SxDvVFu/gilkfWS28GA==,type:int]
+                                # this is required currently as we do not register all node iqns
+                                # the effective outcome of this is, allow all iqns to connect
+                                generate_node_acls: 1
+                                cache_dynamic_acls: ENC[AES256_GCM,data:Jg==,iv:m51IzOlP8C+um/mN//77FolvcJDAZV6bR2K1byO+b2Y=,tag:x/E+EIiA5kL+50BdHjIjOA==,type:int]
+                                # if generate_node_acls is 1 then must turn this off as well (assuming you want write ability)
+                                demo_mode_write_protect: 0
+                            auth: null
+                            # CHAP
+                            #userid: "foo"
+                            #password: "bar"
+                            # mutual CHAP
+                            #mutual_userid: "baz"
+                            #mutual_password: "bar"
+                        block:
+                            attributes:
+                                # set to 1 to enable Thin Provisioning Unmap
+                                emulate_tpu: 0
+                    targetPortal: 10.1.0.63:3260
+                    # for multipath
+                    targetPortals: []
+                    # leave empty to omit usage of -I with iscsiadm
+                    interface: ""
+                    # MUST ensure uniqueness
+                    # full iqn limit is 223 bytes, plan accordingly
+                    # default is "{{ name }}"
+                    #nameTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+                    namePrefix: csi-
+                    nameSuffix: -cluster
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUVWJvT0RpRTBsTTlEUy9i
+            Nm9DUDlycTVpZm84bDRBRElOVmVMVVl0RXhVClM1ZGZTOU1NbFQ5VDFvK0E0SDdZ
+            K2V3SUVadnoxbXZUOTc3dUVmQzZoTFUKLS0tIEhVQkp0cXEyQTFsRzJ2YTBFVU5r
+            RlN6N0lYR1Y2ZFg3QkM2U2JmT1pOSkkKDJeO9Y/BFajpLLNuy8+87f/fomNLQC60
+            qkKcm2Nru3t9sFvubDW3iuUi9sgKq17UvoxZCMca7rJ0/uvcvnXMyQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-01T22:43:27Z"
+    mac: ENC[AES256_GCM,data:uPim69mLZeDb3SOmMnBuDYyBwYPBiznr+Gh9f8T+Bhigpf/xe0BU+2pGUPsxkmKwJ0eCgQ4eNHsxWBLUn9edd3X1628su6vAzgIzZ3P25vw5AQtfv5JR72oicO5iRZE/3kiXeEtECZffgJlLIQGaD9u67yuIgKxNqAFpkvl/iNE=,iv:Ka43VgCVjeuY2Ji2dgaOYviapXtkROVqevXmcO4Z0HI=,tag:mGcXy60ElOMs6VcX1v/01A==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(privateKey|displayname|email|pass|ca|id|bootstraptoken|secretboxencryptionsecret|secrets|secrets|password|cert|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.9.1

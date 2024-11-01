@@ -1,0 +1,138 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: zfs-nfs
+    namespace: democratic-csi
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: democratic-csi
+            version: 0.14.6
+            sourceRef:
+                kind: HelmRepository
+                name: democratic-csi
+                namespace: flux-system
+            interval: 15m
+    timeout: 20m
+    maxHistory: 3
+    driftDetection:
+        mode: warn
+    install:
+        createNamespace: true
+        remediation:
+            retries: 3
+    upgrade:
+        cleanupOnFail: true
+        remediation:
+            retries: 3
+    uninstall:
+        keepHistory: false
+    values:
+        csiDriver:
+            #ENC[AES256_GCM,data:yiaR9Qg4HwUHXhqULNCdQSaWfA5UsLB01nodRciCz6JvAalisPU5jLbvrTG3PA==,iv:3zFvzixt941Qa98yLUegO83q/mLdHCu7h7rqoHfh76E=,tag:swBh703ERl1UaxGc+KbtRA==,type:comment]
+            name: ENC[AES256_GCM,data:frRsLOmiqXkJAvWPffLtnFzlWQ/G2w==,iv:OSku8VAyA9gBraqOe5M2Fsgp8KlIfmV2LU8UHGfwibM=,tag:Kx0U+PZ7toW1xjKeTskxVA==,type:str]
+            fsGroupPolicy: ENC[AES256_GCM,data:naUwvg==,iv:jrYyl5F0X8AX8HWkpy1L7TSw1eCnz23JBAVkPofmBu4=,tag:/WChQGc4ifjUv2rp+twTZA==,type:str]
+        # add note here about volume expansion requirements
+        storageClasses:
+            - name: zfs-generic-nfs-csi
+              defaultClass: true
+              reclaimPolicy: Delete
+              volumeBindingMode: Immediate
+              allowVolumeExpansion: true
+              parameters:
+                # for block-based storage can be ext3, ext4, xfs
+                # for nfs should be nfs
+                fsType: nfs
+                # if true, volumes created from other snapshots will be
+                # zfs send/received instead of zfs cloned
+                detachedVolumesFromSnapshots: "false"
+                # if true, volumes created from other volumes will be
+                # zfs send/received instead of zfs cloned
+                # detachedVolumesFromVolumes: "false"
+              mountOptions:
+                - noatime
+                - nfsvers=3
+              secrets:
+                provisioner-secret: null
+                controller-publish-secret: null
+                node-stage-secret: null
+                node-publish-secret: null
+                controller-expand-secret: null
+        # if your cluster supports snapshots you may enable below
+        volumeSnapshotClasses:
+            - name: zfs-generic-nfs-snapshot-csi
+              parameters:
+                #  # if true, snapshots will be created with zfs send/receive
+                detachedSnapshots: "true"
+        #  secrets:
+        #    snapshotter-secret:
+        driver:
+            config:
+                driver: zfs-generic-nfs
+                sshConnection:
+                    host: 10.1.0.63
+                    port: 22
+                    username: root
+                    # use either password or key
+                    privateKey: ENC[AES256_GCM,data:ETLTByzpALtNmlge5kICrT4Lh7me15BgzLB8wyhzkiMCuTCdGLZ0CF9wC9YJQJqG+Dr7HhOQEz2AXflSOnL0lFBvXmJUEmGSXWr4a3XWX45aXcntYVQPtnumovaJAZ4ugcp+5AzXWNVwLYeXe7Q7ya60H5OcJwcoisvO729mArzisxYq0V6bU6F9HcQ9eV8B1pwCDDuL7tcWfT/lL/xi3CI+01FJN1W9O0Fk/pQHjmic4Gd+WjlbY4lvhZa5tOHQXPNi9c9+x2BfSJ6FIa10tRdhZxiOGFcPSxN+4B7JZ+YH7IPmw8aOJZCl9WMGppWEO9cbXvKQHG4+9ESfsyJC62Xts6AbQcwEgqATjBBAKNGNDVvJ+47e+cxE/cICIsr9PoulIW2N+APFDC+Wv7AKLmi/nQRmvpcbwd1a+szA/DLs15rsosl5SbLs6nbCZkGwFCvn9Z3MUOwYh6ND+c6JWfFp/tb+rkUgq2vSMCVFMSCvXiV+srx4HInA0vN8KQ/kb7L3gMjh3I8ptJpT+RzArZw6BwTCSXAuJGilM5Z0/mRt44kgfozRWMl9SbUNT0VuVrrKYP66/galYK8qO8AU2NmoYZBFBMcr1Dp3YslEN7C7Mg584n1dxW+7LeOokUNwd3Wrk4ffMAGy++xTPD3/HIoVqpm3F/j7LXJZR4RWRDDsE+P2oHybHke5VRXHtDcQI4MrkIRnHZPBEb70C5yjWiqtEMCdj5IDqR5CiySXbG8hKCmCSomXdVnykGjTBKSCcg5Qy5GBxU1i/pV1Hkvo+0U6Y14BEhj9FlgVQ2RPOxIeS+J1Tjd5hlkECBceqvz0ARGJGPu9jkahISjw24g1K9FcMVaHpT2KeTZdMIX/hmXIkrjMaKdUWXlIKRqVQEZpaAx2Lb+WsRXD/UslhGLSllyQLV43sd4RfIkcSs/OtnwaCTdeQhreeq6MLdRGViKY+guDQqoPKRajGecRdp8MpUuRtevVPaVEc+9O0i6e4rLK/iD2ViONjxLbmaf/GJeS4i6ypChjlkBikRKk4kCrqI4S9jkq40k1PNQh52IPLlxnPP+yb+ZBhDTRV9PO8jHPpdHf0xSCVJO5fwTGX4km9SBcgfemAla/KHd99JOzqlDtZKg7jet9eGUDKIhFpgkQCn0rLypdGatrVAmV+vVrb+uGi1DVLF9I+Y2CRiCqaJXFJoy8dZ0jfsauysft4uGBVorxdxKLAE52nt2Ayb5QHay6rQygt1KnrEpBzDA86nEfkIGMn/rWewz8Dx+DZWL+UuO2C/zgQoMRANQZd1bGe+GS1nqIYB/mmH1Ng0qJbWov9pQRGJFaAl2vtcPKbyaC2aZrmS+8gOfncoIqzqXIKK8YpQj2jT4TQs4GZVsmjs82koxQkyQH344B3s8jTlpVP39CHUwZGqZFKynIitXjI2kohlc1QaCy5LXN/dMT7+cV59y/LkdJZOKK39QAldKmt/GFYvHkRWEBhGpdHuXyBz48Qv52P2yk2LS4JiYPY9cEkisdiepEb/5KBG3/sC4DDg3fYii/VuuFosyqp4mGSdQMEd6BFwjCKYD2gZ0clyY7QG5Sd7vx8DXnDNIp6FCj5/lzy8pRhrkCIQluXOvGg5QHc6G+hzFtnRKzrph4SCwvZwYCBo9fRBJDwEL03G2u4wtrJ3SQ/ffNVl4VHf2uj15z70BABVdeRjl/kCcPEwEbdKLMKQoTMYX2gDcaDtO+f3zV2szBx8a3tfsJxE95Hq1In1igDu7dqauIpEmbcDmLr7uEI4oe3oyeR2TNDRl+36G6aMX/mCBWBE6KPWpwhVnCi58NE+Pyd77m2wvoE3gn58vseO+Oq066iTsXk2/OShcIjTx0d1aQciu9CdR7SehqiBwSNQsH8CN6PHxaddNlofB5hvqCe/PGZypkn4o0aYBIGwHrG09CSpX2ftVNHD3IW7YrHq23bCIoBGWb1B8/9bsgkoTYSd7ZJI/ZoV8B5l56n81RnBOBC0fMAKremtxPAltPlayp1gxRlWpHlpUqpCWuLIXqvkH25PgngkBvgmLtd061cDMct2HTzZlX9oaY3T2Wd5ftb6QFZxptioHPdz9zQmBk+++Z8C0a9/KYI7BEBpcvFav/NrClQPfSM2r+nkw4cKO4WYbNSOS9meJPTxWr29WUr3Yle7Aqo11EDPY/KZTiDRXlR5ClF6LYcF41Jt2k+f3f4q4vP9bX7tk/89W3fp/CGS+sIrjvTaHiQzgcShBagQUZOwAefyjomm8XCBqQgrM8KdN63wh1VKY3hTz600UPMHc1xbSSiMTmDC4b6osHD0xf+SIlxZq564yZ9LBCCiOXWIKRQDOCCxbUmOkiAvIKHjfo1ruORUbp7ImnMhYAGrJZdWCracF1+1INhudMUxdoPBUU0dANLQWQD2M731/pFUNw4OcXs7qt4hDStoi+EIgJJyPofncU9uJFnjzHsD55xGv9GvD8TTVIKVxN8R6vSN7lGaP5JOxZtuwuSDNjA6zwL0ByDTur/6I4zqONEZXhfdmuwNxu7UdypI4HCPvnDhL7j8Lq+YMS+eYa7yQkN4gknt9vhLCa5hMYn7YAj15OrEe2lyb3gkV/JdICxA95N5TNWoP2r3VaDQjCJBlTP406zmYMH7+X53laooOmcEIXIzp8a7nQ2+XnZ6iYJKsbg7Kb/08ly6tOplB8ReYRqzpLkdM4/hepUNpWJkUNybQ3SKwUt46fJaQIzgjwYd0QsZcAb6TGMw7vE3kCEJmX9jKhg2V/qw30SCSqmCOKCl4JCeMv/ZJODRaQOOhT9f9fqfYTPK53Ueqrd9WmbHOEJAj50Qn2bgCjd8aV8KAJLs8+hXtRi2NJZqQjHjO+leGOMgOe1N6aKb8yNeGgmGGyGbSLpyJ+g9cG+a/nwcyCfNvE+XByvo+qYR7aPItAutKUermC4mfu5Kx13Xr5ghGeUssOcybeTpW93gMUoXYimUnCzCNjDSk4K8bfwTTDH9q/5KS7SYyToMZP9MEbfwqAYR/gS3q84GLfQROr9EQfRVZ+fJ4acwlzDv80kc4UZkK8bYyOkYjEdTTaV0mfB+FRynXPJwF6/RVuO3ucSACeEEvyb8c0hgb/cmRhzbaux/HJRl7xxVBLes1rGElPfkawc6+hFRyZ+sW2OeYU5ixlresNvw8W4bF3jFOYi2KCM6HrtH5ES7SE8aDCXZXDJxBrBTwk5B9QrJgqf8WcwIAVj7ro/WECBbE5G87y/OyRw1enCVG6HiKlMfsvj0H7Btk1FvMbhdY1oLPxIaLE+bMkBWYWxeMCBlQ36H1+dX1BWHr2Alfbb30plIkufrBkvNd9O1EMVlDoEQwcDWAuCMsZSDsPZ+V/aWmj44VwEMaJbQ+GNwp3O9JiyNiBncrpqGHV44Glzykm3vg1/ogjqcB68maKLZ33tJOFARwByF3AZ6Lsi5S1UE3RmMCeWKjksiIVat+ZRU/N1JNwokt/60K0T4vMnpxdfCPkkFBQG4LGGzmoOvBc15fWecNtDk0Bxf5uAiV49hR5k00SzYWMW46DLqHtZvVn4jnkrumbvPaVjWJm55Bv6H6Y/EDDFrcXLVfJO8XHcTKYziugzTy2+92Bt3CLmLy06nuzHh6C2iHVsYX5EDgwM2humc6V0soirOsYMjvHRNMFjQsxmCy9U0WfS8GJvle/SUfq782VwmYdgFz6aD+N5uShvMLk/yDplhgWkN/J8zqg+RH0ie1EHrrr4yvDtTzfTAArsDIRdpU8NItMmj5RNnEFrs04/vwrRj/AXHQ8OqWepwTp3IEoP+IQiVn2qg+eZ2/jh3Jdhqk767nfMu49vm1HTDfmy4DTkkSYZVb4aGg7S9Y1IJ7k5VHE+mNnk8cY1wlQJ7eGDCspfwJpF+kZ+SkEg/g2c+3YgUT7EWR4woazS5qy/b5kCXKP0W9vog5gC+yfS1zrgYzeZgTk+ALUn8PWsLAwAS3q64TmYFQHU1nqQGLWOGBhzB0dQr//225Zhu0QHnnugDGkNDcNk7+9Z9LMN8N/ExCOni/Fq/qxszwblADs1lZocIHjmWrSBnK2CdgFLnDK4osUue8YftlBRlDDoBCRaOFIMoruKhOYfj2KGcfScmQr1clbg4bBJGxMX/mT8ehin6Qb7YXFwawhOuOQL0zv+GHdlm/WAInA22rUK3+0Fr2ONqCI4zD3ej1GjpGuPe6dPEq5DdtgqAf3wOV+IbjGNEfFnRlfIKFr16+xC4HviyiKlizj8ibwcfzCsylp+DBox+eTC6TDUGvU4UOO838XuQcNBwZOjWfxab3db+wG2UPrYIo7VBkKthhpqdKjZiugRtNPzz4h4LgN/izyOSFDYaJmmHxpC6kbUjE4QZFOEikRKARlmtGo7PJL+S+GAUjgYOJBZfWere6ZdohSBCzf3gamP7yzkFgTfhT1CZGN1JQaphaLC+yu6DBBHTLsWRaSiuFDuy4d8lcPQz5iz+OWo1PVdnfAwNqj,iv:OqS2oWHOfxLm2nhi9OwJfbVNHCmQ3V6503+k0ut7xik=,tag:vbas2/kx7EwofZi+5vIP+w==,type:str]
+                zfs:
+                    # can be used to override defaults if necessary
+                    # the example below is useful for TrueNAS 12
+                    cli:
+                        #  sudoEnabled: true
+                        paths:
+                            zfs: /usr/sbin/zfs
+                            zpool: /usr/sbin/zpool
+                            sudo: /usr/bin/sudo
+                            chroot: /usr/sbin/chroot
+                    # can be used to set arbitrary values on the dataset/zvol
+                    # can use handlebars templates with the parameters from the storage class/CO
+                    #datasetProperties:
+                    #  "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+                    #  "org.freenas:test": "{{ parameters.foo }}"
+                    #  "org.freenas:test2": "some value"
+                    datasetParentName: Heimdall/k8s/main-cluster
+                    # do NOT make datasetParentName and detachedSnapshotsDatasetParentName overlap
+                    # they may be siblings, but neither should be nested in the other
+                    # do NOT comment this option out even if you don't plan to use snapshots, just leave it with dummy value
+                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster-snapshots
+                    datasetEnableQuotas: true
+                    datasetEnableReservation: false
+                    datasetPermissionsMode: "0777"
+                    datasetPermissionsUser: 0
+                    datasetPermissionsGroup: 0
+                    #datasetPermissionsAcls:
+                    #- "-m everyone@:full_set:allow"
+                    #- "-m u:kube:full_set:allow"
+                nfs:
+                    # https://docs.oracle.com/cd/E23824_01/html/821-1448/gayne.html
+                    # https://www.hiroom2.com/2016/05/18/ubuntu-16-04-share-zfs-storage-via-nfs-smb/
+                    shareStrategy: setDatasetProperties
+                    shareStrategySetDatasetProperties:
+                        properties:
+                            #sharenfs: "rw,no_subtree_check,no_root_squash"
+                            sharenfs: "on"
+                            # share: ""
+                    shareHost: 10.1.0.63
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2aGJuRy9TMkJqZ0pxTVdD
+            OU94NC9kd1c0RTNXeTNUMjNhQk9tVW1veWlvCjFsT0pOQ0RhejIycVVQUXJMVE9u
+            Ulc2VFd4Mzk5RlZ2ZW1DdDlwUkhzcWsKLS0tIHRTd3ZJamc1TnFpOHpKN1cxOE5v
+            M3RLanhENE81bElnendiNXJCOXpEVlkKfDE6WxkcMbsfwfzmWMcb5Wpi9qAFygLx
+            j3enVBYN27l4+Sijo+lZaeGMH2IETdeRdGq+Rrd0JBhaniDZAD5tpg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-01T22:43:27Z"
+    mac: ENC[AES256_GCM,data:f/K1pHWFIlyONC1ZwHUQtB4gdYlWp0IVxc2DZxNHStJF5akSQ7PLnTkil4xXc1ZCNTxgH8o5BvgkPJKQn3m2yBVjxl60qypnrleAFf1YCozcIPv0zP/8UgQYViqHNI+wig/q9PwO9YKmGWZWqOhXs8rSMFuPpcsGTK0sepkWiiI=,iv:pSSH1oCESKs8MauB9M0DuTmvXGjJAE/D94EsXfDzyvk=,tag:WCozk+Yl86raa+FYgUaJ1w==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(privateKey|displayname|email|pass|ca|id|bootstraptoken|secretboxencryptionsecret|secrets|secrets|password|cert|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.9.1
