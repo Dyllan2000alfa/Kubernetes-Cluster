@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: zfs-iscsi
+    name: heimdall-iscsi
     namespace: democratic-csi
 spec:
     interval: 15m
@@ -30,21 +30,21 @@ spec:
         keepHistory: false
     values:
         node:
-            hostPID: ENC[AES256_GCM,data:G1YIBw==,iv:HcsRVl1nowo8RoU3NJ/okFBB9TU4nY2/se00JiqE9GE=,tag:DK0oZka9q1p91Hk9RlExFw==,type:bool]
+            hostPID: ENC[AES256_GCM,data:P4Dmow==,iv:IDgCSxp1IKY0pGtzygXM76GKrtu5sXdnTSLYAZjCcGE=,tag:hcC1HJmPmKcmm1RGYr27QQ==,type:bool]
             driver:
                 extraEnv:
                     - name: ISCSIADM_HOST_STRATEGY
                       value: nsenter
                     - name: ISCSIADM_HOST_PATH
                       value: /usr/local/sbin/iscsiadm
-                iscsiDirHostPath: ENC[AES256_GCM,data:PX2gZenvkaDz+AlxGa+BTkilafQ=,iv:EqECDgxAv0lnEMYOZweZsIAHzzR1UA3f9+Y9O7SBY3E=,tag:U4yCBa4hRMELN/qcz3Q6rg==,type:str]
+                iscsiDirHostPath: ENC[AES256_GCM,data:nX2BoXoLS/yyGE4LRzMiFQfWBDY=,iv:ooqutkfKE23NkO+rS+Ojoeh3VlhMxwDq0RCasLveevM=,tag:JpjO5bk2cbns9ZC5U6k6Ww==,type:str]
                 iscsiDirHostPathType: ""
         csiDriver:
-            #ENC[AES256_GCM,data:ZpgaFQHb6D2T/ROIY7zsQLRNr8TZOntpMMHm98Z3MWx6eS8GgTBd8sShbUxZgw==,iv:0mcjQ0otAMa7OVVbUystDdM+38HVASsg6hKMZZMHh+E=,tag:8EQ8G6eV1My2A4sCcCuvjg==,type:comment]
-            name: ENC[AES256_GCM,data:BRK/knSk4mriTtsWg7ymA8cHSzn5k3+H,iv:+FkxZ6WTLJPo1gprUtWp00amHAoo5fYF+LmDNb4vLaY=,tag:dx7Mq9H0OiGL6LXTjTdl3Q==,type:str]
+            #ENC[AES256_GCM,data:gcaq7KVAB9v6z3eXZshNDc55wYXWgiTfFFQpH74tmbqW+SmdCopg3aUT9JR4Iw==,iv:6zknML/VCb/5JoRg/PgcQ53wFuuAydQwL92gK2HdDV8=,tag:vvgoTl7ukc9tC83cwy8n9Q==,type:comment]
+            name: ENC[AES256_GCM,data:gFq6fA+KNsVnM9cjfZCWcmYb8BPqTfkG,iv:Ll1I/KMGFWFCk6wZgKHncDB0hHg07SUigPHdsHrrUgA=,tag:QbZ6buL7lv7AlCMclGKZ3g==,type:str]
         # add note here about volume expansion requirements
         storageClasses:
-            - name: zfs-generic-iscsi-csi
+            - name: heimdall-iscsi-csi
               defaultClass: false
               reclaimPolicy: Delete
               volumeBindingMode: Immediate
@@ -64,20 +64,20 @@ spec:
                 provisioner-secret: null
                 controller-publish-secret: null
                 node-stage-secret: null
-                #ENC[AES256_GCM,data:XTs5VjIZaHv2bJt/3XvSF2OXC+59z6ho8Uxqktgn9JAlxRh8TyKyIvG1ZVf2wFGnyxmjfvYw8OS+JMCdRNXREvmiX3W24rVr4PAe28eWB9emwsw5FSKCAIz4s1LIeobfnApPs6U=,iv:AE0Kgfd+5G6qxjrL++9PdaTV+tRl5hrvIp6pDfGCh5k=,tag:Q8L+xA7r6bXMsyt8BmU1wQ==,type:comment]
-                #ENC[AES256_GCM,data:j9aCYKyEVfWdc7tY4ji23L3aoQPp,iv:oXgFTQZKnl970yqx5TK8afnwNf7rL4Kv11Z32yfC3L4=,tag:7fUq9LeEEJqcFAGmvAslfg==,type:comment]
-                #ENC[AES256_GCM,data:Dp0OXjiD8XNea4UZgrV7vjOorrg3DhGpH4QFjjmrUvr7CC4LzeOrfBGLaI2RXkx2,iv:tiFQF/jLyXLVnQJlGy2S9YdEwskOxJGLlt2qVSM7qlA=,tag:BLrU6CgaMqkxihgWPFtxlw==,type:comment]
-                #ENC[AES256_GCM,data:OppaEd04DdUUvVjxXOA9lJSw2K/sTK/CG4t1GzW1kojBzFAd6DA/lTtwjHqX,iv:qbP2nLjqwR0phrk5s9vxsYr2Xws2h7+gLKJOGgmnOvk=,tag:P1vW5hPcbfTPVm55kk7eYw==,type:comment]
-                #ENC[AES256_GCM,data:8prQImjLYUJ8j4+M1ihiAGnX1xPD2YKzwS1w+/Kf9USlR/cyoBNRw6tQ9EZg,iv:SvkK6G6me5vfmc4aM2VcqtIIRWc8RpuXB76fkkj8Rkk=,tag:6vqw+hB/bmYHs7rmRU1+gQ==,type:comment]
+                #ENC[AES256_GCM,data:T0InE6v2opEy/id53B6RBlcylpqzQetIHyZXNX6edp2fNnBUsdPiRf7SCzZfxH6Z3iZYlrhRQWnPTMgWRgayPDMz0WSSTxeitKNpjsrPGgpyTXR01PposJqsGGc9PKvg1ruIax0=,iv:6rLU7s76SjJMO2/k5A3iYh7AwP57lEXfDSv8EaBj03I=,tag:NaV+diEoiCbaO6QALB2ISA==,type:comment]
+                #ENC[AES256_GCM,data:mqk4NGKRF5WUq5XE9NBdOtImwsQq,iv:quUdp05lLqr97D0NdBrVK1nFoa4b2b3FasozjDN/bA8=,tag:PG33DRM6ATt9fnWKry5COQ==,type:comment]
+                #ENC[AES256_GCM,data:Pd4fZiqN/0mHLdMuq997ms/qWUhDxStMoOd9rCWEMr/XUHr0s1KuElPXj4MSFlmd,iv:jhn7xXBjycEhBEhhdkCnZEC6iwwR+E6PSDACSkCN5XA=,tag:Hpo75GfFjr+gaB22Iyzyig==,type:comment]
+                #ENC[AES256_GCM,data:YrhvGRq2BTN6IUhU2O3fpMUS4A3Jbdrf1iQ7LBO0KZKnlW5KAuTXaZyNOA6k,iv:IFDL7Vxkdfae10J791YIIuXrTvrvYm5yjYvKIhVhKvg=,tag:FM2MXLsEblcls4M1ls8PVQ==,type:comment]
+                #ENC[AES256_GCM,data:WKe3hZ4Fl9PBf14F1YcoJoMIcpng5c5kBssV9QvbgUzyTTWAoJAS8m0IG/cR,iv:Zx+JqixMhYeYT4gzQPEFqLZLLYVFdzGXjd7JsUTYzqQ=,tag:3nwvTvVXVPCryU+/zXKIzw==,type:comment]
                 #
-                #ENC[AES256_GCM,data:b/fDIKlfhVhqcmSMTbeGQhJMDRzffeulJfAPeQ==,iv:bslRK1BeqfrEklDBarWATpHa+7t5Xfw/jAZ7AQXLlgg=,tag:Pimkd8ECXKGnxuqwDahzWw==,type:comment]
-                #ENC[AES256_GCM,data:+c8+VC2/xNeO3qY1/9Utv8rf5jjW4yjbJzpxcti7hfWmBGGucaXtjXUHeIaJC48F,iv:Rk1mountLmC6JuetF30Qd+7UVrppqmhLCv57ua12Cio=,tag:VW45IcvI/yf1TWhm+SNZ7Q==,type:comment]
-                #ENC[AES256_GCM,data:+Joa55JfK47v/PRaVGVxfqoDonWQQUktCI4SL0D7A3N8+FtD2/mZ9OmfA6WaxLEX,iv:SetpVNKNrtIcgAiOgdeOI8clUG8W4GQOorttuqNsRJs=,tag:G6OzDiYs0OZus7NZ3r++9g==,type:comment]
+                #ENC[AES256_GCM,data:v5absf36nRBqYeNdgWTyGlu8lNve3jqQZcHMxg==,iv:1GTSf9xGb2/HQl8R+nHxTi6SgbNryVfcYjwlpNd59gY=,tag:4DwCSSUSUA9SLdOhMfSTYw==,type:comment]
+                #ENC[AES256_GCM,data:oz/xRXPv1L4uAWCqqnIjmRXHcYgTn62e41TKgpSx9LCkxyh5SpHEXVydNn0W1iGH,iv:eOsvY6027Rz1lqE3nTFgfLa94CaQoitQ+Q/qEE3qYlU=,tag:47twOPu3IyV0SuOWij/48Q==,type:comment]
+                #ENC[AES256_GCM,data:HXumxe0jYdluDxk3TLWM2nOiMkzhWrARDTpW1jiQKfb+5BGOIzUl3vxh08EwLPGc,iv:xIcL/WRS8YWZxFsjDdL+olH6oKI1XIYEmlKzAX5IIGs=,tag:EUyTrWS7sf//rqsCFNJswQ==,type:comment]
                 node-publish-secret: null
                 controller-expand-secret: null
         # if your cluster supports snapshots you may enable below
         volumeSnapshotClasses:
-            - name: zfs-generic-iscsi-snapshot-csi
+            - name: heimdall-iscsi-snapshot-csi
               parameters:
                 #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
@@ -91,7 +91,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data: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,iv:GIg8HE78MQLxXgTvZdtGpgHUwJiJoobLyEy0yq7NJYc=,tag:PNrctgVnc4Y+upN8vTtzSA==,type:str]
+                    privateKey: ENC[AES256_GCM,data:zvLfcT3nTRnqUUHSZoCZJ4nj9l+KqkQSwVR6NGS3jTuQEJQF5oW5YvJf5tojV2FrDPrQyguQ2eZgSPtpQW69LF3KmXX6X6N9cacUErDh2lmr30H0yUcAI7aTjHFjnII7Qt/XFsYA3Kl0uG2RbymveNRe1Nr6kJZt9L/37ept+aK61+6hO+C8wO8M9peQ94cnqFbOS7e2PaFgHb6syDRnUQM1MHGDICGJwnPWaEwAKwD4uKdZSw+g1eUC8ZZ9cSDOSWz5XPhKxhK5HOk7XNmrLuYKqMC5o0R+9LtJ7wLS2zJblkjALyqXbMCOBCZzUD8Ortuz+WNDYWTDFacdkpYcbXAVf/vonMyIq6nDGcX/s9HFBQ+tBz5rir70LnsqppbFUSmguXwLw+WNOIc2j8IZPVRVaUUNkalPTjzWTojrnuMdm6U6w8S6B1ZiNfAmdW5emdM002PbHZ4zFQVAiy7HHzqqTnNxAa4raWQfv1tfjLJM/+XqHKGD5mGfmWMkNf2GUWDw/KcX4xjjlDGz3J88vHSDU18WJreCJNadbgPSbXiE/CwNWu/DHnamv9PiWNwJameebdTnOWJvxwzMqzQUZF4Nz497Bxjp0qt2gy7vNXwHnwdNicB89YtuBbZ0+GQ6vF/GU9n9kGNkqDIQtP2qrTmtx8ptxlXswwwwQXsCsMvysbJiTVHNBYzySB+sfsxzRojelQWHLkfVH+2CWQr1yWHc1nXJ9uVNhjBpib+kN+9M1sMeELlg1+Z/PM6LNEZIPYqpO+843jZNYTD91z6wxw8HHsaRSnax6g42dEdK+g6J0hxp8qwwkvI6r+fB7PK4rRz7ueg6c3S8tHOV1NPwFy7pUeiT5ZBwP5OImsgaQKgSP9objAmEDzMVpZqKbvyCzvQVChWIepWBpD6mYFuOS5GyPH7z4shLPMKY59Rx0A3yPYqswRr595lJisjcyBmOYhPsdn2MKgqB0IUCgPeOdNQBXNF8E/cJH4UXviQqfHhe5E4lKWij6AKUB7HsL1fbJZAw1ph9CAqlvcYDUgRl1RG4nCUOJuerp3KT2IKjOzZ1+4ykpAJtRH7WSjTZny+wvkbS9mcZba4BkoVUZnSowzS1rZ9mSwN3k7IMpOZkMe0TiCtahuTgeFM/gQICsz2ux3S53fMhd1mWcWqBJ1HvOrlkGXgWaLKUvHqrUw0c3GViUBX8PVG5qTLphVICFukXoNVURULDju0bEAqxdQBwWiH4Pr7YNAuaehPGUHf4t07lPbq+PrU+3bKena531vXsDDa6c4/p92jv8lxMhwW+coMaMHSsFiWBxG+6aYk+t5t9ru9kp19vsO7F9ZEsl1TU7pu6fiGei31iQaD7YJSXZNmVxrV/Hp293+cGsNTP6YFwsYi6Q7fDF2IZBJTpfIWWN/PFU09Ob4RTpnvTkR1Ie19VrUSIbbhCuwfCtzEFspBZNpULBisRkqyhufiqd6JQicUwrxm5C1PJ+EIzSTDX4tvKluR+atmVTgbp+NRL3i9+5/KeN/dDbL2JyKPk53P5D7R+5KLS5azQUtmXemZ/8BYyBFQ1ODdnEmqWBMkLbZXZxjd+rUV5JYDGRDqq32vcuuCYYZQm/SH7Vv+EhaSQ0fgv5RWSztRyq3BnCbdgmSbX1dCCyMJ+mpHG19Wovloma0uDxvLzELf01jdQYINdqD23HBsJTPjrq1sBDy/QhXl52x1mb3olMU7x6sLbhZN6uBWfVN9DzmuxcDBhDY0dGQ16PXqHroDWVNPwMbhDC0UOD61HLVChsDq03pxodhRvyxFumrKABu1NEvAbt+VogGnIsr1vxdIW9Iar+9ojDzXCgmyVB6GVgQJY3KGLcHg1IssU+ydpeTpG4ZzQWQePAAGqQwBqSny5+KQb13GZyaaR2oB9ZU7+r9ijO9+vpjrs/Uo5M0cLkXexGIvEjziZGLzaGGaQkd/wR98aIvHFCXTgBOpfKZVRG9IUuDw7i9p1T2lNJsXroMfOWx9ybdr9DJkiEuKX4E+nET4Mo+C0pvHQkq8MIra2moWfysnbbxQYB/cFPVByyvY4+pRlG3bIPBEh/zkVAtMuidpTCC/zC43YWVzo/l8O6kWdIurXF0qXMgX6Cwpsurq5rl0E7Pj3C9ASSeaLT5WgqsmCfAQEIk10fU+9UodMHS/Ql8LM+ARaZvghxbFKlI8/nAhaMy9nf6vT3J87GddUTH7PmQdlwj6iGCO5MiTp2roEOT7j0Nop87FQRCgTgiIoL7DYG7gb+PQTsNYqgsMmCecwTNqVerDsruIRkgvSNmMXWdXqj1tUPd+t5O7j6ebFwaEwtPaCeHTseriB2abkyUXJfLHts+xWuXTJei85tcjuzD8aWGY70KQsYh3yoW2M30pTAUMyT68okx21UAwQwcK8t3VUGh3SqVeDoFeQ8eOtrAc4PtFQwvZj7uPSw4x1Ji/BL2Ktb84XVPmuW6de7BNZ66o7zD/okvb8cXXcZaztSlrO/N0UmrxgdrUtUJbQqeaM3zomxes5G/7hbDk7fWijMxJj+YEXam1EAPFFKlQTJlXPWEaYA7MAVHP/1aJwQshgIGmZ4Fm2utDfvZ6CjAtjVcR8jwoOFNwDwZiXg7RcRgE1rk9RUWNl6kOpJFW3wwA4ks2cbF0YOL79BLgPGl/jaZuN0/RUnzGGZusm7/gdBq+Teh9g2QKHCX64XBrPyiexanqTlh4qFrAebeffKRBzhZ1rdjos5n+WFFH0elK6/U8kzKIlRyl8TcdMSUYIt3yQv9o8/Y4z1+pVWJRvGHvCLTu0w6dB9mG5gtqXWQYdwHXh6qBEc4ELyQYEDsdCOis1bydMI6R8iEQrrTE612GG4xvRAH1p0U+H2GpUbc5qOUm9dXEGskikel42V5SlGX4sSkUsD4y3bTxgkM103uS/So3FG00teSYVVRN7n/w6ScbExNqh2YD89vd5iQD6IZVS506cgw3yQVMDtbofiVPnpyr9ck9k5NFnEyddC0dzWKw50hbesFz73f0UsjhIzKBRElRZH7uWVp1aGi4ExDPtgM33zE8J+1mP1EIJdqXv3vhEqTTYSCW0r162xpmxME9Pgyb/fISrNV43Dgl3Fem3Z7CimaRfaXZZYoAlVAQqxEfL7g3CV11uOohzf7lGPOxX7JFMcpIvrpx9v5SyUbxo783yxJ4HJlA96TVgso+KC0FUJwSa4hliNA+Qh30AGCmrAbXVBp72PSQaSV3MYNPguXVJzdKDj01exjGw7Z1PaRg6/5l+dGLWUvaBjcMG4UaW8+ghMEzVZwqpI0akL4qkfUzMH2nicm0Q742mT6jlKdreL6evIgUO8Q9dpXFsgVVNG7oo2f0G23DowNkzUIWpVS3eW/rV3mDhIVJmdLATm3A+Br7fRFdphynEA43yAcRVUf0i1WQx/oz51Jxj5vuSDe6qVcW2QPwSf1taOQto71ZHI4SCz0aunCiZwmAaPDUlBX2IthDTbbKh0Z3cX42m1LgQHaeKmQJ+0jg6EKyS2dV0JpNg/tH+Kcn/Qqj9dLScSquarBxEYAxJScTwqG0KvBm6J13UlHdfee2NXlH299s3kQE34TlVno9cjHUD/GBxt8OmkN2orI3BmdukpFgYeFOc09qlEbiK1xGa7m2XFzzAwTK/Tgmn36L8D/ehwkU9M54+/F6VTk2gZkE6PipSt2GRF2uanezwcgASw34X13FTqMp0dmzinmgUGJccdfOZxrgns44TLPC6kmOrERtMHYQF5VbnZWGbdJSDxWUj7Rg+WkLjnCV+MqPyygT5Z9CnC6rzV6l7mwNdMAIrqPgMOIGpjBuwcN8zvUf2Mzf8u4io9EJdaOfV/RwuTlTD80WpFveU7gsF9ehZqZ5aKg5VbgOKhsikSKcVqH8vVJJkU7SxtbzhUC8FwFkG5BOHmkN94cHNsw6DvdX4DGpl/PPMLTtLAXUEPhXlBr3QC3QKNoRChmN8yv0pkToOBhE31efO35kfRr9oUM/+fa2rEAq4hI64V6Z81nJCz+iKcSHK0UgrTu0QwWDkQR1uB7onKewAlioJT1FrkFoAX/GLbVAc6N65p0ecKvM3QqCtquMaMnfgUPHkNti30b1jL1th821z0LVmn8SDS3qbl46TCiu15d6jSXH5tnyeKL7pvBD/WupCFNv6tIqSDzmhvxgL+uSVc7GOtkpL/hdME/0Di/XmAIrSv3HjlI+ZxmO2FfOG/6LaGczzAyFsUboPzixNhFm80WAQSz5pegnV9JjunaHYJg3Sy5b9zyBxl/HzDKlxUWppGl+UrvxFNMdBXF9joSVe/6IEDvGXXhPGqFtis+aIiWGXwA+vXumfphCVr0ZNIDhLJA5ZH4OqAcaVwgxiPg5LUi02oYOa6T5ONOpr3l5M2ouR+qfTYS3bdw1s7M4tMebsjwyatkcu4N6RUXw5K2dPVB6zKAa++uvd/E7sGHOJXZijOZmDfQU9nDEYGVbGo7ifS5ZsL60d30B3jOqJ,iv:jIrm3M6AXMHHN1GeNdKh/mwqvuE4NItUt+QR0gDpl4k=,tag:WEohB1IdpFrvVVTbgsX/9A==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -134,11 +134,11 @@ spec:
                         tpg:
                             attributes:
                                 # set to 1 to enable CHAP
-                                authentication: ENC[AES256_GCM,data:AQ==,iv:2Vg8L+DWBcuyLbwAMe+vbSh0XrqiZzw/ekkQg0Jp5z8=,tag:+IdsZHny8VsNWuQCEgwKUA==,type:int]
+                                authentication: ENC[AES256_GCM,data:LA==,iv:w+LuE0bR+7Vkw1lQbrUgvHSfOBj0hMmsVIvgUYQxRlg=,tag:nDwtgVx6dv/dJb7eO2enhQ==,type:int]
                                 # this is required currently as we do not register all node iqns
                                 # the effective outcome of this is, allow all iqns to connect
                                 generate_node_acls: 1
-                                cache_dynamic_acls: ENC[AES256_GCM,data:bw==,iv:DTf3Zcr2EG+YQhHDGsfwxyPL5mH2BoL+vR9Xqe29Htc=,tag:EuJongN4g85HINq34Nvhxg==,type:int]
+                                cache_dynamic_acls: ENC[AES256_GCM,data:WQ==,iv:i7VpAl0M7q3Vp4yBmXu3E+B8sXm5xm88Z8zqk5Zt1H0=,tag:r+RRzG9uGbsjpRgvXeXy6w==,type:int]
                                 # if generate_node_acls is 1 then must turn this off as well (assuming you want write ability)
                                 demo_mode_write_protect: 0
                             auth: null
@@ -173,14 +173,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaZFBnWlNKbEVtSnp5Y2x5
-            ZE9RN1BWVjFWZE1KT1p5NUc0OHpwUlhJcDM4CjNNbHY0dmlRTG9ycElBQkUyMXpt
-            akJTZm9neDVKYmk2OXk0R1JMclgwZlEKLS0tIGZiUVZ6OVZuWUpNRWFFTkcwaDVK
-            amsrWGQ5Y0VZaUU1SWNVK2JGRXBDemsKIw15cCpYVkEz7whDSVrBSozti/ocULj0
-            LnnYwW3SuhbQRNHuH5c123TR2zAzgNkMjC0b9micKKWdoqnDFPg6Nw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1M3JCYW5La2pPYkdDek9j
+            U2RlTjkzeVN3eDBXLzIvblFaS2Y0bFowdXg0CjhVTG5GNktiL0NHTWNFQmczdkVQ
+            WnFqZ1F3YUIzMXErdlRGSzVERU1aOWMKLS0tIFh2ZkVaVnZITlIwQUhTQVNQZktx
+            VzdLTFIrMUVhMi9ieUp1bFZSOFpVckEKvdccgfBeYy6hDXfhSE5vvrmQMccVi+zV
+            HbqWLBRmwxzmmWyEsa7gOjVPwPWe3Jy/B7u9Y35bAwbFufIwVyAaqA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-01T23:39:06Z"
-    mac: ENC[AES256_GCM,data:IWxHgYhbMkd8HGtcS9DbOzaqQKuGxR5jn45IF5CFO/q+Cdn3wzQu3CS3OFUph3HcHC7aOxyTtHuio1fS4dKunlCe0o9D+y+byrJlKUR3/IWhazL6FO9k5Yebn5qzEBcd2EXXKVuz5+59s3oKxCJUqfpbIteZkK8bVimZWhoMiSo=,iv:VlzmhXExgvHQ52MIfe8a9pvc1beCXCGq/58DvNBrpMY=,tag:uJn5jB7EqikSvLy9vHG63A==,type:str]
+    lastmodified: "2024-11-01T23:50:10Z"
+    mac: ENC[AES256_GCM,data:orZThlzxQJC3CdVN53EBa0B4vIXcXt/IFYos8b3PbNxP/kfP8xuicH62m4k3ND0ikE1dnquQSYnVS/sQDgA/eKIBu789xYglnOpAPLviqTQ4z0U4XWGXOcc6xvHCyczWATGC3N5cW1Q6r9zb5jBWNHtxvMIvxuBZOx5rAKqmEjk=,iv:CTl3L4HIWRjyJEXmlFRwII+ik/m/7z//O3X3Efbwft0=,tag:tgETLcWho8FR6j3W1fCaTQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey|displayname|email|pass|ca|id|bootstraptoken|secretboxencryptionsecret|secrets|secrets|password|cert|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.9.1
