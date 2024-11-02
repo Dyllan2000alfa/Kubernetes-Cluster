@@ -2,10 +2,8 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: test-claim-iscsi
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "zfs-generic-iscsi-csi"
 spec:
-  storageClassName: zfs-generic-iscsi-csi
+  storageClassName: heimdall-iscsi-csi
   accessModes:
     - ReadWriteOnce
   resources:

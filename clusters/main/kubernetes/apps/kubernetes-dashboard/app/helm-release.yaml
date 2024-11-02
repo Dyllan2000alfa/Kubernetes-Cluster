@@ -46,14 +46,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhZVpCWXYxbWsvdHR0VFg2
-            aExwZmJEQlFlY1RQZjhVK2FQaHAwOW5UYm5jCm14czh0emFrcEtISXpDWUd4ZUdw
-            VkxLTE9WTkVSODZmWmxadXduMGNhalEKLS0tICtSU1RDOXBqMnVhaWlxc3VIMVJE
-            YnpHL1NtWW9SRTZYMVdjMEl2QkFHTkkKe31r8s0EP1QsBbInnYSjeNN4tQVSGKpn
-            VUSSkMUJLd3yjWEQeKjBc2pm6KQv2jS0/eo0xC0F1I3heqK1J6MEDA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRWmhVQVN4TVlRMDhhbjdN
+            UVBSUTI1cDkyMG5OUUh4WlF4VDJmbWZSTEdvCllNUWgvZlNJZ1E4NkozelBDVGF0
+            aEQxSjZpL2ZjUjZWeERhV0VJUHByblEKLS0tIGs0SFJiNkp0NTYyajJtblVDNVp3
+            SlRmWC9oc2lrZHR0YXVieGx0UmlCcXcKXL/xFdPnx4BhTADhp29CBQ5/mC/67eJm
+            p7TG/5qG1PmK8d6wUBgpdMg742qZYPeiPXZzfvPbqQvrBtAHWXyBlA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-01T23:50:10Z"
-    mac: ENC[AES256_GCM,data:+bnxlg/D9H3qMfA560PR+Fho+ke0y0F+jNRvBRTBTIeXGvZlN6B2PBoEopwQcETqZml42uAF6alwH76UI9UWxQ+YBpApzmj7aeXuffYU0fY9e6kN5mGyZ277r+U90oEMynb8hYDtUeFOLYlBv5jws8ztBt8uQjEhkx6E9H3/YwM=,iv:QUZuxgYPUEGYm4NGlkFtQNBM57cEGZB1qBRCgc5RJYE=,tag:ad1AJG8Oeg7dok5fBevthw==,type:str]
+    lastmodified: "2024-11-02T21:44:42Z"
+    mac: ENC[AES256_GCM,data:G7AcSGCVWl89uh2dcomTayumSbxCeHOo9msjMKOYDDui0Dtr9t2KfvEla7WmPkZ+oLPr7pm5OpEnBAF1aQx3X6rqGbzrReZvCJheWo6L98DKJRyAeuxRiTYxOrzmwCw0RClHTwVNbgShxvi8cR7jWkuuFKyfRK7aDlbzhlXs5hk=,iv:HvT4CAO2LmmTyxyy2oV1hyvZ9+xOG+OtUZKIxwPM7ts=,tag:2yyM9y9I84jfsFgSLRBabg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey|displayname|email|pass|ca|id|bootstraptoken|secretboxencryptionsecret|secrets|secrets|password|cert|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.9.1
