@@ -125,7 +125,11 @@ spec:
 
       k8sgateway:
         enabled: true
-        type: ClusterIP
+        domains:
+        - dnsChallenge:
+            domain: dns01.clouddns.com
+            enabled: true
+          domain: tinoco.casa
         ports:
           k8sgateway:
             enabled: true
