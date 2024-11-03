@@ -36,6 +36,7 @@ spec:
     keepHistory: false
     
   values:
+    TZ: America/Chicago
 
     persistence:
 
@@ -74,8 +75,6 @@ spec:
     ingress:
       main:
         enabled: true
-        targetSelector:
-          main: main
         hosts:
           - host: games.tinoco.casa
             paths:
@@ -85,3 +84,17 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: cloudflare
+          traefik:
+            allowCors: false
+            enabled: true
+            entrypoints:
+                - websecure
+
+    securityContext:
+      container:
+          UMASK: "0022"
+          readOnlyRootFilesystem: false
+          runAsGroup: 0
+          runAsUser: 0
+      pod:
+          fsGroupChangePolicy: OnRootMismatch
