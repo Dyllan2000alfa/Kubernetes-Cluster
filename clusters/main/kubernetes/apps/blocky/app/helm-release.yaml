@@ -178,14 +178,8 @@ spec:
       # - in: something.com
       #   out: somethingelse.com
       mapping: []
-       - dnsserver: 10.1.0.131
-         domain: ldap.tinoco.casa
-       - dnsserver: 10.1.0.133
-         domain: kms.tinoco.casa
-       - dnsserver: 10.1.0.1
-         domain: router.tinoco.casa
-       - dnsserver: 10.1.0.4
-         domain: primary.tinoco.casa
+      # - domain: something.com
+      #   dnsserver: 192.168.178.1
     # -- Setup client-name lookup
     clientLookup:
       # -- upstream used for client-name lookup
