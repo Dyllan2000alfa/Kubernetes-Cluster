@@ -34,7 +34,7 @@ spec:
             config:
                 enabled: true
                 type: pvc
-                size: 16Gi
+                size: 256Gi
                 mountPath: /config
             directorystorage:
                 enabled: true
@@ -93,14 +93,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5Y3lmSDhPUXE4OUplSk4x
-            NWpGZnFMMXRyWndFd1RDR1pKMWUyM0lHRTB3CkFEZThCVUxIcFlBaU44VFZpUmlL
-            TVFZdlUxdVYrQ1hvTGJDZjJOTnM3Qm8KLS0tIHJDYjArUFRIQUsraXhSdThLaTFX
-            clFhZVRxODFKeTh1TkVyWG9oNGg4eEkKB6OwNKTviSGkkMOrqb0GqDetyw8HfSO+
-            GldH4rPc55rmk07jFsQzv7MNlN4ScTz20fN57mb49VcJ+A84ABBoRw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0d2lzR0x3NjZuME5kcVVE
+            a1J0VTg5TWRxeHgwMG5ZZDZHcmN1U3hrcFFVCm1EajNKUENZcXR4TzBuSHZwWlYr
+            UHI4Sit3VDZ4eC82SDUxZEp1YVBPTlkKLS0tIFVVeTlqVm5pM1NNZzQvdWdlQm9T
+            Skp6UStuWlpzajlBakE3Z1FYTXFQcW8KP1W3k7IQY9GyNMkc26CMRl4wxLu5F9JO
+            FzkgeYVMX1AcV8yj7IIFls4ZJFeUr4KUgCNjPF+AHz6FN7Q8MXMfMA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-03T22:38:15Z"
-    mac: ENC[AES256_GCM,data:q2QOQEg3ms+vIe6C0Cev9LYB/BqM+yQH2PBXKaclZqbULVeR8uk9dcUVycXgpjb2UYYKzLSiaTRTKxFyKnweVa1Te4LhGub03KFT2YTtImtz9LX2UjI8l4JCL9jX5FRy9LQpls06Wx3UcFPdxoh/ZwYDM1ojqes7JyfxHUK+uwg=,iv:oNtNNi+E1BwPqVJkANnV4+9B39dTPV0PO95r0VVG4cw=,tag:raJv27W2v9kZH5xscr5RNw==,type:str]
+    lastmodified: "2024-11-03T22:43:27Z"
+    mac: ENC[AES256_GCM,data:r/BqbuKRc8iY20MowIfaftr7yrPhIENAVAAg/7j5SDYKeyWwdeI2OpBYZk7KxB8sT0BsWqJRB1XU6ei53YdXyD3wsh+pKOckkMFilOE1RgDiJ4gzCxIh1/ZfaS4xFTReaoDucku15hRfIJMbdBqQWbRDS81Pp3/+WVr64eFA0RE=,iv:EAmy2KgoGvQmToOMWXzvS5Q0LdWB+3E6sifIHnX8Cmc=,tag:4QGgIhULfum3FQZM8AW8Jw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(password))
     version: 3.9.1

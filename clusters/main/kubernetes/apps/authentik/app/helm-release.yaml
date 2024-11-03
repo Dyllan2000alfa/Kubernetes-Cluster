@@ -34,7 +34,7 @@ spec:
             credentials:
                 # Only works on initial install
                 email: dyllan@tinoco.casa
-                password: ENC[AES256_GCM,data:pzlQDmRxwaQz0FI=,iv:QxAw5PzuaqwD5rrrbi6zLZ7da4h6+BiIixXdEF9J0LU=,tag:3CoWwkzFg8VHvUOqhqM/EA==,type:str]
+                password: ENC[AES256_GCM,data:8IDdrZZsNamQBTs=,iv:Y3m9CXydGP7YgajdJeLMhvcRwEIEKY1FG7XMHZpW4O0=,tag:WKQaD3+o3QU0HsWpSsu6qw==,type:str]
                 # Optional, only set if you want to use it
                 bootstrapToken: ""
             credentials:
@@ -579,14 +579,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUSWlKL2dENXkwSSs5M0I2
-            WTcvRVd3MGVieWZuN2NPeXJCMTlzZkZxUzJ3CnB2aVN0c1NlYXpER3BmQiszaGxy
-            eDloTm5qOXU1dzZGcXZOWVR0SEVwZXMKLS0tIEYxZEFYdmtnRnRtRGkxRkR4UTEw
-            YXhiRGovV2h3MFlia0tLN29xR2prNDQKG2snffLDOfaYf4hfNUzl80+fx37LaZGR
-            cbzoHPWDT9tNg/Be3WKHrRvfMvZQG8MBkx96p6zealDXk3/RKVtlkg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWcmprK1VNR0JBaE5EM1V2
+            K2VpeHdkTVRVSStnMXJFcmpUNmtlaWpyeEU0ClBDZCtwRGFMbXFKbHZ6TTVrdXZK
+            ell0WVVGZk4zbnArM09XVEdNM3M4UmMKLS0tIFY1VUZxMEVvSm1ZNXBOM2NMcjlQ
+            SU55YzdOeFpjSmZSTWw1a05Tb2tCWkkKCncwuw+6K3uDw0Y5i9i0G5qc/sHrMRft
+            K4KVBkj736HmH6tOtKyrJojgWOSXlN9wa+7SQ2XM5RVVRhpXTkMYxA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-03T22:38:15Z"
-    mac: ENC[AES256_GCM,data:dqpCMTdujtuc8AMaB01hgJZDaRvYM8Kfeu9fufhy82YPPmiFiGWjjZJnz2WdW7naqum/gHRcDq3JfES7OIlbwyFnqm755piyEatfkiGff+QsROpMiKi9ZAjLwJHVITZuKX7nTChl2zAqyO7c/rd3ICa6n/8bSTSVqSOD6iSK+Ck=,iv:BpE+c81fK1IzOnqKEu+U4NXCUU5sEBLWKdOUxjap6jM=,tag:HM2q58btpWEnjh3cqXDKmg==,type:str]
+    lastmodified: "2024-11-03T22:43:27Z"
+    mac: ENC[AES256_GCM,data:ZhFT/5mb4Lg2QrRpr5QYiqNGArcuAkOLgPz869/ZUCxROFj3l4pPwQVYb2iVaXZ2HCGPgj2X4pArKeUDojPYVpJviZDiJXgtaIrv05GhoB9wLmurb2rHGqr74IXuTo8Dq64Zf+3ylBMYkQGhcqrsQlrZzF8uUrd9hmHo1HAng0A=,iv:EIigx87rTB4rdVjjgB+g2MOShdCJdUU4fndDa3Ob6cM=,tag:unSWAmIj7EvACimupxMA3w==,type:str]
     pgp: []
     encrypted_regex: ((?i)(password))
     version: 3.9.1
