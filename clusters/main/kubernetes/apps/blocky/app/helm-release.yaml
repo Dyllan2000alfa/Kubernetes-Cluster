@@ -64,12 +64,6 @@ spec:
                     - /app/blocky
                     - healthcheck
 
-    # -- Blocky Config File content
-    blockyConfig: {}
-    # upstream:
-    #   default:
-    #     - 1.1.1.1
-
     # -- some general blocky settings
     blocky:
       # -- Enable prometheus annotations
@@ -125,11 +119,6 @@ spec:
 
       k8sgateway:
         enabled: true
-        domains:
-        - dnsChallenge:
-            domain: dns01.clouddns.com
-            enabled: true
-          domain: tinoco.casa
         ports:
           k8sgateway:
             enabled: true
