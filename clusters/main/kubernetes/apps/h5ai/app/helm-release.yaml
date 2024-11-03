@@ -46,7 +46,7 @@ spec:
         mountPath: /config
         
       directorystorage:
-        enabled: false
+        enabled: true
         mountPath: /h5ai
         readOnly: true
         type: nfs
