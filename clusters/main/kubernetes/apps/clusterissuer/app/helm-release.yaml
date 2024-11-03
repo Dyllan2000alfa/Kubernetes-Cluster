@@ -1,135 +1,146 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: clusterissuer
-  namespace: clusterissuer
-
+    name: clusterissuer
+    namespace: clusterissuer
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: clusterissuer
-      version: 9.2.2
-      sourceRef:
-        kind: HelmRepository
-        name: truecharts
-        namespace: flux-system
-      interval: 15m
-
-  timeout: 20m
-  maxHistory: 3
-
-  driftDetection:
-    mode: warn
-
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-
-  uninstall:
-    keepHistory: false
-
-  values:
-    manifestManager:
-      enabled: true
-    workload:
-      main:
-        enabled: false
-        podSpec:
-          containers:
+    interval: 15m
+    chart:
+        spec:
+            chart: clusterissuer
+            version: 9.2.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 15m
+    timeout: 20m
+    maxHistory: 3
+    driftDetection:
+        mode: warn
+    install:
+        createNamespace: true
+        remediation:
+            retries: 3
+    upgrade:
+        cleanupOnFail: true
+        remediation:
+            retries: 3
+    uninstall:
+        keepHistory: false
+    values:
+        manifestManager:
+            enabled: true
+        workload:
             main:
-              enabled: false
-              probes:
-                liveness:
-                  enabled: false
-                readiness:
-                  enabled: false
-                startup:
-                  enabled: false
-    service:
-      main:
-        enabled: false
-        ports:
-          main:
-            enabled: false
-            port: 9999
-    portal:
-      open:
-        enabled: false
-    operator:
-      cert-manager:
-        namespace: cert-manager
-
-    clusterIssuer:
-      selfSigned:
-        enabled: false
-        name: "selfsigned"
-      CA: []
-      #   - name: myca
-      #     selfSigned: true
-      #     selfSignedCommonName: "my-selfsigned-ca"
-      #     # Used to manually define a CA-crt not used when selfSigned is enabled
-      #     crt: ""
-      #     key: ""
-      #     # TODO: Add option to use SCALE CA certs
-
-      ACME: 
-      - name: cloudflare
-        # Used for both logging in to the DNS provider AND ACME registration
-        email: "admin@tinoco.casa"
-        server: 'https://acme-v02.api.letsencrypt.org/directory'
-        # Used primarily for the SCALE GUI
-    #     customServer: 'https://acme-staging-v02.api.letsencrypt.org/directory'
-        # Options: HTTP01, cloudflare, route53, akamai, digitalocean, rfc2136, acmedns
-        type: "cloudflare"
-        # for cloudflare
-        cfapikey: ""
-        cfapitoken: "sRwCU6bVB57fZ01dLVGVDp-TM-Pf6o94zqiUbZaI"
-    #     # for route53
-    #     region: ""
-    #     accessKeyID: ""
-    #     route53SecretAccessKey: ""
-    #     # optional for route53
-    #     role: ""
-    #     # for akamai
-    #     serviceConsumerDomain: ""
-    #     akclientToken: ""
-    #     akclientSecret: ""
-    #     akaccessToken: ""
-    #     # for digitalocean
-    #     doaccessToken: ""
-    #     # for rfc2136
-    #     nameserver: ""
-    #     tsigKeyName: ""
-    #     tsigAlgorithm: ""
-    #     rfctsigSecret: ""
-    #     # for acmedns
-    #     name: sd
-    #     acmednsHost: asdf
-    #     # Pick one of the bellow acmednsConfig
-    #     acmednsConfigJson:
-    #     acmednsConfig:
-    #       - domain: ""
-    #         username: ""
-    #         password: ""
-    #         fulldomain: ""
-    #         subdomain: ""
-    #         allowFrom: []
-
-    clusterCertificates:
-      # Namespaces in which the certificates must be available
-      # Accepts comma-separated regex expressions
-      # replicationNamespaces: 'ix-.*'
-      certificates: []
-      # - name: mycert
-      #   enabled: true
-      #   certificateIssuer: selfsigned
-      #   hosts:
-      #     - my.domain.com
-      #     - '*.my.domain.com'
+                enabled: false
+                podSpec:
+                    containers:
+                        main:
+                            enabled: false
+                            probes:
+                                liveness:
+                                    enabled: false
+                                readiness:
+                                    enabled: false
+                                startup:
+                                    enabled: false
+        service:
+            main:
+                enabled: false
+                ports:
+                    main:
+                        enabled: false
+                        port: 9999
+        portal:
+            open:
+                enabled: false
+        operator:
+            cert-manager:
+                namespace: cert-manager
+        clusterIssuer:
+            selfSigned:
+                enabled: false
+                name: selfsigned
+            CA: []
+            #   - name: myca
+            #     selfSigned: true
+            #     selfSignedCommonName: "my-selfsigned-ca"
+            #     # Used to manually define a CA-crt not used when selfSigned is enabled
+            #     crt: ""
+            #     key: ""
+            #     # TODO: Add option to use SCALE CA certs
+            ACME:
+                - name: cloudflare
+                  # Used for both logging in to the DNS provider AND ACME registration
+                  email: admin@tinoco.casa
+                  server: https://acme-v02.api.letsencrypt.org/directory
+                  # Used primarily for the SCALE GUI
+                  #     customServer: 'https://acme-staging-v02.api.letsencrypt.org/directory'
+                  # Options: HTTP01, cloudflare, route53, akamai, digitalocean, rfc2136, acmedns
+                  type: cloudflare
+                  # for cloudflare
+                  cfapikey: ""
+                  cfapitoken: sRwCU6bVB57fZ01dLVGVDp-TM-Pf6o94zqiUbZaI
+        #     # for route53
+        #     region: ""
+        #     accessKeyID: ""
+        #     route53SecretAccessKey: ""
+        #     # optional for route53
+        #     role: ""
+        #     # for akamai
+        #     serviceConsumerDomain: ""
+        #     akclientToken: ""
+        #     akclientSecret: ""
+        #     akaccessToken: ""
+        #     # for digitalocean
+        #     doaccessToken: ""
+        #     # for rfc2136
+        #     nameserver: ""
+        #     tsigKeyName: ""
+        #     tsigAlgorithm: ""
+        #     rfctsigSecret: ""
+        #     # for acmedns
+        #     name: sd
+        #     acmednsHost: asdf
+        #     # Pick one of the bellow acmednsConfig
+        #     acmednsConfigJson:
+        #     acmednsConfig:
+        #       - domain: ""
+        #         username: ""
+        #         password: ""
+        #         fulldomain: ""
+        #         subdomain: ""
+        #         allowFrom: []
+        clusterCertificates:
+            # Namespaces in which the certificates must be available
+            # Accepts comma-separated regex expressions
+            # replicationNamespaces: 'ix-.*'
+            certificates: []
+            # - name: mycert
+            #   enabled: true
+            #   certificateIssuer: selfsigned
+            #   hosts:
+            #     - my.domain.com
+            #     - '*.my.domain.com'
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBERHdkbHJaZjR4M3FNYnkw
+            TVVNN3g3VFVnbmR5ZjBJM1EzWGhyNTVSb1dNCitVY0F1WWdLWXBPRXByNkxPc2Ux
+            RFM2VElTaXRHMWtZZm1GQUQ1bGdmekUKLS0tIEdnY3hEcytiV21ZYUovMjFLd3lG
+            bDdOQWZoOGNHUWJGK2FQcXB3THByNm8KiahI1MnRq0NdXfXy1vDFvuR6gEAP52QL
+            GM+EwkCDR+lsxUk4oD+QMV8bu6cP/wXo5Wyam3N84aRIKECkj5ELuw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-03T22:38:15Z"
+    mac: ENC[AES256_GCM,data:ECJtLp5xqc8Uo/XxFvreELf51O5Ofx2RiwxLJOIOxyXGuIBm25Z1RFTcz/NAzbQ6h7141GTnbdBQ0OP2F/LdSXQ+OH2BpQcxRM0waxzVJyC2zzLbfMiYQEqZSsYeLQZYLfVlO80tzE4S+TDs6c+HOD3GKvsBrrQRXCoz5G5D/NA=,iv:RRxpH/AGejD1SfZ9VEmkCnqbfzhg6hcFltFpblBNDas=,tag:rmLDZW1QTIW7GcggWhAL8A==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(password))
+    version: 3.9.1

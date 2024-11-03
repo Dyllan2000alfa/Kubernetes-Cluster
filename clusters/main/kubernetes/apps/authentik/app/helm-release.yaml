@@ -1,579 +1,592 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: authentik
-  namespace: authentik
-
+    name: authentik
+    namespace: authentik
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: authentik
-      version: 27.8.2
-      sourceRef:
-        kind: HelmRepository
-        name: truecharts
-        namespace: flux-system
-      interval: 15m
-
-  timeout: 20m
-  maxHistory: 3
-
-  driftDetection:
-    mode: warn
-
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-
-  uninstall:
-    keepHistory: false
-
-  values:
-    TZ: America/Chicago
-    authentik:
-      credentials:
-        # Only works on initial install
-        email: dyllan@tinoco.casa
-        password: Dman2003()$
-        # Optional, only set if you want to use it
-        bootstrapToken: ""
-      credentials:
-        cloudflare:
-            accessKey: ${S3_access}
-            bucket: app-backup
-            encrKey: ${S3_encr}
-            name: cloudflare
-            path: ""
-            secretKey: ${S3_secret}
-            type: s3
-            url: ${S3_url}
-      general:
-        disableUpdateCheck: false
-        disableStartupAnalytics: true
-        allowUserChangeName: true
-        allowUserChangeEmail: true
-        allowUserChangeUsername: true
-        overwriteDefaultBlueprints: false
-        gdprCompliance: true
-        tokenLength: 128
-        impersonation: true
-        avatars:
-          - gravatar
-          - initials
-        footerLinks:
-          - name: Authentik
-            href: https://goauthentik.io
-      email:
-        host: "protonmail-bridge.protonmail-bridge.svc.cluster.local"
-        port: 25
-        username: primary@tinoco.casa
-        password:
-        useTLS: false
-        useSSL: false
-        timeout: 10
-        from: ""
-      ldap:
-        tlsCiphers: "null"
-        taskTimeoutHours: 2
-      logging:
-        # info, debug, warning, error, trace
-        logLevel: info
-      errorReporting:
-        enabled: false
-        sendPII: false
-        environment: customer
-        sentryDSN: ""
-      geoip:
-        enabled: false
-        # Ignored if enabled is true
-        # If enabled is false, and this is true, the
-        # built-in GeoIP database will be wiped
-        wipeBuiltInDb: false
-        editionID: GeoLite2-City
-        frequency: 8
-        accountID: ""
-        licenseKey: ""
-      outposts:
-        proxy:
-          enabled: false
-          token: ""
-        radius:
-          enabled: false
-          token: ""
-        ldap:
-          enabled: true
-          token: "jeUuHoUvs7A2gLaqBKsDCODes1kr0q2dPgbBujg0AlwBzHIpUDkoEhtg4kbfB7fpWdRYIQupJFDUmFnniQEJnV58ihouo7qP3Is2HhOmVAR2NpQxGxxoPILJongrNeTZ"
-    # ===== DO NOT EDIT BELOW THIS LINE =====
-    workload:
-      # ===== Server =====
-      main:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
-            main:
-              enabled: true
-              primary: true
-              imageSelector: image
-              securityContext:
-                runAsUser: 1000
-                runAsGroup: 1000
-                # readOnlyRootFilesystem: false
-              envFrom:
-                - configMapRef:
-                    name: server
-                - secretRef:
-                    name: server-worker
-                - configMapRef:
-                    name: server-worker
-              args:
-                - server
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /lifecycle/ak
-                    - healthcheck
-                readiness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /lifecycle/ak
-                    - healthcheck
-                startup:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /lifecycle/ak
-                    - healthcheck
-      # ===== Worker =====
-      worker:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
-            worker:
-              enabled: true
-              primary: true
-              imageSelector: image
-              securityContext:
-                runAsUser: 1000
-                runAsGroup: 1000
-                # readOnlyRootFilesystem: false
-              envFrom:
-                - secretRef:
-                    name: server-worker
-                - configMapRef:
-                    name: server-worker
-              args:
-                - worker
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /lifecycle/ak
-                    - healthcheck
-                readiness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /lifecycle/ak
-                    - healthcheck
-                startup:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /lifecycle/ak
-                    - healthcheck
-      # ===== PROXY =====
-      proxy:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
-            proxy:
-              enabled: true
-              primary: true
-              imageSelector: proxyImage
-              securityContext:
-                runAsUser: 1000
-                runAsGroup: 1000
-              envFrom:
-                - configMapRef:
-                    name: proxy
-                - secretRef:
-                    name: proxy
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /proxy
-                    - healthcheck
-                readiness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /proxy
-                    - healthcheck
-                startup:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /proxy
-                    - healthcheck
-      # ===== RADIUS =====
-      radius:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
-            radius:
-              enabled: true
-              primary: true
-              imageSelector: radiusImage
-              securityContext:
-                runAsUser: 1000
-                runAsGroup: 1000
-              envFrom:
-                - configMapRef:
-                    name: radius
-                - secretRef:
-                    name: radius
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /radius
-                    - healthcheck
-                readiness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /radius
-                    - healthcheck
-                startup:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /radius
-                    - healthcheck
-      # ===== LDAP =====
-      ldap:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
+    interval: 15m
+    chart:
+        spec:
+            chart: authentik
+            version: 27.8.2
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 15m
+    timeout: 20m
+    maxHistory: 3
+    driftDetection:
+        mode: warn
+    install:
+        createNamespace: true
+        remediation:
+            retries: 3
+    upgrade:
+        cleanupOnFail: true
+        remediation:
+            retries: 3
+    uninstall:
+        keepHistory: false
+    values:
+        TZ: America/Chicago
+        authentik:
+            credentials:
+                # Only works on initial install
+                email: dyllan@tinoco.casa
+                password: ENC[AES256_GCM,data:pzlQDmRxwaQz0FI=,iv:QxAw5PzuaqwD5rrrbi6zLZ7da4h6+BiIixXdEF9J0LU=,tag:3CoWwkzFg8VHvUOqhqM/EA==,type:str]
+                # Optional, only set if you want to use it
+                bootstrapToken: ""
+            credentials:
+                cloudflare:
+                    accessKey: ${S3_access}
+                    bucket: app-backup
+                    encrKey: ${S3_encr}
+                    name: cloudflare
+                    path: ""
+                    secretKey: ${S3_secret}
+                    type: s3
+                    url: ${S3_url}
+            general:
+                disableUpdateCheck: false
+                disableStartupAnalytics: true
+                allowUserChangeName: true
+                allowUserChangeEmail: true
+                allowUserChangeUsername: true
+                overwriteDefaultBlueprints: false
+                gdprCompliance: true
+                tokenLength: 128
+                impersonation: true
+                avatars:
+                    - gravatar
+                    - initials
+                footerLinks:
+                    - name: Authentik
+                      href: https://goauthentik.io
+            email:
+                host: protonmail-bridge.protonmail-bridge.svc.cluster.local
+                port: 25
+                username: primary@tinoco.casa
+                password: null
+                useTLS: false
+                useSSL: false
+                timeout: 10
+                from: ""
             ldap:
-              enabled: true
-              primary: true
-              imageSelector: ldapImage
-              securityContext:
-                runAsUser: 1000
-                runAsGroup: 1000
-              envFrom:
-                - configMapRef:
-                    name: ldap
-                - secretRef:
-                    name: ldap
-              probes:
-                liveness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /ldap
-                    - healthcheck
-                readiness:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /ldap
-                    - healthcheck
-                startup:
-                  enabled: true
-                  type: exec
-                  command:
-                    - /ldap
-                    - healthcheck
-      # ===== GeoIP Updater =====
-      geoip:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
+                tlsCiphers: "null"
+                taskTimeoutHours: 2
+            logging:
+                # info, debug, warning, error, trace
+                logLevel: info
+            errorReporting:
+                enabled: false
+                sendPII: false
+                environment: customer
+                sentryDSN: ""
             geoip:
-              enabled: true
-              primary: true
-              imageSelector: geoipImage
-              securityContext:
-                runAsUser: 0
-                runAsGroup: 0
-                capabilities:
-                  disableS6Caps: true
-              envFrom:
-                - configMapRef:
-                    name: geoip
-                - secretRef:
-                    name: geoip
-              probes:
-                liveness:
-                  enabled: false
-                readiness:
-                  enabled: false
-                startup:
-                  enabled: false
-    service:
-      # Server HTTPS
-      main:
-        ports:
-          main:
-            protocol: https
-            port: 10229
-      # Server HTTP
-      http:
-        enabled: true
-        type: ClusterIP
-        ports:
-          http:
-            enabled: true
-            protocol: http
-            port: 10230
-      # Proxy
-      proxy:
-        enabled: true
-        targetSelector: proxy
-        ports:
-          http:
-            enabled: true
-            protocol: http
-            port: 10227
-            targetSelector: proxy
-          https:
-            enabled: true
-            protocol: https
-            port: 10228
-            targetSelector: proxy
-      # Radius
-      radius:
-        enabled: true
-        targetSelector: radius
-        ports:
-          radius:
-            enabled: true
-            protocol: udp
-            targetSelector: radius
-            port: 1812
-      # LDAP
-      ldap:
-        enabled: true
-        targetSelector: ldap
-        ports:
-          ldap:
-            enabled: true
-            port: 389
-            targetSelector: ldap
-      # LDAPS
-      ldaps:
-        enabled: true
-        targetSelector: ldap
-        ports:
-          ldaps:
-            enabled: true
-            port: 636
-            targetSelector: ldap
-      # Server Metrics
-      servermetrics:
-        enabled: true
-        type: ClusterIP
-        ports:
-          servermetrics:
-            enabled: true
-            protocol: http
-            port: 10231
-      # Radius Metrics
-      radiusmetrics:
-        enabled: true
-        type: ClusterIP
-        targetSelector: radius
-        ports:
-          radiusmetrics:
-            enabled: true
-            protocol: http
-            port: 10232
-            targetSelector: radius
-      # LDAP Metrics
-      ldapmetrics:
-        enabled: true
-        type: ClusterIP
-        targetSelector: ldap
-        ports:
-          ldapmetrics:
-            enabled: true
-            protocol: http
-            port: 10233
-            targetSelector: ldap
-      # Proxy Metrics
-      proxymetrics:
-        enabled: true
-        type: ClusterIP
-        targetSelector: proxy
-        ports:
-          proxymetrics:
-            enabled: true
-            protocol: http
-            port: 10234
-            targetSelector: proxy
-    persistence:
-      media:
-        enabled: true
-        targetSelector:
-          main:
+                enabled: false
+                # Ignored if enabled is true
+                # If enabled is false, and this is true, the
+                # built-in GeoIP database will be wiped
+                wipeBuiltInDb: false
+                editionID: GeoLite2-City
+                frequency: 8
+                accountID: ""
+                licenseKey: ""
+            outposts:
+                proxy:
+                    enabled: false
+                    token: ""
+                radius:
+                    enabled: false
+                    token: ""
+                ldap:
+                    enabled: true
+                    token: jeUuHoUvs7A2gLaqBKsDCODes1kr0q2dPgbBujg0AlwBzHIpUDkoEhtg4kbfB7fpWdRYIQupJFDUmFnniQEJnV58ihouo7qP3Is2HhOmVAR2NpQxGxxoPILJongrNeTZ
+        # ===== DO NOT EDIT BELOW THIS LINE =====
+        workload:
+            # ===== Server =====
             main:
-              mountPath: /media
-          worker:
+                enabled: true
+                type: Deployment
+                podSpec:
+                    containers:
+                        main:
+                            enabled: true
+                            primary: true
+                            imageSelector: image
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                                # readOnlyRootFilesystem: false
+                            envFrom:
+                                - configMapRef:
+                                    name: server
+                                - secretRef:
+                                    name: server-worker
+                                - configMapRef:
+                                    name: server-worker
+                            args:
+                                - server
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /lifecycle/ak
+                                        - healthcheck
+                                readiness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /lifecycle/ak
+                                        - healthcheck
+                                startup:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /lifecycle/ak
+                                        - healthcheck
+            # ===== Worker =====
             worker:
-              mountPath: /media
-        volsync:
-        - credentials: cloudflare
-          dest:
-            enabled: false
-          name: config
-          src:
-            enabled: true
-          type: restic
-      templates:
-        enabled: true
-        targetSelector:
-          main:
-            main:
-              mountPath: /templates
-          worker:
-            worker:
-              mountPath: /templates
-        volsync:
-        - credentials: cloudflare
-          dest:
-            enabled: false
-          name: templates
-          src:
-            enabled: true
-          type: restic
-      blueprints:
-        enabled: true
-        targetSelector:
-          worker:
-            worker:
-              # This will automatically change to `/blueprints`
-              # if `overwriteDefaultBlueprints` is set to `true
-              # Otherwise it will respect the value specified here
-              mountPath: /blueprints/custom
-        volsync:
-        - credentials: cloudflare
-          dest:
-            enabled: false
-          name: blueprints
-          src:
-            enabled: true
-          type: restic
-      certs:
-        enabled: true
-        mountPath: /certs
-        targetSelector:
-          worker:
-            worker:
-              mountPath: /certs
-        volsync:
-        - credentials: cloudflare
-          dest:
-            enabled: false
-          name: certs
-          src:
-            enabled: true
-          type: restic
-      geoip:
-        enabled: true
-        targetSelector:
-          main:
-            main:
-              mountPath: /geoip
-          worker:
-            worker:
-              mountPath: /geoip
-          geoip:
+                enabled: true
+                type: Deployment
+                podSpec:
+                    containers:
+                        worker:
+                            enabled: true
+                            primary: true
+                            imageSelector: image
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                                # readOnlyRootFilesystem: false
+                            envFrom:
+                                - secretRef:
+                                    name: server-worker
+                                - configMapRef:
+                                    name: server-worker
+                            args:
+                                - worker
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /lifecycle/ak
+                                        - healthcheck
+                                readiness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /lifecycle/ak
+                                        - healthcheck
+                                startup:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /lifecycle/ak
+                                        - healthcheck
+            # ===== PROXY =====
+            proxy:
+                enabled: true
+                type: Deployment
+                podSpec:
+                    containers:
+                        proxy:
+                            enabled: true
+                            primary: true
+                            imageSelector: proxyImage
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                            envFrom:
+                                - configMapRef:
+                                    name: proxy
+                                - secretRef:
+                                    name: proxy
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /proxy
+                                        - healthcheck
+                                readiness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /proxy
+                                        - healthcheck
+                                startup:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /proxy
+                                        - healthcheck
+            # ===== RADIUS =====
+            radius:
+                enabled: true
+                type: Deployment
+                podSpec:
+                    containers:
+                        radius:
+                            enabled: true
+                            primary: true
+                            imageSelector: radiusImage
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                            envFrom:
+                                - configMapRef:
+                                    name: radius
+                                - secretRef:
+                                    name: radius
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /radius
+                                        - healthcheck
+                                readiness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /radius
+                                        - healthcheck
+                                startup:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /radius
+                                        - healthcheck
+            # ===== LDAP =====
+            ldap:
+                enabled: true
+                type: Deployment
+                podSpec:
+                    containers:
+                        ldap:
+                            enabled: true
+                            primary: true
+                            imageSelector: ldapImage
+                            securityContext:
+                                runAsUser: 1000
+                                runAsGroup: 1000
+                            envFrom:
+                                - configMapRef:
+                                    name: ldap
+                                - secretRef:
+                                    name: ldap
+                            probes:
+                                liveness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /ldap
+                                        - healthcheck
+                                readiness:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /ldap
+                                        - healthcheck
+                                startup:
+                                    enabled: true
+                                    type: exec
+                                    command:
+                                        - /ldap
+                                        - healthcheck
+            # ===== GeoIP Updater =====
             geoip:
-              mountPath: /usr/share/GeoIP
-    cnpg:
-      main:
-        enabled: true
-        user: authentik
-        database: authentik
-    redis:
-      enabled: true
-      includeCommon: true
-    portal:
-      open:
-        enabled: true
-    metrics:
-      # FIXME: Metrics do not work yet
-      servermetrics:
-        enabled: true
-        type: servicemonitor
-        endpoints:
-          - port: "{{ .Values.service.servermetrics.ports.servermetrics.port }}"
-            path: /metrics
-        prometheusRule:
-          enabled: false
-      radiusmetrics:
-        enabled: true
-        type: servicemonitor
-        endpoints:
-          - port: "{{ .Values.service.radiusmetrics.ports.radiusmetrics.port }}"
-            path: /metrics
-        prometheusRule:
-          enabled: false
-      ldapmetrics:
-        enabled: true
-        type: servicemonitor
-        endpoints:
-          - port: "{{ .Values.service.ldapmetrics.ports.ldapmetrics.port }}"
-            path: /metrics
-        prometheusRule:
-          enabled: false
-      proxymetrics:
-        enabled: true
-        type: servicemonitor
-        endpoints:
-          - port: "{{ .Values.service.proxymetrics.ports.proxymetrics.port }}"
-            path: /metrics
-        prometheusRule:
-          enabled: false
-    updated: true
-
-    ingress:
-      main:
-        required: true
-        enabled: true
-        hosts:
-          - host: authentik.tinoco.casa
-            paths:
-              - path: /
-                pathType: Prefix
-        integrations:
-          certManager:
+                enabled: true
+                type: Deployment
+                podSpec:
+                    containers:
+                        geoip:
+                            enabled: true
+                            primary: true
+                            imageSelector: geoipImage
+                            securityContext:
+                                runAsUser: 0
+                                runAsGroup: 0
+                                capabilities:
+                                    disableS6Caps: true
+                            envFrom:
+                                - configMapRef:
+                                    name: geoip
+                                - secretRef:
+                                    name: geoip
+                            probes:
+                                liveness:
+                                    enabled: false
+                                readiness:
+                                    enabled: false
+                                startup:
+                                    enabled: false
+        service:
+            # Server HTTPS
+            main:
+                ports:
+                    main:
+                        protocol: https
+                        port: 10229
+            # Server HTTP
+            http:
+                enabled: true
+                type: ClusterIP
+                ports:
+                    http:
+                        enabled: true
+                        protocol: http
+                        port: 10230
+            # Proxy
+            proxy:
+                enabled: true
+                targetSelector: proxy
+                ports:
+                    http:
+                        enabled: true
+                        protocol: http
+                        port: 10227
+                        targetSelector: proxy
+                    https:
+                        enabled: true
+                        protocol: https
+                        port: 10228
+                        targetSelector: proxy
+            # Radius
+            radius:
+                enabled: true
+                targetSelector: radius
+                ports:
+                    radius:
+                        enabled: true
+                        protocol: udp
+                        targetSelector: radius
+                        port: 1812
+            # LDAP
+            ldap:
+                enabled: true
+                targetSelector: ldap
+                ports:
+                    ldap:
+                        enabled: true
+                        port: 389
+                        targetSelector: ldap
+            # LDAPS
+            ldaps:
+                enabled: true
+                targetSelector: ldap
+                ports:
+                    ldaps:
+                        enabled: true
+                        port: 636
+                        targetSelector: ldap
+            # Server Metrics
+            servermetrics:
+                enabled: true
+                type: ClusterIP
+                ports:
+                    servermetrics:
+                        enabled: true
+                        protocol: http
+                        port: 10231
+            # Radius Metrics
+            radiusmetrics:
+                enabled: true
+                type: ClusterIP
+                targetSelector: radius
+                ports:
+                    radiusmetrics:
+                        enabled: true
+                        protocol: http
+                        port: 10232
+                        targetSelector: radius
+            # LDAP Metrics
+            ldapmetrics:
+                enabled: true
+                type: ClusterIP
+                targetSelector: ldap
+                ports:
+                    ldapmetrics:
+                        enabled: true
+                        protocol: http
+                        port: 10233
+                        targetSelector: ldap
+            # Proxy Metrics
+            proxymetrics:
+                enabled: true
+                type: ClusterIP
+                targetSelector: proxy
+                ports:
+                    proxymetrics:
+                        enabled: true
+                        protocol: http
+                        port: 10234
+                        targetSelector: proxy
+        persistence:
+            media:
+                enabled: true
+                targetSelector:
+                    main:
+                        main:
+                            mountPath: /media
+                    worker:
+                        worker:
+                            mountPath: /media
+                volsync:
+                    - credentials: cloudflare
+                      dest:
+                        enabled: false
+                      name: config
+                      src:
+                        enabled: true
+                      type: restic
+            templates:
+                enabled: true
+                targetSelector:
+                    main:
+                        main:
+                            mountPath: /templates
+                    worker:
+                        worker:
+                            mountPath: /templates
+                volsync:
+                    - credentials: cloudflare
+                      dest:
+                        enabled: false
+                      name: templates
+                      src:
+                        enabled: true
+                      type: restic
+            blueprints:
+                enabled: true
+                targetSelector:
+                    worker:
+                        worker:
+                            # This will automatically change to `/blueprints`
+                            # if `overwriteDefaultBlueprints` is set to `true
+                            # Otherwise it will respect the value specified here
+                            mountPath: /blueprints/custom
+                volsync:
+                    - credentials: cloudflare
+                      dest:
+                        enabled: false
+                      name: blueprints
+                      src:
+                        enabled: true
+                      type: restic
+            certs:
+                enabled: true
+                mountPath: /certs
+                targetSelector:
+                    worker:
+                        worker:
+                            mountPath: /certs
+                volsync:
+                    - credentials: cloudflare
+                      dest:
+                        enabled: false
+                      name: certs
+                      src:
+                        enabled: true
+                      type: restic
+            geoip:
+                enabled: true
+                targetSelector:
+                    main:
+                        main:
+                            mountPath: /geoip
+                    worker:
+                        worker:
+                            mountPath: /geoip
+                    geoip:
+                        geoip:
+                            mountPath: /usr/share/GeoIP
+        cnpg:
+            main:
+                enabled: true
+                user: authentik
+                database: authentik
+        redis:
             enabled: true
-            certificateIssuer: cloudflare
-          traefik:
-            allowCors: false
-            enabled: true
-            entrypoints:
-                - websecure
+            includeCommon: true
+        portal:
+            open:
+                enabled: true
+        metrics:
+            # FIXME: Metrics do not work yet
+            servermetrics:
+                enabled: true
+                type: servicemonitor
+                endpoints:
+                    - port: '{{ .Values.service.servermetrics.ports.servermetrics.port }}'
+                      path: /metrics
+                prometheusRule:
+                    enabled: false
+            radiusmetrics:
+                enabled: true
+                type: servicemonitor
+                endpoints:
+                    - port: '{{ .Values.service.radiusmetrics.ports.radiusmetrics.port }}'
+                      path: /metrics
+                prometheusRule:
+                    enabled: false
+            ldapmetrics:
+                enabled: true
+                type: servicemonitor
+                endpoints:
+                    - port: '{{ .Values.service.ldapmetrics.ports.ldapmetrics.port }}'
+                      path: /metrics
+                prometheusRule:
+                    enabled: false
+            proxymetrics:
+                enabled: true
+                type: servicemonitor
+                endpoints:
+                    - port: '{{ .Values.service.proxymetrics.ports.proxymetrics.port }}'
+                      path: /metrics
+                prometheusRule:
+                    enabled: false
+        updated: true
+        ingress:
+            main:
+                required: true
+                enabled: true
+                hosts:
+                    - host: authentik.tinoco.casa
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                integrations:
+                    certManager:
+                        enabled: true
+                        certificateIssuer: cloudflare
+                    traefik:
+                        allowCors: false
+                        enabled: true
+                        entrypoints:
+                            - websecure
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUSWlKL2dENXkwSSs5M0I2
+            WTcvRVd3MGVieWZuN2NPeXJCMTlzZkZxUzJ3CnB2aVN0c1NlYXpER3BmQiszaGxy
+            eDloTm5qOXU1dzZGcXZOWVR0SEVwZXMKLS0tIEYxZEFYdmtnRnRtRGkxRkR4UTEw
+            YXhiRGovV2h3MFlia0tLN29xR2prNDQKG2snffLDOfaYf4hfNUzl80+fx37LaZGR
+            cbzoHPWDT9tNg/Be3WKHrRvfMvZQG8MBkx96p6zealDXk3/RKVtlkg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-11-03T22:38:15Z"
+    mac: ENC[AES256_GCM,data:dqpCMTdujtuc8AMaB01hgJZDaRvYM8Kfeu9fufhy82YPPmiFiGWjjZJnz2WdW7naqum/gHRcDq3JfES7OIlbwyFnqm755piyEatfkiGff+QsROpMiKi9ZAjLwJHVITZuKX7nTChl2zAqyO7c/rd3ICa6n/8bSTSVqSOD6iSK+Ck=,iv:BpE+c81fK1IzOnqKEu+U4NXCUU5sEBLWKdOUxjap6jM=,tag:HM2q58btpWEnjh3cqXDKmg==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(password))
+    version: 3.9.1
