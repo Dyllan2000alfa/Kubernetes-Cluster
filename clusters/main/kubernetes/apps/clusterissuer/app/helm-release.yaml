@@ -86,7 +86,6 @@ spec:
         server: 'https://acme-v02.api.letsencrypt.org/directory'
         # Used primarily for the SCALE GUI
     #     customServer: 'https://acme-staging-v02.api.letsencrypt.org/directory'
-        email: ""
         # Options: HTTP01, cloudflare, route53, akamai, digitalocean, rfc2136, acmedns
         type: cloudflare""
         # for cloudflare
