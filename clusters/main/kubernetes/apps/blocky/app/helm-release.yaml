@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: blocky
   namespace: blocky
+
 spec:
   interval: 15m
   chart:
@@ -14,21 +15,28 @@ spec:
         name: truecharts
         namespace: flux-system
       interval: 15m
+
   timeout: 20m
   maxHistory: 3
+
   driftDetection:
     mode: warn
+
   install:
     createNamespace: true
     remediation:
       retries: 3
+
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
+
   uninstall:
     keepHistory: false
+
   values:
+  
     workload:
       main:
         replicas: 2
@@ -55,6 +63,7 @@ spec:
                   command:
                     - /app/blocky
                     - healthcheck
+
     # -- Blocky Config File content
     blockyConfig: {}
     # upstream:
@@ -65,6 +74,7 @@ spec:
     blocky:
       # -- Enable prometheus annotations
       enablePrometheus: true
+
     service:
       main:
         enabled: true
@@ -75,6 +85,7 @@ spec:
             port: 4000
             protocol: http
             targetPort: 4000
+
       dns:
         enabled: true
         type: loadBalancer
@@ -90,6 +101,7 @@ spec:
             protocol: tcp
             port: "{{ .Values.service.dns.ports.dns.port }}"
             targetPort: 53
+
       dot:
         enabled: true
         type: loadBalancer
@@ -100,6 +112,7 @@ spec:
             port: 853
             protocol: tcp
             targetPort: 853
+
       https:
         enabled: true
         type: ClusterIP
@@ -109,6 +122,7 @@ spec:
             port: 4443
             protocol: https
             targetPort: 4443
+
       k8sgateway:
         enabled: true
         type: ClusterIP
@@ -118,6 +132,7 @@ spec:
             port: 5353
             protocol: udp
             targetPort: 5353
+
     ## TODO Add support for SCALE certificates and certificates secrets here
     certFile: ""
     keyFile: ""
@@ -127,6 +142,7 @@ spec:
     logPrivacy: false
     dohUserAgent: ""
     minTlsServeVersion: 1.2
+
     # -- set the default DNS upstream servers
     # Primarily designed for inclusion in the TrueNAS SCALE GUI
     defaultUpstreams:
@@ -147,6 +163,7 @@ spec:
       - 8.20.247.20
       # Router
       - 10.1.0.1
+
     # -- set additional upstreams
     # Primarily designed for inclusion in the TrueNAS SCALE GUI
     upstreams:
@@ -161,6 +178,7 @@ spec:
       upstream: ""
       # -- IP's linked to upstream DoT/DoH DNS name
       ips: []
+
     # -- set additional bootstrap dns (not needed, only used if bootstrapDns is set)
     additionalBootstrapDns: []
     # - upstream: ""
@@ -170,6 +188,7 @@ spec:
     filtering:
       # -- Ensures filtering by query type
       queryTypes: []
+
     # -- Set manual custom DNS resolution
     customDNS:
       customTTL: 1h
@@ -180,6 +199,7 @@ spec:
       mapping: []
       # - domain: something.com
       #   dnsserver: 192.168.178.1
+
     # -- Setup client-name lookup
     clientLookup:
       # -- upstream used for client-name lookup
@@ -188,6 +208,7 @@ spec:
       clients:
       # - domain: laptop
       #   ips: []
+
     # -- Setup caching
     caching:
       minTime: 15m
@@ -198,6 +219,7 @@ spec:
       prefetchThreshold: 5
       prefetchMaxItemsCount: 0
       cacheTimeNegative: 30m
+
     # -- set conditional settings
     # Primarily designed for inclusion in the TrueNAS SCALE GUI
     conditional:
@@ -207,6 +229,7 @@ spec:
       mapping: []
       # - domain: something.com
       #   dnsserver: 192.168.178.1
+
     # -- set blocking settings using Lists
     # Primarily designed for inclusion in the TrueNAS SCALE GUI
     blocking:
@@ -281,6 +304,7 @@ spec:
         - name: 172.17.0.0/16
           groups:
             - ads
+
     # -- configure using hostsfile for lookups
     # Allows for using the hosts configured in kubernetes and such
     hostsFile:
@@ -325,6 +349,7 @@ spec:
             verbs:
               - list
               - watch
+
     k8sgateway:
       enabled: true
       # -- TTL for non-apex responses (in seconds)

@@ -5,3 +5,5 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - traefik/ks.yaml
   - blocky/ks.yaml
+  - clusterissuer/ks.yaml
+  - h5ai/ks.yaml
