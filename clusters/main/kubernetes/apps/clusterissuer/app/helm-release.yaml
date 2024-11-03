@@ -87,7 +87,7 @@ spec:
         # Used primarily for the SCALE GUI
     #     customServer: 'https://acme-staging-v02.api.letsencrypt.org/directory'
         # Options: HTTP01, cloudflare, route53, akamai, digitalocean, rfc2136, acmedns
-        type: cloudflare""
+        type: "cloudflare"
         # for cloudflare
         cfapikey: ""
         cfapitoken: "sRwCU6bVB57fZ01dLVGVDp-TM-Pf6o94zqiUbZaI"

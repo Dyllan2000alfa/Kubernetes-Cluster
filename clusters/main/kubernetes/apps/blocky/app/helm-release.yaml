@@ -88,7 +88,7 @@ spec:
 
       dns:
         enabled: true
-        type: loadBalancer
+        type: LoadBalancer
         loadBalancerIP: 10.1.0.132
         ports:
           dns:
