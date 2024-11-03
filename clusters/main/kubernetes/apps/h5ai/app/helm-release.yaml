@@ -43,11 +43,11 @@ spec:
         enabled: true
         type: pvc
         storageClassName: heimdall-nfs-csi
-        size: 8Gi
+        size: 16Gi
         mountPath: /config
         
       directorystorage:
-        enabled: true
+        enabled: false
         mountPath: /h5ai
         readOnly: true
         type: nfs
