@@ -4,3 +4,4 @@ resources:
   - democratic-csi
   - kubernetes-dashboard/ks.yaml
   - traefik/ks.yaml
+  - blocky/ks.yaml
