@@ -119,7 +119,7 @@ spec:
                     zvolDedup: inherit
                     zvolEnableReservation: false
                     # 512, 1K, 2K, 4K, 8K, 16K, 64K, 128K default is 16K
-                    zvolBlocksize: null
+                    zvolBlocksize: 4k
                 iscsi:
                     shareStrategy: targetCli
                     # https://kifarunix.com/how-to-install-and-configure-iscsi-storage-server-on-ubuntu-18-04/
