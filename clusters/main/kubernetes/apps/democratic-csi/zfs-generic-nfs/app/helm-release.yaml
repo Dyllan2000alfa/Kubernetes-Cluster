@@ -53,6 +53,7 @@ spec:
               mountOptions:
                 - noatime
                 - nfsvers=3
+                - nolock
               secrets:
                 provisioner-secret: null
                 controller-publish-secret: null
