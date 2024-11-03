@@ -50,6 +50,9 @@ spec:
                 # if true, volumes created from other volumes will be
                 # zfs send/received instead of zfs cloned
                 # detachedVolumesFromVolumes: "false"
+              mountOptions:
+                - noatime
+                - nfsvers=4.2
               secrets:
                 provisioner-secret: null
                 controller-publish-secret: null
