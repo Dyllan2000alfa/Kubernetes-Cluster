@@ -74,17 +74,14 @@ spec:
     ingress:
       main:
         enabled: true
-      
-      targetSelector:
-        main: main
-      
-      hosts:
-        - host: games.tinoco.casa
-          paths:
-            - path: /
-              pathType: Prefix
-            
-      integrations:
-        certManager:
-          enabled: true
-          certificateIssuer: cloudflare
+        targetSelector:
+          main: main
+        hosts:
+          - host: games.tinoco.casa
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: cloudflare
