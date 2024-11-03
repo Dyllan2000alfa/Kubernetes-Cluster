@@ -68,6 +68,7 @@ spec:
     service:
       main:
         enabled: true
+        type: ClusterIP
         ports:
           main:
             enabled: true
@@ -76,6 +77,8 @@ spec:
             targetPort: 4000
       dns:
         enabled: true
+        type: loadBalancer
+        loadBalancerIP: 10.1.0.132
         ports:
           dns:
             enabled: true
@@ -89,6 +92,8 @@ spec:
             targetPort: 53
       dot:
         enabled: true
+        type: loadBalancer
+        loadBalancerIP: 10.1.0.132
         ports:
           dot:
             enabled: true
@@ -97,6 +102,7 @@ spec:
             targetPort: 853
       https:
         enabled: true
+        type: ClusterIP
         ports:
           https:
             enabled: true
@@ -105,6 +111,7 @@ spec:
             targetPort: 4443
       k8sgateway:
         enabled: true
+        type: ClusterIP
         ports:
           k8sgateway:
             enabled: true
