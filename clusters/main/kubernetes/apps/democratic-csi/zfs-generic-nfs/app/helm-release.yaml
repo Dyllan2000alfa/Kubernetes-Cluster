@@ -112,6 +112,13 @@ spec:
                             sharenfs: "on"
                             # share: ""
                     shareHost: 10.1.0.63
+                    shareAlldirs: false
+                    shareAllowedHosts: []
+                    shareAllowedNetworks: 10.1.0.0/24
+                    shareMaprootUser: root
+                    shareMaprootGroup: root
+                    shareMapallUser: ""
+                    shareMapallGroup: ""
 sops:
     shamir_threshold: 3
     kms: []

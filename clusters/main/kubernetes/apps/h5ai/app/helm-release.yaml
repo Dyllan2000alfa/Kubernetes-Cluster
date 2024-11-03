@@ -42,8 +42,6 @@ spec:
       config:
         enabled: true
         type: pvc
-        storageClassName: heimdall-nfs-csi
-        accessModes: ReadWriteOnce
         size: 16Gi
         mountPath: /config
         
