@@ -7,3 +7,4 @@ resources:
   - blocky/ks.yaml
   - clusterissuer/ks.yaml
   - h5ai/ks.yaml
+  - authentik/ks.yaml
