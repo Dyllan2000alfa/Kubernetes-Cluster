@@ -79,7 +79,7 @@ spec:
       #     key: ""
       #     # TODO: Add option to use SCALE CA certs
 
-      ACME: []
+      ACME: 
       - name: cloudflare
         # Used for both logging in to the DNS provider AND ACME registration
         email: "admin@tinoco.casa"
