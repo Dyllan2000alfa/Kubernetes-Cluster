@@ -9,7 +9,6 @@ resources:
   - cloudnative-pg.yaml
   - coredns.yaml
   - csi-driver-nfs.yaml
-  - democratic-csi.yaml
   - descheduler.yaml
   - intel.yaml
   - jetstack.yaml
@@ -30,3 +29,4 @@ resources:
   - topolvm.yaml
   - truecharts.yaml
 # more goes here!
+  - democratic-csi.yaml
