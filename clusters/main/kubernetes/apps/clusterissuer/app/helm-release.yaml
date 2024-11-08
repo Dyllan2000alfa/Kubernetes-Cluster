@@ -81,7 +81,7 @@ spec:
                   type: cloudflare
                   # for cloudflare
                   cfapikey: ""
-                  cfapitoken: sRwCU6bVB57fZ01dLVGVDp-TM-Pf6o94zqiUbZaI
+                  cfapitoken: ${DOMAIN_0_CLOUDFLARE_TOKEN}
         #     # for route53
         #     region: ""
         #     accessKeyID: ""
@@ -123,24 +123,3 @@ spec:
             #   hosts:
             #     - my.domain.com
             #     - '*.my.domain.com'
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB3UEplTlQ3UktPd3hhbnpK
-            VVYvWUVXaHRBVXdKWk9XdUdNelRjb1dwOHlvCjF2ZUNTQkFVR3h1Yi9IZUJrbkdI
-            ak1KakxjV3N1NWxkRkVqQTgxOHdpVncKLS0tIHVGSGoyclJEZUdad3Y0L3JJYzdz
-            YnhZRDdTRGFHNzNYRFR6WGs0RlNpbHMKhG19uSv9NtgFfkMDmhvWrkB923ZcKisk
-            3DmSES+j7ifWmh6f5L6kdxEddFh61XQkjT07Imrv+NYd89iQHvDoZw==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-08T18:59:04Z"
-    mac: ENC[AES256_GCM,data:BHN2qs9RPNtMJ5N8R7rW6mTc92GPgED+vq6/57LIvZmlPLKXYrXkp0gQB0VH6enY7kw+VMjGv8UzIrGoB78/LxluZ0bZ2Dnj6vOScYLPn1h3iKcbDNijfodZsSLJjXEgPRwHMQrqdUox0awsrmB2VYejcRD3OnExr5o1t6j/ZaA=,iv:+UcIN7nX87zhMo330MQsLJb0mUqNS+IUZ6VSbYiIric=,tag:k87DoABlJgIIaKkvLfTc0Q==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(password))
-    version: 3.9.1

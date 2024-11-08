@@ -419,24 +419,3 @@ spec:
                 enabled: true
                 user: blocky
                 database: blocky
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDeFdINnNzSzIrQzRwRUh0
-            bEpBS082NlUrOEgrVXBwRkM5aUVuY3FMMm1zCllpcGlhTFV2REdremdoSzFYZnlE
-            QnRTaFJJL3NINkJvYk5yVHRBaGNpaWMKLS0tIDRJVlczWmhXQ29vOUtwQ3N6NFdS
-            MHdsejhYWEtMVDNQNTZDQlBENklEYmcKIwrQvSzVX0fLoq4NaO5E2o1FLJsVhNC3
-            rX3qD0zc/RtfZyAzoq0pDmK3nN/Ay0ZgraIBMe03P60WjGvYU7D2kw==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-08T18:59:04Z"
-    mac: ENC[AES256_GCM,data:LQXPyy/JJ8hc55NGj46HR7NHkkiYp9WJ6RCOn+V/FQYbczzjI2XRgHOg1okYSSJ5+E3r5qAyI3mYX7kgJtN2DPZbAY7C9vXaKshbu+qwJZBX2ttE6Av9ZX13arj9uvJX1ryt2T9PtUG0B7rJ2lFUQwcNqG2PdWoAmr+qHJzK6yA=,iv:pggQdthPrhEZLUMPCSgeJCivUIKROQ7lRZvEBE7oEyQ=,tag:VPYkb6VkDIkSEXN8cZu9Og==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(password))
-    version: 3.9.1

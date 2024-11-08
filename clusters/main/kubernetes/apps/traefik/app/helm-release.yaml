@@ -807,24 +807,3 @@ spec:
                 integrations:
                     homepage:
                         href: https://{{  ( index .Values.ingress.main.hosts 0 ).host  }}/dashboard/
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtZnZBazlLMFM5UFdHMVU0
-            djYxUjNYa0dLRVMzQlZ3QXRMcjJZUTZkc1RZCk16azhvMlJNMnhiSHBBcTk1V2Rs
-            Zy9FdHEvL04xZ2prdkVnTmxscy9GVHcKLS0tIFFmZCs1Z0RmOWlsZFpmR2cyQlF6
-            RGZvK1p3U0ZLSUVKamZ1QkdBTkNqY28KnVCrYt8u/anDPAWXpEewtvV6CYebjpRg
-            8CD4tn8/yG3T6DxPOysC+V9ZuKmEhvOiKha75vnSmJ1FK40M8VbjTA==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-08T18:59:04Z"
-    mac: ENC[AES256_GCM,data:NRYZwxYn7YHZq6DZ1voBqWdkdfizJ4WKkmU96erXbAgJ6JWffF0Zg5ori1lW1dqce1w/zNHpOWgqHqv/JZSnpk1iIKPDoquSJPmQtL4J1+U4R1bwkTrQw1aqcC9pAVcTIbmAk9Z2a8mqtOvluQ50QZ/ergdFvnBw2N871zmR+Yg=,iv:GzAnaQsMrKEOSwvaoPrzTBx1CTNFX2GRbU/0bFYZx/w=,tag:nbS2vcbpPUmawEIVgHuWKg==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(password))
-    version: 3.9.1

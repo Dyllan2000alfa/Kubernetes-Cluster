@@ -36,24 +36,3 @@ spec:
                 ports:
                     main:
                         port: 80
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGaWEzbDZ5RzJKV1VzQWVY
-            dmZUL1htR0dtWVlEYXFmWXBoR1NkQ2ZtN1FzCmxmM3JjQktuMjFUWXk5a2oveWkr
-            YnJOQXFlbmErUmJkaXlXSzUxWkhmM3cKLS0tIDgwVHBONXBCZTNyMnk4NlVHZ3ZE
-            YjlhSnRZZCtEZldLU3dLMCsxN1NCb0kK6cjwVCVBQ07pK3lsb/6zCgYU7IMIeGdC
-            z166m7jSuTzNBbLfSluwwFY5qvRIRQAwNgnTJuV8tGaQFwQNv9aoaw==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-08T18:59:04Z"
-    mac: ENC[AES256_GCM,data:k8bNrNzA6YFOkXd0M2oQeeT7IuxnmYuc4tRRtMKG1wHHxTeQbWmMZHI/ntW73vCD+IfvCtfFNOTXP5IPt/0V68dQcoXnK5QXh0HgAOvMADKoxvrPsbgJCSPcFKWoh/ZrkpiBb+g6wmiNBDuDMv+6XDswsDPM3dPdMLvQZfQHHec=,iv:CW/q4HORo2oD+ntfs7VFPxN+TfzhbGr30CWsQ6DGsCw=,tag:vYun8eqp1LM2KdaB6Dgxww==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(password))
-    version: 3.9.1

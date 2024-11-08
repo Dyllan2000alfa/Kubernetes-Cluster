@@ -83,24 +83,3 @@ spec:
                 runAsUser: 0
             pod:
                 fsGroupChangePolicy: OnRootMismatch
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwOVk1MVdoK1ZjajNhbUt2
-            Y05YMEZCK05HazBxWitOU2F1REFDMVdIWlZVCjAvVm1JSTE2dkVPQjRVWmhzcXhX
-            RDhCN2pxUmtEM0E5NnFTM3ZPQ29ZSTQKLS0tIEU2cGE3bXFBbmxyY3hzK2NjeVpT
-            K2h4WnVvejRHbWZSQnNRb3Y5U3FRQWMKHF2lYRlECl4lno9VGD8CRATrhm9bVZPb
-            qBBk/2TuzyZKRV27vlN9pXZzANf3CcnNNfWCLNuPn+naBcXVn1HRVA==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-08T18:59:04Z"
-    mac: ENC[AES256_GCM,data:8JerDLoA/SyPIEkJcNDNjIbolF7SYWVZND40ZeUqg4IWCV1MEtCEb0PoHhHpfRh0YetFbxMl7Be0RsXDj9vypzIvYeJo9Kmk79+u2Rr0M7ju7obWQahvSr/a1JPHRDi0eWRO17OVMOmKn+/9jrdkMrFvPeIPBmazi5QgQkRBjhE=,iv:IHF33Geka8tYp/WcO7gNeGFgVKANTH598RIPbtFKYA0=,tag:mopfwwwP3MZUzcbAw83XYg==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(password))
-    version: 3.9.1

@@ -30,23 +30,23 @@ spec:
         keepHistory: false
     values:
         TZ: America/Chicago
+        credentials:
+            cloudflare:
+                accessKey: ${S3_access}
+                bucket: app-backup
+                encrKey: ${S3_encr}
+                name: cloudflare
+                path: ""
+                secretKey: ${S3_secret}
+                type: s3
+                url: ${S3_url}
         authentik:
             credentials:
                 # Only works on initial install
                 email: dyllan@tinoco.casa
-                password: ENC[AES256_GCM,data:H+95BmVzDBSUx/Q=,iv:hD+8XuNyDtPEqKvgvzi4sdoZdVx7Y7+IUZRsCq2ypnI=,tag:fn5AHs6c523ElyFZldbsPA==,type:str]
+                password: ${default_password}
                 # Optional, only set if you want to use it
                 bootstrapToken: ""
-            credentials:
-                cloudflare:
-                    accessKey: ${S3_access}
-                    bucket: app-backup
-                    encrKey: ${S3_encr}
-                    name: cloudflare
-                    path: ""
-                    secretKey: ${S3_secret}
-                    type: s3
-                    url: ${S3_url}
             general:
                 disableUpdateCheck: false
                 disableStartupAnalytics: true
@@ -569,24 +569,3 @@ spec:
                         enabled: true
                         entrypoints:
                             - websecure
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBOamtBT2MxNWp0U201R3Nu
-            L3dXZGp6NnRQamFnTy9scGpnQlJGbmhDSWxnCjl6TDVmZUJVRStjS2NwdDg1Y3hO
-            bWxRNE5iaCt5TzdRM0ZiRVQxSlhmeDQKLS0tIHNadDNVRmZTZlRnaHhLR0NFR3d6
-            UlhuRzZuZ0N0M2ZJeDlQdU5KSUt4MnMKU3IvXWwPhkuEOsBliSxFAQV9P8BDeY4M
-            xm/33CHChfapaJgy6Ks2GYtPNPcZK8I3JFkNW+INw60ZkJpjJIHNJw==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-08T18:59:04Z"
-    mac: ENC[AES256_GCM,data:sjXhwGMa9PAt0WgAwoXvVlkwoWE2VG9wCqUMeLQmhgXuRK/vq3xt9w1v8yII4R5q8X7RZTiAKBC3R+1jW0jmciHtgrfReIUOu+SPOpJEOGyKpGemt6rX5Jep94/e/n3HnNMby7Ht4B94RZgAtPhVi6JGiglXCX1p8WZy7rb2uFw=,iv:QzPrgebf6RWR+Rb7uBat/+fpejpoWlCTxA7HZPNT74I=,tag:i5m2n8w1lNC1MHU5uMDVRg==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(password))
-    version: 3.9.1
