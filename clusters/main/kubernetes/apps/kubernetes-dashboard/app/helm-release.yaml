@@ -46,14 +46,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBzbXJEMFhWeEJlbm5Va0xk
-            Vlh5VkZkdnd4VGdVMTh1dTdqNEdVT2VsR0Z3CkM0M0pQdXBJMjNXUEx0UitOREk4
-            cmNENStnZmJVV1R3TzhBU1NUejlNbzQKLS0tIEsyMmlPcUJSK1pJMVY2eU5maHEv
-            RThqbWNhem5WT1ZaMnRiRXJsZld1M0UKkVcu287FwDAByaYLsmHbgNvpV8z8+iLG
-            iQ5UCurKwhOT6805hAkTrdg1jyqZouWaDkiENEq66iAjjpwH/xBxmw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGaWEzbDZ5RzJKV1VzQWVY
+            dmZUL1htR0dtWVlEYXFmWXBoR1NkQ2ZtN1FzCmxmM3JjQktuMjFUWXk5a2oveWkr
+            YnJOQXFlbmErUmJkaXlXSzUxWkhmM3cKLS0tIDgwVHBONXBCZTNyMnk4NlVHZ3ZE
+            YjlhSnRZZCtEZldLU3dLMCsxN1NCb0kK6cjwVCVBQ07pK3lsb/6zCgYU7IMIeGdC
+            z166m7jSuTzNBbLfSluwwFY5qvRIRQAwNgnTJuV8tGaQFwQNv9aoaw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-03T22:43:27Z"
-    mac: ENC[AES256_GCM,data:gytKHDkDU2IKBQ8oDifskIRsYhGEcHuT+bpfZjRpAAvPDTWB24uR3wrbsoU/H4bthz87DG2o7Cfv5plOb/kFdCKpxK5URS6Bnn1kY/v2H+fW5FPvvXaSz5J9shXRbAe2Wm4nAYeNkAKOTBviZMXJt/Wu7q4y//qMcbxeuIXyBvQ=,iv:dyKwlxHtRhF6Dll4W7uTZgkqWjrBACjMeEQNCwsAyNU=,tag:6RRr/m42ed1g6pQMrIW9ew==,type:str]
+    lastmodified: "2024-11-08T18:59:04Z"
+    mac: ENC[AES256_GCM,data:k8bNrNzA6YFOkXd0M2oQeeT7IuxnmYuc4tRRtMKG1wHHxTeQbWmMZHI/ntW73vCD+IfvCtfFNOTXP5IPt/0V68dQcoXnK5QXh0HgAOvMADKoxvrPsbgJCSPcFKWoh/ZrkpiBb+g6wmiNBDuDMv+6XDswsDPM3dPdMLvQZfQHHec=,iv:CW/q4HORo2oD+ntfs7VFPxN+TfzhbGr30CWsQ6DGsCw=,tag:vYun8eqp1LM2KdaB6Dgxww==,type:str]
     pgp: []
     encrypted_regex: ((?i)(password))
     version: 3.9.1
