@@ -34,7 +34,8 @@ spec:
             config:
                 enabled: true
                 type: pvc
-                size: 256Gi
+                storageClass: heimdall-nfs-csi
+                size: 100Gi
                 mountPath: /config
             directorystorage:
                 enabled: true

@@ -429,6 +429,7 @@ spec:
         persistence:
             media:
                 enabled: true
+                storageClass: heimdall-nfs-csi
                 targetSelector:
                     main:
                         main:
@@ -446,6 +447,7 @@ spec:
                       type: restic
             templates:
                 enabled: true
+                storageClass: heimdall-nfs-csi
                 targetSelector:
                     main:
                         main:
@@ -463,6 +465,7 @@ spec:
                       type: restic
             blueprints:
                 enabled: true
+                storageClass: heimdall-nfs-csi
                 targetSelector:
                     worker:
                         worker:
@@ -480,6 +483,7 @@ spec:
                       type: restic
             certs:
                 enabled: true
+                storageClass: heimdall-nfs-csi
                 mountPath: /certs
                 targetSelector:
                     worker:
@@ -495,6 +499,7 @@ spec:
                       type: restic
             geoip:
                 enabled: true
+                storageClass: heimdall-nfs-csi
                 targetSelector:
                     main:
                         main:
@@ -508,6 +513,7 @@ spec:
         cnpg:
             main:
                 enabled: true
+                storageClass: heimdall-nfs-csi
                 user: authentik
                 database: authentik
         redis:
