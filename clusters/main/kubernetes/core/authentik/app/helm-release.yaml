@@ -1,0 +1,201 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authentik
+      version: 27.8.2
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+    interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    TZ: America/Chicago
+
+    credentials:
+      cloudflare:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3SECRET}"
+        encrKey: "${S3ENCR}"
+
+    authentik:
+      credentials:
+        # Only works on initial install
+        email: ${AUTHENTIKLOGIN}
+        password: ${AUTHENTIKPASS}
+        # Optional, only set if you want to use it
+        bootstrapToken: ""
+      general:
+        disableUpdateCheck: false
+        disableStartupAnalytics: true
+        allowUserChangeName: true
+        allowUserChangeEmail: true
+        allowUserChangeUsername: true
+        overwriteDefaultBlueprints: false
+        gdprCompliance: true
+        tokenLength: 128
+        impersonation: true
+        avatars:
+          - gravatar
+          - initials
+        footerLinks:
+          - name: Authentik
+            href: https://${DOMAIN_0}
+      email:
+        host: ${SMTP}
+        port: 25
+        username: ${PROTONLOGIN}
+        password: ${PROTONPASS}
+        useTLS: false
+        useSSL: false
+        timeout: 10
+        from: ""
+      ldap:
+        tlsCiphers: "null"
+        taskTimeoutHours: 2
+      logging:
+        # info, debug, warning, error, trace
+        logLevel: info
+      errorReporting:
+        enabled: false
+        sendPII: false
+        environment: customer
+        sentryDSN: ""
+      geoip:
+        enabled: false
+        # Ignored if enabled is true
+        # If enabled is false, and this is true, the
+        # built-in GeoIP database will be wiped
+        wipeBuiltInDb: false
+        editionID: GeoLite2-City
+        frequency: 8
+        accountID: ""
+        licenseKey: ""
+      outposts:
+        proxy:
+          enabled: false
+          token: ${AUTHENTIKPROXY}
+        radius:
+          enabled: false
+          token: ${AUTHENTIKRAD}
+        ldap:
+          enabled: true
+          token: ${AUTHENTIKLDAP}
+    
+    ingress:
+      main:
+        required: true
+        enabled: true
+        hosts:
+          - host: authentik.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          traefik:
+            enabled: true
+          certManager:
+            enabled: true
+            certificateIssuer: tinoco-le-prod
+
+    persistence:
+      media:
+        accessModes:
+          - ReadWriteMany
+        storageClass: heimdall-nfs-csi
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: config
+            src:
+              enabled: true
+            type: restic
+      templates:
+        accessModes:
+          - ReadWriteMany
+        storageClass: heimdall-nfs-csi
+        targetSelector:
+          main:
+            main:
+              mountPath: /templates
+          worker:
+            worker:
+              mountPath: /templates
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: templates
+            src:
+              enabled: true
+            type: restic
+      blueprints:
+        accessModes:
+          - ReadWriteMany
+        storageClass: heimdall-nfs-csi
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: blueprints
+            src:
+              enabled: true
+            type: restic
+      certs:
+        accessModes:
+          - ReadWriteMany
+        storageClass: heimdall-nfs-csi
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: certs
+            src:
+              enabled: true
+            type: restic
+      geoip:
+        accessModes:
+          - ReadWriteMany
+        storageClass: heimdall-nfs-csi
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: geoip
+            src:
+              enabled: true
+            type: restic
+
+    cnpg:
+      main:
+        # mode: recovery
+        backups:
+          enabled: true
+          credentials: cloudflare
+        recovery:
+          method: object_store
+          credentials: cloudflare

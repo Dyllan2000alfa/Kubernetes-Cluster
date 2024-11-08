@@ -13,3 +13,5 @@ resources:
   - system-upgrade-controller/ks.yaml
   - traefik-crds/ks.yaml
   - volsync/ks.yaml
+  - longhorn/ks.yaml
+  - democratic-csi

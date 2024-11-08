@@ -1,0 +1,45 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: clusterissuer
+  namespace: clusterissuer
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: clusterissuer
+      version: 9.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    clusterIssuer:
+      selfSigned:
+        enabled: true
+        name: selfsigned
+      ACME:
+        - name: tinoco-le-prod
+          # Used for both logging in to the DNS provider AND ACME registration
+          email: ${EMAIL}
+          server: https://acme-v02.api.letsencrypt.org/directory
+          # Options: HTTP01, cloudflare, route53, akamai, digitalocean, rfc2136, acmedns
+          type: cloudflare
+          # for cloudflare
+          cfapitoken: ${DOMAIN_0_CLOUDFLARE_TOKEN}
