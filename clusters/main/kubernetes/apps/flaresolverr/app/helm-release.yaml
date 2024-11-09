@@ -31,3 +31,34 @@ spec:
   values:
 
     TZ: America/Chicago
+
+    credentials:
+      cloudflare:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3SECRET}"
+        encrKey: "${S3ENCR}"
+
+    persistence:
+      config:
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: config
+            src:
+              enabled: true
+            type: restic
+      backup:
+        enabled: true
+        mountPath: /config/Backups
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: backup
+            src:
+              enabled: true
+            type: restic
