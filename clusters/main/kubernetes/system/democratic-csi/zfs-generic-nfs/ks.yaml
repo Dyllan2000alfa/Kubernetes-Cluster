@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/apps/democratic-csi/zfs-generic-nfs/app
+  path: clusters/main/kubernetes/system/democratic-csi/zfs-generic-nfs/app
   prune: true
   sourceRef:
     kind: GitRepository
