@@ -43,7 +43,7 @@ spec:
         readOnly: true
         type: nfs
         server: 10.1.0.63
-        path: /Heimdall/k8s/Webfiles/nsfw-games
+        path: /Heimdall/Webfiles/nsfw-games
 
     ingress:
       main:
