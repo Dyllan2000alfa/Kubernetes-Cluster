@@ -725,7 +725,7 @@ spec:
             #   prefix: "/foo"
             geoBlock:
                 # -- https://github.com/PascalMinder/geoblock
-                - name: geoBlock
+                - name: geoblock
                   allowLocalRequests: true
                   logLocalRequests: false
                   logAllowedRequests: false
