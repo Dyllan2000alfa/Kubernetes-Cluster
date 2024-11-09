@@ -192,6 +192,9 @@ spec:
 
     cnpg:
       main:
+        enabled: true
+        user: authentik
+        database: authentik
         mode: recovery
         backups:
           enabled: true
