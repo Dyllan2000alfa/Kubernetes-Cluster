@@ -31,7 +31,7 @@ spec:
     values:
         csiDriver:
             # should be globally unique for a given cluster
-            name: org.democratic-csi.nfs
+            name: org.democratic-csi.heimdall-nfs
             fsGroupPolicy: File
         # add note here about volume expansion requirements
         storageClasses:
@@ -78,7 +78,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:p32wdZzhHBHDPeOYUutmBYkdltrQJIEApraUrc+fXlWNBx675KWbFP0FUGQLNLwUVwEo4P+rBe29q3JBGe/yE/c1jRsA1QWqqiSRTR04oIzOHDRG1ZjS2CZ0Vt2ryF9wiJMjl1Eq2q8iE0UkmGRN1WTB2dcsLC7y7YFHh8Tbq1hIjiXMNdakHFpu7Qhjl7ajVVrE0pubk23AvWrOTMfNNEvK412bTdv/UFCV/gKAs4bKKKmAvhAwFBP2IJodU5K2S88Nh1cWzEW8uFeDtceSTrKPTEvQvRRKVpuO9lwP4vzC34x6EpnroWresSgTZ9TtPHPMY+eGm0UYzeV2Zxx+BeGbAbfOO9cpXb5LeTyoq107lzveGmZpSCLNlQGzZuqtstoSMGqavriuFwhLZuG57UZ7pi/JBKnMNWOxVfsNwIpt2TncIBxQJzxi1RTK4FdInASyOrv3CmtKqKDaHfb8mr6+6B0NBrtSEcf4arTMBQxNlwHrUkRGXwmEoIAEpyCnPpxwfVmtlX5M1XOzAXdg,iv:PFi4JkJGGeYrkDS3yEMwmRzS2aKczUgb/rzZCWherMk=,tag:nFB2E/aAmqxy8PkI7McjUw==,type:str]
+                    privateKey: ENC[AES256_GCM,data:UPNbLMrK8cPmlSki9az5GJLl8sax0Ne/S8ejj2mSptlVav70yrWDqVhQGHQI9Iu9Pv+LxfS/Wq5rqdnah8Vs2QuGR9+2pavjJzrGZ1uoNR0ipA//EbubsI9Y71N6ngr/mHwVnK/10XDH8J/NiBo2/nyeVswIkUz7PatQ2VAxadaAXAYQKFAXRIj0EsJ6A/fMk1l88zY/qaWiIcFrprw4CgEfknRh6JyosbViViAfeudONJCIm/haMZIX5WhrgidAz+9aNDKLO1qEBoeR4TKuUz2Gj2jQrpqKMGa+Q/zchu8XoW9kWOcM3c3qU9668xmZYsTebeJbd4d75NzvlK+GlNI2od7Oic8xP6467XqBfhT9U+7WsLfbHxe/ubPnZdz54nu1g8wG3kx4YZR4EEt6s4sl9sCHeDVdt+Y4dDL4euxTHej5Yc9Ktmi0lOPXVbm/qM+28FFqi1T1aDzUFBhLIMx7D+pX6auwD8ZpNQiLTF8ABY10tnkTAQp0tvO29fYnCuiHKDuoxgpbQmeV/FXr,iv:Y2BGEwmhcw5SVnlze0MLVgt5uefSZc0xfyhJDA71zP8=,tag:xSK7lxyR8c8o/Lfv5LXCMQ==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -91,16 +91,11 @@ spec:
                             chroot: /usr/sbin/chroot
                     # can be used to set arbitrary values on the dataset/zvol
                     # can use handlebars templates with the parameters from the storage class/CO
-                    #datasetProperties:
-                    #  "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
-                    #  "org.freenas:test": "{{ parameters.foo }}"
-                    #  "org.freenas:test2": "some value"
-                    datasetParentName: Heimdall/k8s/main-cluster
-                    # do NOT make datasetParentName and detachedSnapshotsDatasetParentName overlap
-                    # they may be siblings, but neither should be nested in the other
-                    # do NOT comment this option out even if you don't plan to use snapshots, just leave it with dummy value
-                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster-snapshots
-                    datasetEnableQuotas: true
+                    datasetProperties:
+                        org.freenas:description: '{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}'
+                    datasetParentName: Heimdall/k8s/main-cluster/nfs/pvc
+                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster/nfs/snapshot
+                    datasetEnableQuotas: false
                     datasetEnableReservation: false
                     datasetPermissionsMode: "0777"
                     datasetPermissionsUser: 0
@@ -109,22 +104,11 @@ spec:
                     #- "-m everyone@:full_set:allow"
                     #- "-m u:kube:full_set:allow"
                 nfs:
-                    # https://docs.oracle.com/cd/E23824_01/html/821-1448/gayne.html
-                    # https://www.hiroom2.com/2016/05/18/ubuntu-16-04-share-zfs-storage-via-nfs-smb/
                     shareStrategy: setDatasetProperties
                     shareStrategySetDatasetProperties:
                         properties:
                             sharenfs: rw,no_subtree_check,no_root_squash
-                            #sharenfs: "on"
-                            # share: ""
                     shareHost: 10.1.0.63
-                    shareAlldirs: false
-                    shareAllowedHosts: []
-                    shareAllowedNetworks: 10.1.0.0/24
-                    shareMaprootUser: root
-                    shareMaprootGroup: root
-                    shareMapallUser: ""
-                    shareMapallGroup: ""
 sops:
     shamir_threshold: 3
     kms: []
@@ -135,14 +119,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrZEZ2QVB0TnR2eVZjK2hk
-            aXZ0QWRJcnNaWGJTMk9xRkhLNmJDN0NUalRnCnl2WGwzSlRqai9HQVZoMzlHNkph
-            VWk0SWZNVktPK2lDT1pGSlliNVlsSmcKLS0tIERNMzBRbkwyZFlnWjg3Qm4xRnBq
-            b1FRZi9ydnJwRFN4VkV4UW1ZczJEVkEK+xLhRj2dR1HOCWSQTcRHJlvy1rV/Zjnk
-            c0tCrv/P/zLfTForI01N2hYlNVGTE1trL3tA4dC52CXnzz/ewk5c2w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwd09iMmlNQkVycWpKTC82
+            ZHFXYlV1NEtYNENHQm54MjBmT1hJZUs3MUhBCktIYi9FQXpoN1lSZ2dOekFCbytD
+            MWhWOVNkaGxkTlptbVRlWGRJNjkzQzgKLS0tIEwzY1BIY2pCMExHL21uYjZRLzRB
+            OEkrbm1tVzdmL0NuNWh2YlZlL25QbDQK3yGnFFodCFm+xCT9seoZUr36LVO7Aj08
+            X7D3M9aqcSTkjBUaVmfRgsrTBVBNB58a5ogNtdwUkZO746wImYgwjw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T07:36:51Z"
-    mac: ENC[AES256_GCM,data:b2m/yUTVWFb/SqXHrQ7rMbbUk5RI+0GgMs/gexStGL/b5WHP15Yue60Oe6iYzQ10AEdafqkNfqKGEpwxe2mSUGO3DAtdlA38aMgbY0+QuUNu6zh99WU74y6IxWQ0X3KI8u5LNGaJ5I5+53oXWRa2H8doFdmdmNGlry23/RkwnM0=,iv:YFpk7/AQvOu+QBhroeJ4S6JPq9OnO5en+c+9UNBZ+F0=,tag:SlE9N+7pinDoFXW6eXRGJg==,type:str]
+    lastmodified: "2024-11-09T18:13:26Z"
+    mac: ENC[AES256_GCM,data:L24uXdKaxf56TwDJWYOSuCasHWPCVU0oAKM/z14ElZ86UP8owzpOVR2R79viWPBQMp4gFrbi+NR/y7l0YGei33wM0P4FFESla0aRUopcI1RojXhH5JQGoEtvmGiU6xQw2FMgUGpqIdUtpIrsxUJW0durksRhIzeHaSCuBGl70cs=,iv:l9SzuF9+PVE98V02hFfeHfftzHFcxzPcNIiYZ0+51gI=,tag:3ueXFCGL0NbbvbKYeLHQyA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1

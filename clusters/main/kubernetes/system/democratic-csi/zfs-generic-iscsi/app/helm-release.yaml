@@ -30,9 +30,7 @@ spec:
         keepHistory: false
     values:
         csiDriver:
-            # should be globally unique for a given cluster
-            name: org.democratic-csi.iscsi
-        # add note here about volume expansion requirements
+            name: org.democratic-csi.heimdall-iscsi
         storageClasses:
             - name: heimdall-iscsi-csi
               defaultClass: false
@@ -43,12 +41,7 @@ spec:
                 # for block-based storage can be ext3, ext4, xfs
                 # for nfs should be nfs
                 fsType: ext4
-                # if true, volumes created from other snapshots will be
-                # zfs send/received instead of zfs cloned
-                # detachedVolumesFromSnapshots: "false"
-                # if true, volumes created from other volumes will be
-                # zfs send/received instead of zfs cloned
-                # detachedVolumesFromVolumes: "false"
+                detachedVolumesFromSnapshots: "false"
               mountOptions: []
               secrets:
                 provisioner-secret: null
@@ -65,11 +58,9 @@ spec:
                 #      node-db.node.session.auth.password_in: bar
                 node-publish-secret: null
                 controller-expand-secret: null
-        # if your cluster supports snapshots you may enable below
         volumeSnapshotClasses:
             - name: heimdall-iscsi-snapshot-csi
               parameters:
-                #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
               secrets:
                 snapshotter-secret: null
@@ -81,10 +72,8 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:RMNMMDxyhpzz+TpXinL0x8ZPyKfzRMuVGsPUIRxO4GMKarBHyFAZvznPcJGu4XEUPPXg1CrrtkdWsAdKN4Ig77o3aeUwpFvVqvaX5UChl3nx2bSwUKi8j3rzizumeSNQqVuWObbbSTKaNpkiEE5N6ygqdUEmrBhHZffrAdKJntAD8VG4TBzpsPt4hFTfutmRRHuF5lhHxyXHOI1WbYsbP1hspZQC/36XmdNXst6lE5c0wnfMcLM3a8wd16u8R4XpCfpEgwrD5A5ynhBPNEu2mJOo7dly5bTaNFS40vuQhYaZtzKUUbW1ix5Ze6g8qMo0BR+m/cfFJ63o6cfH/wAdVVs+79Xg1AojtkPdkZSepBLKalNmgSolOMIyjTW6geqb/j9v4txc6IKCuNC085L5Ss93+9GS2mPQE7fkW4lrsH8SgVk9RRJjP9j5cSFedKtIh9JCFElQvFFkBWIktLW5dycgYHdwzNZTJJE5NK1Tz6M/sN0wglWhCPwNONgcWs04kDi54INtVH1X6+xIDQeq,iv:decu6D7qAy8CvdI4s8OgmSgqf1w7kyl18tgyuCg9Zzs=,tag:ZwAzSVPjMmL37Mq9phs5ZQ==,type:str]
+                    privateKey: ENC[AES256_GCM,data:uZYoCCzP0S1skJJPMCIDGobfWFp/KrhOYbltp66lv8G5WAKtwNVfCs+qPHgpHFJg9VJE6wXsABVy/ZPrDvQsKLFlWqNjmltVnrBLNN5ZKd4/83TBO6h5cEtF5dHhTa/34H7E2LPJy0HKtPh/6FBJt8VO+i2GFMbALSSaXycu7bsmHx86MD8xXzur9fJEr0CZ71lazItEBF7sqbw+kq3feTKIc/YD1oBvBtzs+j24WSiUXKXqDSSygqAgV7acgto1kmOc/rQ/k71bYt5/K7qaLsembIDEFHs43m/Ri+Pb2BwShk4uYxXxKKF9VWWVYUXnK0xhpXBBw0nY0Qe54DNqwlGPN0Cubm/QypArz9PyNtDPGgxwInGgKCiF0IR5P5hEemxcOo5bq5f/TiCc7eADDStQ/6C6fwrIYKSE0ZY8kJBCV+BqInEKGKpOhJfur4gX7StxgLh2c6awysV5llzu0eBqoZouv9O09J2fP0RlkfW0v15V7b8lvm5IaqfwZfXkaIJCRVe8teys4UcUilWP,iv:pwWV48dRvNwcL6zYoylalhpB2LFtXCJYHNJWM79djVs=,tag:qLT91TlRZ9LBYjtR8N0i3g==,type:str]
                 zfs:
-                    # can be used to override defaults if necessary
-                    # the example below is useful for TrueNAS 12
                     cli:
                         #  sudoEnabled: true
                         paths:
@@ -92,17 +81,10 @@ spec:
                             zpool: /usr/sbin/zpool
                             sudo: /usr/bin/sudo
                             chroot: /usr/sbin/chroot
-                    # can be used to set arbitrary values on the dataset/zvol
-                    # can use handlebars templates with the parameters from the storage class/CO
-                    #datasetProperties:
-                    #  "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
-                    #  "org.freenas:test": "{{ parameters.foo }}"
-                    #  "org.freenas:test2": "some value"
-                    datasetParentName: Heimdall/k8s/main-cluster
-                    # do NOT make datasetParentName and detachedSnapshotsDatasetParentName overlap
-                    # they may be siblings, but neither should be nested in the other
-                    # do NOT comment this option out even if you don't plan to use snapshots, just leave it with dummy value
-                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster-snapshots
+                    datasetProperties:
+                        org.freenas:description: '{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}'
+                    datasetParentName: Heimdall/k8s/main-cluster/iscsi/pvc
+                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster/iscsi/snapshot
                     # "" (inherit), lz4, gzip-9, etc
                     zvolCompression: inherit
                     # "" (inherit), on, off, verify
@@ -163,14 +145,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3QU0rVHNkbnI1bFdGaHR3
-            Q1lhNXpSd3pFWmlvOUdMZW5lbjJ2Q3hTbXc0CmJwcnV4ZlE4blczMVpnbVVDbmZC
-            MVZHYUJCMUtOcXVUZERNSEI2SDNVU1kKLS0tIGgyRUh0RlgzYnpDeFhBblYrMStC
-            U3c3MVJPOFp4WEtQWUNVN2RqcUZIMU0KKT8pzZ/dzxYQmldR1qOZbu4GJD+eBYt6
-            Jp+fJEgHk58pnivtb4MwYl+fX6aQFuG3LMOhjhJYrJdwr8Wkt2HZpQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFM0ltZTdIU3Y0ZElvdmI1
+            S0syUjViOTZob2pUclBDeFIwaDNLRVNjWVdRClh2ek5lUVVsbVUzREtSNy9YdEpL
+            NjU0bG16SXpnZUtzU0M2VU9zdWdmMlUKLS0tIHZROThxOUtCbzQ3MEtBdzZQVjNW
+            R1lYOHZYalo3QUZ3QTVTQSt6aEcyeEkK8KVZL34QNDNi6O/699b4us3STtT596Kd
+            d7YtPol1UFJvlQjpxFvcRPVEZqGKDq1cENXiKSuW+eci078ZJRPXBA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T07:36:51Z"
-    mac: ENC[AES256_GCM,data:21IWxlpPX8OqAA9fyagXtG7JRYzNqfQ2cQs9a9IARoEwCDHIfxoeAuMlUeE2p59+T8gXD/mlBa3iSJ9ugwKIvphRETxwFzp8kKIXpbZMW5XGGYIPISIZDYm708oeX6VPLxBwxSWQbC45A4SWhC1bO04eyICqxpKTTHP0VhH+NS4=,iv:laLK26nHTV6WYmmry76WSiWV7jHn1ffHELqDbcS8cS8=,tag:bWc/g+LHNY8DVVlVMOaVeQ==,type:str]
+    lastmodified: "2024-11-09T18:13:26Z"
+    mac: ENC[AES256_GCM,data:Ey92eMKoCjlHeeegPTzwmgfEJBklhTaH72fxLnR3wvB5C8U/E9cNGSWySeye0fWXia/KhdrEJH90Iq++fgz9uPXigRv7v5ujQWbnLw5Y/jd0A4zfqBoV32kfVnpDkGl59Px35FIxE8J2d/DC7HluC0fx+WBxYmv1mrUlKvuYLjI=,iv:RtxWiGAS5kaqdirkQ3V5uchxFThFRD9s2OShONr+aM0=,tag:OYHkJUwW2bcAW2+qN/iTxg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
