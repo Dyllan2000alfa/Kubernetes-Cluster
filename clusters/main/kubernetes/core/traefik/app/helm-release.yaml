@@ -715,7 +715,7 @@ spec:
             # Cf-Connecting-Ip (If from Cloudflare)
             # Evaluation of those headers will go from last to first
             realIP:
-                - name: realIp
+                - name: realip
                   # -- The real IP will be the first one that is
                   # -- not included in any of the CIDRs passed here
                   excludedNetworks:
