@@ -66,8 +66,8 @@ spec:
               parameters:
                 #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
-        #  secrets:
-        #    snapshotter-secret:
+              secrets:
+                snapshotter-secret: null
         driver:
             config:
                 driver: zfs-generic-nfs
@@ -76,7 +76,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:OJY2MR4F4zKAsKnnaIx/WcBw3Bc1JlzhUopS1cBh0266kD6Svdff6SUqBOzLpXV+Ou/SqjrX8MKKG8e6knXX30lRLh6QFp5R6e1wfwbycnyMNe1Nd3w+GkQAkdFwSDGYjCZa3Cz5gyBN73rXJUGjRrRWwqBVivYaAAj28snOXhYexBG7+HiHVGNeg3Pk/U4vB4R0jGNzLTn0YThxTXlje6OQzFCq7WlzXgL4Pojkizjo+ycevyWbBvZEre+sX6Q8KzO/NIAyq8rQtZSMxFsnS9ofB+o+9LQm78Wf48wyhgUr+pSWp1HW5HIm7JGwwR5Oz/OfcIiM5UYvQ5FgUXqEh3i9Nj+M1stVI7SV4+nO/gaT3GH15WT8CKKKaW6wFpIGtFdnq7MwCmkMrMJemoyhIl0bQZROs+rxPblGqr+1Wm42lIR2XAF849rCMOW6EV2Qqlsyp6TE+z1pIuHoUGCMuBTULI/eNaEyNmKYUTdGAhFRvzJPVD3ftZUGy/oMaQqu3jSuVbk5/7aR+J/PMdg9,iv:fPSFUJMqhbUSoczCXl8ZsZGK+0O+c2mgIvoUyeGUlRk=,tag:kXYRc7bFlc/DOos74jQHsA==,type:str]
+                    privateKey: ENC[AES256_GCM,data:tYH6ebpxNKyocE8+XmhtfdrXAlzXZXkz3cNBL3WNLKM4CsF75qhXbO/zdH4eFhQ5clSNyARXtGrKYVv6ZXetc8R56gXuxvL7/65K9+tncF4NYuQSX+DalQO/xtvINIWkNW2rNjxfqyqZSmioIP4DEMENs64xTL4Gy0bx+9ZdnxL2jFn/IYE+c7bBd8q9e52ZGbjGwI+1HpwFgX8mkOP/isCoQ3Gj/yvjx+Dl73hlnTcTL0lqnKc8RmyfCt8OqUOrvVIZXUDedlGZVQ9Qz7kCnkrc8cmZxav2ww/bPZdUicNA7BK98jjMjomXtFbMv+MGy9mvzG9Wjo1Kk1lkh43MV1kEA2JAfSJb66vJXB9BvOoOAtjfAdzpcPZEhrCkw7Yeork/LIN0fu9Fh0OLiKtYjiEIv1bOXNg7yMhABWbRRKeF6l+KrsxSWCyLY+URhK7KmmmyYFj9WSEJ6T4xgOTsixf0BIoQb0ZW2L5+/P2sWC74jlUO/tJshPa/HlhEMOJOg2C0+Bnk7ISrl2Pn1I9f,iv:aHrW6HdGNBoQUEPmYtWd6eB3VORAVTvQq/f5gyT+YFk=,tag:Y8ej9Q7EUE8RZGIcI/kSEg==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -133,14 +133,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByS1NXOHltNmVON0Vmck13
-            bzdxWjJVdXZxMEJVTjhrdWNMUytTK21uVjFBCk5LVC9XMllFVlRERzJXWEthZHls
-            aUV4L1JnSTNoK3c0K1FBL1hmeGZMRm8KLS0tIE96LzluTGxIUTJndG04ZGViZ1Bu
-            L0RFNkw4K09HTUlteU9IYm0xUWF4U1UK/hHLj5iO++lF+FJ8n0aNup01oosfnH08
-            tN8X5kvBRHAuZIyOricZ4Mjj52NhwUR8I777UoXS4teKgp+D8hDmRQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBzVlV6R2lwMjV3RG4rczRu
+            SXplY2MxaExhOFVZT3UwWDVzRUN2dVBmbHdvClBpejVGNmRCcUVQUHhDZnA5dkVr
+            SEVXZHN6YVpKTU8vVGw1d3ZNTVJxbmcKLS0tIFJwWFVXT3BPbGR1N01KZUVtMHNJ
+            V3FiajNHMExDc01UdUdGN3J1YmVBRkEK4CKTBlny1/X2459v9egEBx4qvmvlYCO5
+            glrKeB+9CXU61aWcHFi46i29RhUi1mGO641w/lMAIBeoY9HKnuqIdQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T05:38:51Z"
-    mac: ENC[AES256_GCM,data:zmCONDIBqdFgmCM5LSW9rXktrUCITN/BuAr252f2dBSYzPa8tsaruX91ZU99VqHNReXtJvgHl+if35xpYrydNUSN0OLnyZnL3hYTcZp2pi1vYhtJ2dglutPGXl7uw5xDJal/FCXxKL9ZCUz1X2z0EuAuy2gQi7k7CQpDTr0yWFs=,iv:0Az4niejldetgrYTF13MIfqfzQxfpijsFWV6PAQDYNo=,tag:y5WmDJN8NxVmNI8jKSdQag==,type:str]
+    lastmodified: "2024-11-09T06:25:57Z"
+    mac: ENC[AES256_GCM,data:+hRorymxcukv5foUYJbRJwR0Qvsg1eLbrlVXh8l5sh4pq7fjxK36damci6obNFp75YMKF87gNgdz06aV9G+dK8IuYK2Vn/8Rtvi2k7/DoLs9fxZWT3x4nv8mb2oc8dL1EX7IhmtRt9Q8uxskPFMM3BbaK21ACtJ0/2GqJKIyZlI=,iv:QmIq0iWTebMHkJctBxGbz5nJKUVCWMay6Tv7YFV1zWo=,tag:nlNa6tOAi/TULJzocjLpzA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1

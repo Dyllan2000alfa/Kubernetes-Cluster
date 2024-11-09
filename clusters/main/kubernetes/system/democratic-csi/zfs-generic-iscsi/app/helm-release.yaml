@@ -29,16 +29,6 @@ spec:
     uninstall:
         keepHistory: false
     values:
-        node:
-            hostPID: true
-            driver:
-                extraEnv:
-                    - name: ISCSIADM_HOST_STRATEGY
-                      value: nsenter
-                    - name: ISCSIADM_HOST_PATH
-                      value: /usr/sbin/iscsiadm
-                iscsiDirHostPath: /etc/iscsi
-                iscsiDirHostPathType: ""
         csiDriver:
             # should be globally unique for a given cluster
             name: org.democratic-csi.iscsi
@@ -81,8 +71,8 @@ spec:
               parameters:
                 #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
-        #  secrets:
-        #    snapshotter-secret:
+              secrets:
+                snapshotter-secret: null
         driver:
             config:
                 driver: zfs-generic-iscsi
@@ -91,7 +81,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:FnhocGLLAKdQq7Z9FXFr+qmaq9W99MHU8s0yKNf/ghHP/y5ooYV75E0QVzB1lj/dKppsud1qpWApk32lv94HHDy2fOc30aos7BAC0xIj11RozGt3i4HONk+DKlmr7EbMG/Rz/IGFTvQb6H4sm/vnmgOxOGb5KuKZCS7NrVlqZBxs6cemr3yRbEJ67DpNr68xMJsCFIIugKQ8JWV6DeiqHbTqTHltcn2jTjxtp8TXH8OiT6EuHmidPPIQIqFWo6MkrATLQVdklsoEwkKWIWTCD2OtogISpQSyaH8ugkC3iRoaB7T6VIK0iQ9qg04N/J70Y87zQxsopNtQs9Uk/mYIYxkXq4AZkNT9jPpvxG/NMI/lF8v1hVFzh64c7FqFaf653gFfPNTdh0v2HUYZPZCVC8oQvvKuhHfgfxoCo0aT03h/TKg3e4ndei3l1FIV7p2gj1/okrZwixOtlfWmTCH8a6Vn5vTlWbyIPy6jy+BYYTC7kUMXhiFGVClZt7ba271Uge/9aiSBWg+HRD+A0m1F,iv:r4NWGOhOLEgemnWEg64UYcCZoSPDKqtb1p4DqIzOmd0=,tag:omgzenPpCJ+fPxmARjrckA==,type:str]
+                    privateKey: ENC[AES256_GCM,data:1amPwgx6o0i2nSYJwflxiuNT+QD009T+kDw9PZbBMfmFpKQMI14pJSjHRCpBC+AVscF7rEIteIjdts9omqJ0KhcTGAdSLgL/9PPShnwCUl1zy93ohQYYkDL3KEnzO4aqCAGCKTM9YlE+uG+9/+nDtVUH2H+NWawFj4Bc0v/83rUjtNiaJCZn9KubiukygPqwSBpd02tQDUQ+Tf8vtOtxipmMuei24WX2ppj9htjvSrbvUS0XaE8LdekrocpAKzzOP8/BDRgu+RSvAykUdhwTCTDDsLW2X8sQHedZ+XsLCUVdNCeBA85KVh7ZY1uVWoODQKzSqaqoALgedbqoR0tcVxMBRLGY/F/ZvUoPhfLdtb4u1Iz8fH+fAHhjaoKHWigk2XJp1mQlZT8CrrCqp0nt+/rqWWC1hWzg4f6RdhpnQQJBWdX2ergKqZJUs3AxispxWESHHl5VS3n7w5Y/rlk1A7wlPxcyBoKrhsnf9nGYluLj9psqLjl8zcOZNmgdwcn7UTvIBr/qlIi0RZ7WdyFl,iv:vsZ6L2bvVb+2AWDw1l1qW9EkYB5OiT7m6OCAeSAQK7c=,tag:X3MvJP49rLGT6YSgDkZ45w==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -130,7 +120,7 @@ spec:
                     # http://atodorov.org/blog/2015/04/07/how-to-configure-iscsi-target-on-red-hat-enterprise-linux-7/
                     shareStrategyTargetCli:
                         #sudoEnabled: true
-                        basename: iqn.2003-01.org.linux-iscsi.proxmox-82.x8664
+                        basename: iqn.1993-08.org.debian
                         tpg:
                             attributes:
                                 # set to 1 to enable CHAP
@@ -173,14 +163,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnc2xSTzhIKzc1eXdMaDFN
-            dDlydlQ1bDltbkl6S3BjZi9PeFVib3VvazFvCnhSeHJhdmplRmo1eC9WMEc2azNV
-            RVZUaUZxZm5WNnNJck55MWdDYjBVMTAKLS0tIFJYTng0R1hQRURxV3ZXOHJHNlpY
-            YjdkeDVNTVlFVlpyTUF1eDVoVVdZQkUKUKVqOAZwm8PwdqCHfNCQya5AK7gmQ2i4
-            rIjuEcpzqmxq8ADEVYCRVTvfcn/iEdQwfKkRipqm2sfyGXhd/M363w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwcUZMQ2h6QkhoYWpkWjhz
+            UjJXclpPWUdwd0g3ODdEb01EU01MNVlzRUQ0Ck4wUEtXNFhoRVRYMFcvVmlVOHlY
+            SndwaVNjM0hGRlN3bVlRb0tBSnVNYTAKLS0tIEkvcCs1OXIrVDJZdUFrTVJrTjZN
+            a0NxMWIyRUNHWDNCU2hiRHc2RWExeHcKtX4qwJjyJEMBxcTlAIcc1K+jRcCay0lI
+            TqGJCvFRnFbBBagV6fDERjGVgWbg4zlNsUXLVEHUVUdA6225cz5mbg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T05:38:51Z"
-    mac: ENC[AES256_GCM,data:JXwpvqiYDvjQ1mz5CQ2YCbAtzTIcCmgIbQVFb3hxCyXLvYLEF+x+kYoT0udfeKrZVqn1jCjcPql/ingWD3lhC+0EYGAQeXofDCPTQ7jPa03H2eQRg25BR/UuEetblXgIJLyZL7XNJAX/FkzPX4QZEVDjWWYx/fY9IWGAq917WAU=,iv:3U9WkfbwhnLVG8Zk7RqUWJ8Zp8csM86dzx7gLWxrTVk=,tag:a+20HtO5LXfOyJEu7Foz2A==,type:str]
+    lastmodified: "2024-11-09T06:25:57Z"
+    mac: ENC[AES256_GCM,data:rOG5leJHX3jnJxQun/OlFMTaCdOOyGojp7OcDCdBfwImFyircalr/ZXyp4YbLuMNjGPv+fF6tIQhraRxGwRr2ZTl3a3uW/Jz1zRF/3grnYe6w1RWNWQ8jq/oltDSFnEV7be4XFw89hDriZcNswbu9IcqRHLxmuQtnG14gvwW/X8=,iv:nXfpoJYpk420obkP2OVJIPSWfeFFu+be9WV0bJlwnhc=,tag:1SWfK1T258NRF1KGOjKPkQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
