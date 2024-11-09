@@ -1,14 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: h5ai
-  namespace: h5ai
+  name: readarr
+  namespace: media
 spec:
   interval: 15m
   chart:
     spec:
-      chart: h5ai
-      version: 7.2.1
+      chart: readarr
+      version: 24.1.1
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -32,24 +32,37 @@ spec:
 
     TZ: America/Chicago
 
+    credentials:
+      cloudflare:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3SECRET}"
+        encrKey: "${S3ENCR}
+
     persistence:
       config:
-        enabled: true
         storageClass: heimdall-nfs-csi
-
-      directorystorage:
+        volsync:
+          - credentials: cloudflare
+            dest:
+              enabled: false
+            name: config
+            src:
+              enabled: true
+            type: restic
+      books:
         enabled: true
-        mountPath: /h5ai
-        readOnly: true
-        type: nfs
-        server: 10.1.0.63
-        path: /Heimdall/k8s/Webfiles/nsfw-games
+        existingClaim: media-books-nfs-pvc
+        mountPath: "/media/books"
 
     ingress:
       main:
+        required: true
         enabled: true
         hosts:
-          - host: games.${DOMAIN_0}
+          - host: readarr.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix

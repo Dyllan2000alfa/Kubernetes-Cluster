@@ -9,3 +9,8 @@ resources:
   - h5ai/ks.yaml
   - authentik/ks.yaml
   - media
+  - flaresolverr/ks.yaml
+  - kms/ks.yaml
+  - nullserv/ks.yaml
+  - protonmail-bridge/ks.yaml
+  - unifi/ks.yaml

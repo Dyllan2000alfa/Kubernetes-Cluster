@@ -11,8 +11,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormander/Downloads"
+    server: 10.1.0.63
+    path: "/Heimdall/Downloads"
   mountOptions:
     - nfsvers=4
     - tcp

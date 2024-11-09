@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 10.1.0.4
-    path: "/mnt/Jormungandr/media"
+    path: "/mnt/Jormungandr/Media"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -49,8 +49,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.10.21
-    path: "/mnt/tank/library/series"
+    server: 10.1.0.4
+    path: "/mnt/Jormungandr/Media/Series"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -86,8 +86,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.10.21
-    path: "/mnt/tank/library/movies"
+    server: 10.1.0.4
+    path: "/mnt/Jormungandr/Media/Movies"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -123,8 +123,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.10.21
-    path: "/mnt/tank/library/music"
+    server: 10.1.0.4
+    path: "/mnt/Jormungandr/Media/Music"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -160,8 +160,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.10.21
-    path: "/mnt/tank/library/books"
+    server: 10.1.0.4
+    path: "/mnt/Jormungandr/Media/Books"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -197,8 +197,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.10.21
-    path: "/mnt/tank/library/porn"
+    server: 10.1.0.4
+    path: "/mnt/Jormungandr/Media/Porn"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -215,6 +215,43 @@ metadata:
   namespace: media
 spec:
   storageClassName: media-porn-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-anime-nfs-pv
+  namespace: media
+spec:
+  storageClassName: media-anime-nfs
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 10.1.0.4
+    path: "/mnt/Jormungandr/Media/Anime"
+  mountOptions:
+    - nfsvers=4
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
+    - nolock
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-anime-nfs-pvc
+  namespace: media
+spec:
+  storageClassName: media-anime-nfs
   accessModes:
     - ReadWriteMany
   resources:
