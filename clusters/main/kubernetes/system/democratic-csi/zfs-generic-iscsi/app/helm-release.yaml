@@ -36,8 +36,8 @@ spec:
                     - name: ISCSIADM_HOST_STRATEGY
                       value: nsenter
                     - name: ISCSIADM_HOST_PATH
-                      value: /usr/local/sbin/iscsiadm
-                iscsiDirHostPath: /usr/local/etc/iscsi
+                      value: /usr/sbin/iscsiadm
+                iscsiDirHostPath: /etc/iscsi
                 iscsiDirHostPathType: ""
         csiDriver:
             # should be globally unique for a given cluster
@@ -91,7 +91,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:jjCpZPicDd9yoAShNZrtkkTrXyflHgIBmtqsgIujVDQgGHV8JhyOHlw/puELJaZcsu1T9gizDz0G8ObUsKYotvVxQLTiJjPhac7zm16pozrxj2m/o22Mld3wfS62nqTU1SShQePazSe+X2s84JdwUJCY8MHIsabdMTi2RnpD2LxJ0T81amTkD1o2qVnwaTA1Pe2JdKacBQi9leUT6wjPghy05W8F7rzofkL44XTWGyBhy3qmX3LtpD8i0RrH4zlvi7THDnhECRgBC/FyL8/lTanCRLNOgesPDeI+HBtG0fSeEskbq7rAd9MoV49B5UBVuTENx6Nm5TnbypuUPttg3UjESv8otD1X7powScNv7t11pGbHac0arxiSz26kMsUvAHmpLsJHt/wtyOP4qIGNB3LWV51+hTK0/JYpN2aHPmjfJiL5wcomXSZdb3SJYQYv+XESN8Wzogxxi2aYrsBXwnL1gYIWBuufEYjfXO6ID5D0yIj2gFLHO3Il+w0FraES0xO9YB6ZTxOI2xORzf02,iv:qMh3aN+zQB/LVQNF0oCYO65VC4WS3We50rlodxs7Ljw=,tag:2xnLKNeGJrVmD4qMGrAptg==,type:str]
+                    privateKey: ENC[AES256_GCM,data:2zR1QmOOsrnjzKmufT7cGTAcvR6MKDfeoJItVhyQZ+6rMlvb39BRY1K9wyfHO4TIYIhZ/PIj9S1GLn3u/Wy28WKBpZIRi5WbkOR6+CLaXObvcrcUE6wFfR6uoYmqH+dVdveP/cYscFzsuz2hKnW0emK1cw7ZEkmhdFngRgZ8Z1v6M0XfBoftSm2/p4m49xQT8HUs0qiynZZ0TA3K0Nxaf35NoK/ctSY5GW2RQfnsvLDDeapJ7tLZ/Ye7rxp9cnhxt/DhQMdplQjDnAMLji5uHoETrk4xEYUyRWZYTCljOED+xI+HZfXyT1C/M3v11l8CwdcwZ9H2G8NoFNadYmqjaCd9i6S8f/c+RAxz2tAhNYDLAWYiaU71WU+LwNfQLAnJRfTCDoSJcCNtcgeZ9UZTR7umhjuJ5MHrIEPiL1V0hxQDVf9yFrkAN8coXdsIU1F28EOphlwXdPKO72JIzyScYQua4por5z51gayZO5vhelnbXPvbSX2K6jek9JLZ6j0cATjPtA8PGwArCSxkWaFy,iv:o6pLqefyUBBOh6PN+5uDTsxLwRtlC4wFtYGS0HUpUDY=,tag:ze9/aqkY6oQXUojU4HhaaQ==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -173,14 +173,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkWS9TM0srQ0lqNzduTGdD
-            K0VLZVRrTnE4bUVnUmpqUUFuTWw0ZloybGowCjV6OFhRZ09IK3JYMW1BVWNOditu
-            UENBeDYwbWsyKzhLTkNSdzBXQkpLOHMKLS0tIEhjRVFDWWpBcG54QlNXNFdNY2xl
-            T2dzTkhzZUc3OWx5VFVHU3BvdzNjc1EKbNzumBmhB5NINBiKSBqPZgDMPX8tjWAK
-            dZpoGjLKpMkWkzv/ugldbikMQApgWRBMe6t5IThOZUmhPFyVkaDs3g==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuL1hXTjk2M2YzM2tZTkl0
+            TE1lalpCUEZqYjZubkw1aU9xb0FGb25GRVdFCjhjV050RzJ5RG5KVU5QNnVEY3pl
+            VldkalJ0MnNaN3FuZEppQXV0SDlLVEkKLS0tIEgzWkNMY2pobU9CbG0zQ1NlRXlI
+            Ti9vaFVoN0tjczdQQ1pMYmdQLzJ0cmsK/vExs5uLbD1L2AwlMxZBZGC9OzZrSq+y
+            vZ7AFX72NUGJ3Ups5VtkeZGUizohAZYrl0VL4qiffBMwovQ1llynLg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T03:25:40Z"
-    mac: ENC[AES256_GCM,data:tnBbZwyMF0LZwTeHWmMFpxCt3PcPQl1cm7R7wJLymcUK5Boj3wKpv0FcZUrq0HKx/mCFh543OdfaAz/R6UZhQFDBfWX9aeaYSFg8sZqO3RM8itZS5st4QUM0D0IpQCJviGrjmP4gLKlms2RJwVx/68gTb9ohxYmzzSKnrqACgog=,iv:KX0SDKTomT354oc3SeV3KN2TJ/reTyM+Htt2eZKzE4w=,tag:J3bkMLmSjQrg8uBuCZWwkA==,type:str]
+    lastmodified: "2024-11-09T05:20:14Z"
+    mac: ENC[AES256_GCM,data:Q/UciQ6+VUgrZiOjw9ArFW/O7+A8y5O5YbdcwFOoFZqTLbwuHKaG8h1EgkOikhUOsFi8WT24wu/XYTygKzdbNuGlO6qwgpN1WvkF2im7S2VbDpYWL+vLVZdadVSQl7zWhrWL6ElHlguh+RdVN6sDIU3PCu1uciJOxvI7jdCr4O8=,iv:Pr3QAZ/IG4rhmmBgrqMDbHZhuLYjmWU2TJxHZK6jUS4=,tag:UdNMhd+fxYxQVZTzflXo5Q==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1

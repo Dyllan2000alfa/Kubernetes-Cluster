@@ -193,13 +193,13 @@ spec:
     cnpg:
       main:
         enabled: true
-        #user: authentik
-        #database: authentik
-        #mode: recovery
-        #backups:
-        #  enabled: true
-        #  revision: "1"
-        #  credentials: cloudflare
-        #recovery:
-        #  method: object_store
-        #  credentials: cloudflare
+        user: authentik
+        database: authentik
+        mode: recovery
+        backups:
+          enabled: true
+          revision: 1
+          credentials: cloudflare
+        recovery:
+          method: object_store
+          credentials: cloudflare

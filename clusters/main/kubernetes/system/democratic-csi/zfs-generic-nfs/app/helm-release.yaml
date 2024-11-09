@@ -76,7 +76,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:zltfrGgFDL7LTrKOkhfv69hQ86F2SoihzGC/mPE3e1C73YlWpLHUf7SuHchBTj1m9q/bj47HDCSiZbwvZRNF0Tg8I1oRrbS/QABW05lZINRjDhKis8ym0eXqp0/q2ZG2vfaQN4BilpCRpof2bh+MTpvsBVWLoAk2O2G3nC60z0PCKyHZfDOEPYkza2P+NyPb1ET/CKlkeCGKV+1g/oB1Sw0dIBYCVJvX2bt52hqkBCo7TAXibOpHMySh15g9O6nozJpdHBaKZ8rf/SIt3760JFu/1tNDyGVtReB/uP8pC2MknxAEww6STV/xZyCb3pV1zMXHz9/9WWB7sbJFQK4asYv4OjohJ1tk+EHLoDN9FUf+MQLDXqKcLOLafY/uG3FOlPXI/NAqTOthMTlxPdbmiOrIH/vJOp/nnDEBMQXCXV1nkhuM+8tkrPtJPP4ZY5uXfdTfr45P1wqZKH2eIsE9qrJO6hkPVja9nTR66X2aWFBEPS3G5nS0/5IQ73Vk0xCu+RD22Ptg8ESlLnw3w/vk,iv:tigBizbOx4SLcffDrcQMXPsuo9smZn7gisBPaoh22Bg=,tag:kpRA/WQ/Of0hYg9gm7USIg==,type:str]
+                    privateKey: ENC[AES256_GCM,data:H0nPbQif+OOp15Ycp7X7tQ1v7XiD0X+4VE48mz2oP0HvReFlr8FbMLMRobQEB0lXTD4iaJFwIjCuyoTh4AJv653NzC7hLofMdCCaXF5F007n9JcKtotgu0dPx0IFWePoSOR80Mo8hZgJJQaZykuGxDo3YJX4RD02068t1er38w3Kj3MQBLq+To72anf5hXBUvgxw/LZVHkCfJPSqhHIe6cnSY2NMGXw0/R9jayw4wjJhPs4LAcI3Jth2KuIDTpoNph/NDZ16s86R8pR1obfvR3N0XnT4kloU145dCtybMj7Pw5NMWiAjOPhhDEV5e96DFN5+o7EfoScc3ZEcMZjxOwwUirODoTxUZ0/anbILXlg1/ZvORXRAHDmpVYTAVVExAziv3FJGL99jQq1oxxjYI97Ch04D6TvGPyPfXWg+xeF6J4KmWVEuv6wxywRD3UxPo0VpwcqAsb7ksXg0dvKFuDtAXCCq1nG+tyduUcLMzRlLB2Zsj9CvGVAz2N3ssp8r2Mqd6aEA/J6SMKA5eAN1,iv:XF2+6tNr/GHE4u0nv7iZMpo8tWJMpyHy6T8+C8P3ZQk=,tag:J63iHO/ZmFJb1MCxo+S4Ug==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -112,7 +112,7 @@ spec:
                     shareStrategy: setDatasetProperties
                     shareStrategySetDatasetProperties:
                         properties:
-                            #sharenfs: "rw,no_subtree_check,no_root_squash"
+                            #sharenfs: rw,no_subtree_check,no_root_squash
                             sharenfs: "on"
                             # share: ""
                     shareHost: 10.1.0.63
@@ -133,14 +133,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUZDlOTXU5d04zUUtybGdC
-            dDVvZGRjN0c1M2l0NVpjR3lKd0UxVEwraUdFCndSSis5Rk9JYllsaEZPckNaSG90
-            czRWeXc4MWlXS2h1NE1lUlAxVklzNHMKLS0tIC9NM0ZxKytvSUZoVVBMUzU0ZitI
-            TXZBaHVxRDJkc0h0WUlSWGlxYTU4NTAK0otJlKQ72VjJdF79R3Dc7rg56sz7T0Nu
-            T/b0LYKvj53iQNm1+BIUggCHwZuLv6YXH2GYpy9Bft9Z6Fe9H11VAg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSZHEvWFlBbU1pdGJpeVJu
+            NXZiSGlxNldGTnFod3YwaHFKZXIrUEdZelI4CjNYOUlpT2V2QU1xTldrSEdhdEkr
+            eUUxWnNYczZ1U2N6b2dPOUkzQ01VbWcKLS0tIEk2REorS2ZpRFI5YnR4WFd6azJ2
+            NU5DdHpXamc4OTAxTy9hWlllWXVsVkkKoAmgiWx504BZWG/SbdYh+tvUP6qPfvJN
+            Hhghu06Ra6A1E5/TmL/MUtJjSyk2GXZYwGYeyDAAZr7xk+Q5RGNJtA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T03:25:40Z"
-    mac: ENC[AES256_GCM,data:chGwa8+5VWIz4VN2J9wmMZBMcOq6j3+KGoNzo/x4zI4Hr7iR5uZjH4apa6C2KGT/91pA349yK+zt2T6JR841hYGhK48zriEp4Tm3xkZ9zvbhyqf1HEbtRo8+NyG9UTdfWlUoKm35xZpYDuFEgAD5uWysfU24rM4lN6TKkaxKOSs=,iv:Dh88Ap/WL5SJuRJIXknWKWo4rei/SZMwyzLtbbj2vK0=,tag:UbupdL9Yc9xpQ6SleL4Ntw==,type:str]
+    lastmodified: "2024-11-09T05:20:14Z"
+    mac: ENC[AES256_GCM,data:SgH/4I2+GnvUa26zc/e+NhAbzpx91vi3GvYcMlmeaz9MmQdEn2KtYi0N6gJCY0qhg0KTzfgjJyQ55veODzRoBjmdCOHnfmvgGgYvWRtvom3b+N+G+z7npkdJkHK9hilBq5ZqqMlL4YiWJ+3ZMY+5WBsEAWP83FSWbiaAGMUbFwY=,iv:zOhbenV/hSx0uQgzbhecxLEZn5VHWaPyt0eNxJXToDo=,tag:q0pn2QBLCfpYln1bvAaWxw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
