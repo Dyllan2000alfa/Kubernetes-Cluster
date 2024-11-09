@@ -128,67 +128,65 @@ spec:
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: config
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       templates:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
-        targetSelector:
-          main:
-            main:
-              mountPath: /templates
-          worker:
-            worker:
-              mountPath: /templates
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: templates
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       blueprints:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: blueprints
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       certs:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: certs
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       geoip:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: geoip
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
 
     cnpg:
       main:

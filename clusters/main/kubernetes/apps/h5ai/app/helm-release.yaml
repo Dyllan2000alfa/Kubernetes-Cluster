@@ -32,10 +32,28 @@ spec:
 
     TZ: America/Chicago
 
+    credentials:
+      cloudflare:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3SECRET}"
+        encrKey: "${S3ENCR}"
+
     persistence:
       config:
         enabled: true
         storageClass: heimdall-nfs-csi
+        volsync:
+          - credentials: cloudflare
+            name: config
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
+            src:
+              enabled: true
+              cacheCapacity: 10Gi
 
       directorystorage:
         enabled: true

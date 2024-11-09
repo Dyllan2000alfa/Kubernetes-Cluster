@@ -63,32 +63,35 @@ spec:
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: config
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       data:
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: data
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       certs:
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: certs
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
 
     ingress:
       main:

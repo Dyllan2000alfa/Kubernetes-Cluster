@@ -45,20 +45,22 @@ spec:
       config:
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: config
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       backup:
         enabled: true
         mountPath: /config/Backups
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: backup
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi

@@ -62,12 +62,13 @@ spec:
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
-            dest:
-              enabled: false
             name: config
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
             src:
               enabled: true
-            type: restic
+              cacheCapacity: 10Gi
       series:
         enabled: true
         existingClaim: media-series-nfs-pvc
