@@ -129,6 +129,7 @@ spec:
     cnpg:
       main:
         enabled: true
+        storageClass: heimdall-nfs-csi
         user: blocky
         database: blocky
         mode: recovery

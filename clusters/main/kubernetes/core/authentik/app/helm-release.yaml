@@ -193,6 +193,7 @@ spec:
     cnpg:
       main:
         enabled: true
+        storageClass: heimdall-nfs-csi
         user: authentik
         database: authentik
         mode: recovery
