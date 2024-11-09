@@ -127,60 +127,64 @@ spec:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
-          - credentials: cloudflare
-            name: config
+          - name: config
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi
             src:
               enabled: true
               cacheCapacity: 10Gi
+
       templates:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
-          - credentials: cloudflare
-            name: templates
+          - name: templates
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi
             src:
               enabled: true
               cacheCapacity: 10Gi
+
       blueprints:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
-          - credentials: cloudflare
-            name: blueprints
+          - name: blueprints
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi
             src:
               enabled: true
               cacheCapacity: 10Gi
+
       certs:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
-          - credentials: cloudflare
-            name: certs
+          - name: certs
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi
             src:
               enabled: true
               cacheCapacity: 10Gi
+
       geoip:
         accessModes:
           - ReadWriteMany
         storageClass: heimdall-nfs-csi
         volsync:
-          - credentials: cloudflare
-            name: geoip
+          - name: geoip
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi

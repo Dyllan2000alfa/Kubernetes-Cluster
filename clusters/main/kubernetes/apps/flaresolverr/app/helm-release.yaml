@@ -44,8 +44,8 @@ spec:
     persistence:
       config:
         volsync:
-          - credentials: cloudflare
-            name: config
+          - name: config
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi
@@ -56,8 +56,8 @@ spec:
         enabled: true
         mountPath: /config/Backups
         volsync:
-          - credentials: cloudflare
-            name: backup
+          - name: backup
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi

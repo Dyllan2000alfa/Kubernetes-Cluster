@@ -46,8 +46,8 @@ spec:
         enabled: true
         storageClass: heimdall-nfs-csi
         volsync:
-          - credentials: cloudflare
-            name: config
+          - name: config
+            credentials: cloudflare
             dest:
               enabled: true
               cacheCapacity: 10Gi
