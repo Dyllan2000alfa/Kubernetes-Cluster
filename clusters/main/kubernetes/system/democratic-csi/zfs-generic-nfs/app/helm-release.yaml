@@ -63,6 +63,8 @@ spec:
         # if your cluster supports snapshots you may enable below
         volumeSnapshotClasses:
             - name: heimdall-nfs-snapshot-csi
+              annotations:
+                snapshot.storage.kubernetes.io/is-default-class: 'true'
               parameters:
                 #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
