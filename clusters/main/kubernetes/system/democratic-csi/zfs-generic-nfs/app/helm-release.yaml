@@ -52,7 +52,7 @@ spec:
                 # detachedVolumesFromVolumes: "false"
               mountOptions:
                 - noatime
-                - nfsvers=3
+                - nfsvers=4
                 - nolock
               secrets:
                 provisioner-secret: null
@@ -76,7 +76,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:H0nPbQif+OOp15Ycp7X7tQ1v7XiD0X+4VE48mz2oP0HvReFlr8FbMLMRobQEB0lXTD4iaJFwIjCuyoTh4AJv653NzC7hLofMdCCaXF5F007n9JcKtotgu0dPx0IFWePoSOR80Mo8hZgJJQaZykuGxDo3YJX4RD02068t1er38w3Kj3MQBLq+To72anf5hXBUvgxw/LZVHkCfJPSqhHIe6cnSY2NMGXw0/R9jayw4wjJhPs4LAcI3Jth2KuIDTpoNph/NDZ16s86R8pR1obfvR3N0XnT4kloU145dCtybMj7Pw5NMWiAjOPhhDEV5e96DFN5+o7EfoScc3ZEcMZjxOwwUirODoTxUZ0/anbILXlg1/ZvORXRAHDmpVYTAVVExAziv3FJGL99jQq1oxxjYI97Ch04D6TvGPyPfXWg+xeF6J4KmWVEuv6wxywRD3UxPo0VpwcqAsb7ksXg0dvKFuDtAXCCq1nG+tyduUcLMzRlLB2Zsj9CvGVAz2N3ssp8r2Mqd6aEA/J6SMKA5eAN1,iv:XF2+6tNr/GHE4u0nv7iZMpo8tWJMpyHy6T8+C8P3ZQk=,tag:J63iHO/ZmFJb1MCxo+S4Ug==,type:str]
+                    privateKey: ENC[AES256_GCM,data:OJY2MR4F4zKAsKnnaIx/WcBw3Bc1JlzhUopS1cBh0266kD6Svdff6SUqBOzLpXV+Ou/SqjrX8MKKG8e6knXX30lRLh6QFp5R6e1wfwbycnyMNe1Nd3w+GkQAkdFwSDGYjCZa3Cz5gyBN73rXJUGjRrRWwqBVivYaAAj28snOXhYexBG7+HiHVGNeg3Pk/U4vB4R0jGNzLTn0YThxTXlje6OQzFCq7WlzXgL4Pojkizjo+ycevyWbBvZEre+sX6Q8KzO/NIAyq8rQtZSMxFsnS9ofB+o+9LQm78Wf48wyhgUr+pSWp1HW5HIm7JGwwR5Oz/OfcIiM5UYvQ5FgUXqEh3i9Nj+M1stVI7SV4+nO/gaT3GH15WT8CKKKaW6wFpIGtFdnq7MwCmkMrMJemoyhIl0bQZROs+rxPblGqr+1Wm42lIR2XAF849rCMOW6EV2Qqlsyp6TE+z1pIuHoUGCMuBTULI/eNaEyNmKYUTdGAhFRvzJPVD3ftZUGy/oMaQqu3jSuVbk5/7aR+J/PMdg9,iv:fPSFUJMqhbUSoczCXl8ZsZGK+0O+c2mgIvoUyeGUlRk=,tag:kXYRc7bFlc/DOos74jQHsA==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -112,8 +112,8 @@ spec:
                     shareStrategy: setDatasetProperties
                     shareStrategySetDatasetProperties:
                         properties:
-                            #sharenfs: rw,no_subtree_check,no_root_squash
-                            sharenfs: "on"
+                            sharenfs: rw,no_subtree_check,no_root_squash
+                            #sharenfs: "on"
                             # share: ""
                     shareHost: 10.1.0.63
                     shareAlldirs: false
@@ -133,14 +133,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSZHEvWFlBbU1pdGJpeVJu
-            NXZiSGlxNldGTnFod3YwaHFKZXIrUEdZelI4CjNYOUlpT2V2QU1xTldrSEdhdEkr
-            eUUxWnNYczZ1U2N6b2dPOUkzQ01VbWcKLS0tIEk2REorS2ZpRFI5YnR4WFd6azJ2
-            NU5DdHpXamc4OTAxTy9hWlllWXVsVkkKoAmgiWx504BZWG/SbdYh+tvUP6qPfvJN
-            Hhghu06Ra6A1E5/TmL/MUtJjSyk2GXZYwGYeyDAAZr7xk+Q5RGNJtA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByS1NXOHltNmVON0Vmck13
+            bzdxWjJVdXZxMEJVTjhrdWNMUytTK21uVjFBCk5LVC9XMllFVlRERzJXWEthZHls
+            aUV4L1JnSTNoK3c0K1FBL1hmeGZMRm8KLS0tIE96LzluTGxIUTJndG04ZGViZ1Bu
+            L0RFNkw4K09HTUlteU9IYm0xUWF4U1UK/hHLj5iO++lF+FJ8n0aNup01oosfnH08
+            tN8X5kvBRHAuZIyOricZ4Mjj52NhwUR8I777UoXS4teKgp+D8hDmRQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T05:20:14Z"
-    mac: ENC[AES256_GCM,data:SgH/4I2+GnvUa26zc/e+NhAbzpx91vi3GvYcMlmeaz9MmQdEn2KtYi0N6gJCY0qhg0KTzfgjJyQ55veODzRoBjmdCOHnfmvgGgYvWRtvom3b+N+G+z7npkdJkHK9hilBq5ZqqMlL4YiWJ+3ZMY+5WBsEAWP83FSWbiaAGMUbFwY=,iv:zOhbenV/hSx0uQgzbhecxLEZn5VHWaPyt0eNxJXToDo=,tag:q0pn2QBLCfpYln1bvAaWxw==,type:str]
+    lastmodified: "2024-11-09T05:38:51Z"
+    mac: ENC[AES256_GCM,data:zmCONDIBqdFgmCM5LSW9rXktrUCITN/BuAr252f2dBSYzPa8tsaruX91ZU99VqHNReXtJvgHl+if35xpYrydNUSN0OLnyZnL3hYTcZp2pi1vYhtJ2dglutPGXl7uw5xDJal/FCXxKL9ZCUz1X2z0EuAuy2gQi7k7CQpDTr0yWFs=,iv:0Az4niejldetgrYTF13MIfqfzQxfpijsFWV6PAQDYNo=,tag:y5WmDJN8NxVmNI8jKSdQag==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
