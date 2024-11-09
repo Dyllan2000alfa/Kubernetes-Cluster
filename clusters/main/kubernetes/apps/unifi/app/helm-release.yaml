@@ -69,26 +69,26 @@ spec:
             src:
               enabled: true
             type: restic
-        data:
+      data:
+      storageClass: heimdall-nfs-csi
+      volsync:
+        - credentials: cloudflare
+          dest:
+            enabled: false
+          name: data
+          src:
+            enabled: true
+          type: restic
+      certs:
         storageClass: heimdall-nfs-csi
         volsync:
           - credentials: cloudflare
             dest:
               enabled: false
-            name: data
+            name: certs
             src:
               enabled: true
             type: restic
-        certs:
-          storageClass: heimdall-nfs-csi
-          volsync:
-            - credentials: cloudflare
-              dest:
-                enabled: false
-              name: certs
-              src:
-                enabled: true
-              type: restic
 
     ingress:
       main:
