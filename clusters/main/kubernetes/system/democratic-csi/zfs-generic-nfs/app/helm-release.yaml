@@ -64,7 +64,7 @@ spec:
         volumeSnapshotClasses:
             - name: heimdall-nfs-snapshot-csi
               annotations:
-                snapshot.storage.kubernetes.io/is-default-class: 'true'
+                snapshot.storage.kubernetes.io/is-default-class: "true"
               parameters:
                 #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
@@ -78,7 +78,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:tYH6ebpxNKyocE8+XmhtfdrXAlzXZXkz3cNBL3WNLKM4CsF75qhXbO/zdH4eFhQ5clSNyARXtGrKYVv6ZXetc8R56gXuxvL7/65K9+tncF4NYuQSX+DalQO/xtvINIWkNW2rNjxfqyqZSmioIP4DEMENs64xTL4Gy0bx+9ZdnxL2jFn/IYE+c7bBd8q9e52ZGbjGwI+1HpwFgX8mkOP/isCoQ3Gj/yvjx+Dl73hlnTcTL0lqnKc8RmyfCt8OqUOrvVIZXUDedlGZVQ9Qz7kCnkrc8cmZxav2ww/bPZdUicNA7BK98jjMjomXtFbMv+MGy9mvzG9Wjo1Kk1lkh43MV1kEA2JAfSJb66vJXB9BvOoOAtjfAdzpcPZEhrCkw7Yeork/LIN0fu9Fh0OLiKtYjiEIv1bOXNg7yMhABWbRRKeF6l+KrsxSWCyLY+URhK7KmmmyYFj9WSEJ6T4xgOTsixf0BIoQb0ZW2L5+/P2sWC74jlUO/tJshPa/HlhEMOJOg2C0+Bnk7ISrl2Pn1I9f,iv:aHrW6HdGNBoQUEPmYtWd6eB3VORAVTvQq/f5gyT+YFk=,tag:Y8ej9Q7EUE8RZGIcI/kSEg==,type:str]
+                    privateKey: ENC[AES256_GCM,data:p32wdZzhHBHDPeOYUutmBYkdltrQJIEApraUrc+fXlWNBx675KWbFP0FUGQLNLwUVwEo4P+rBe29q3JBGe/yE/c1jRsA1QWqqiSRTR04oIzOHDRG1ZjS2CZ0Vt2ryF9wiJMjl1Eq2q8iE0UkmGRN1WTB2dcsLC7y7YFHh8Tbq1hIjiXMNdakHFpu7Qhjl7ajVVrE0pubk23AvWrOTMfNNEvK412bTdv/UFCV/gKAs4bKKKmAvhAwFBP2IJodU5K2S88Nh1cWzEW8uFeDtceSTrKPTEvQvRRKVpuO9lwP4vzC34x6EpnroWresSgTZ9TtPHPMY+eGm0UYzeV2Zxx+BeGbAbfOO9cpXb5LeTyoq107lzveGmZpSCLNlQGzZuqtstoSMGqavriuFwhLZuG57UZ7pi/JBKnMNWOxVfsNwIpt2TncIBxQJzxi1RTK4FdInASyOrv3CmtKqKDaHfb8mr6+6B0NBrtSEcf4arTMBQxNlwHrUkRGXwmEoIAEpyCnPpxwfVmtlX5M1XOzAXdg,iv:PFi4JkJGGeYrkDS3yEMwmRzS2aKczUgb/rzZCWherMk=,tag:nFB2E/aAmqxy8PkI7McjUw==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -135,14 +135,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBzVlV6R2lwMjV3RG4rczRu
-            SXplY2MxaExhOFVZT3UwWDVzRUN2dVBmbHdvClBpejVGNmRCcUVQUHhDZnA5dkVr
-            SEVXZHN6YVpKTU8vVGw1d3ZNTVJxbmcKLS0tIFJwWFVXT3BPbGR1N01KZUVtMHNJ
-            V3FiajNHMExDc01UdUdGN3J1YmVBRkEK4CKTBlny1/X2459v9egEBx4qvmvlYCO5
-            glrKeB+9CXU61aWcHFi46i29RhUi1mGO641w/lMAIBeoY9HKnuqIdQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrZEZ2QVB0TnR2eVZjK2hk
+            aXZ0QWRJcnNaWGJTMk9xRkhLNmJDN0NUalRnCnl2WGwzSlRqai9HQVZoMzlHNkph
+            VWk0SWZNVktPK2lDT1pGSlliNVlsSmcKLS0tIERNMzBRbkwyZFlnWjg3Qm4xRnBq
+            b1FRZi9ydnJwRFN4VkV4UW1ZczJEVkEK+xLhRj2dR1HOCWSQTcRHJlvy1rV/Zjnk
+            c0tCrv/P/zLfTForI01N2hYlNVGTE1trL3tA4dC52CXnzz/ewk5c2w==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-11-09T06:25:57Z"
-    mac: ENC[AES256_GCM,data:+hRorymxcukv5foUYJbRJwR0Qvsg1eLbrlVXh8l5sh4pq7fjxK36damci6obNFp75YMKF87gNgdz06aV9G+dK8IuYK2Vn/8Rtvi2k7/DoLs9fxZWT3x4nv8mb2oc8dL1EX7IhmtRt9Q8uxskPFMM3BbaK21ACtJ0/2GqJKIyZlI=,iv:QmIq0iWTebMHkJctBxGbz5nJKUVCWMay6Tv7YFV1zWo=,tag:nlNa6tOAi/TULJzocjLpzA==,type:str]
+    lastmodified: "2024-11-09T07:36:51Z"
+    mac: ENC[AES256_GCM,data:b2m/yUTVWFb/SqXHrQ7rMbbUk5RI+0GgMs/gexStGL/b5WHP15Yue60Oe6iYzQ10AEdafqkNfqKGEpwxe2mSUGO3DAtdlA38aMgbY0+QuUNu6zh99WU74y6IxWQ0X3KI8u5LNGaJ5I5+53oXWRa2H8doFdmdmNGlry23/RkwnM0=,iv:YFpk7/AQvOu+QBhroeJ4S6JPq9OnO5en+c+9UNBZ+F0=,tag:SlE9N+7pinDoFXW6eXRGJg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
