@@ -133,7 +133,7 @@ spec:
               enabled: true
               cacheCapacity: 10Gi
             src:
-              enabled: true
+              enabled: false
               cacheCapacity: 10Gi
 
       templates:
@@ -147,7 +147,7 @@ spec:
               enabled: true
               cacheCapacity: 10Gi
             src:
-              enabled: true
+              enabled: false
               cacheCapacity: 10Gi
 
       blueprints:
@@ -161,7 +161,7 @@ spec:
               enabled: true
               cacheCapacity: 10Gi
             src:
-              enabled: true
+              enabled: false
               cacheCapacity: 10Gi
 
       certs:
@@ -175,7 +175,7 @@ spec:
               enabled: true
               cacheCapacity: 10Gi
             src:
-              enabled: true
+              enabled: false
               cacheCapacity: 10Gi
 
       geoip:
@@ -189,7 +189,7 @@ spec:
               enabled: true
               cacheCapacity: 10Gi
             src:
-              enabled: true
+              enabled: false
               cacheCapacity: 10Gi
 
     cnpg:
