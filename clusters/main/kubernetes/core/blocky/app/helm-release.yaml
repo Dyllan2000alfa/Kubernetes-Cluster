@@ -128,13 +128,10 @@ spec:
                 
     cnpg:
       main:
-        enabled: true
-        mode: recovery
+        enabled: false
         backups:
-          enabled: false
-          revision: "1"
+          enabled: true
           credentials: cloudflare
         recovery:
-          enabled: true
           method: object_store
           credentials: cloudflare
