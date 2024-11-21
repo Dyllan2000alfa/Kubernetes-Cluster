@@ -132,3 +132,12 @@ spec:
         storageClass: heimdall-nfs-csi
         user: blocky
         database: blocky
+        mode: recovery
+        backups:
+          enabled: false
+          revision: "1"
+          credentials: cloudflare
+        recovery:
+          enabled: true
+          method: object_store
+          credentials: cloudflare
