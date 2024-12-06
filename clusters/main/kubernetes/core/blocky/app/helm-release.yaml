@@ -110,7 +110,7 @@ spec:
       enabled: true
       # -- list of processed domains
       domains:
-      - domain: "${DOMAIN_0}"
+      - domain: "radarr.tinoco.casa"
         # -- Optional configuration option for DNS01 challenge that will redirect all acme
         # challenge requests to external cloud domain (e.g. managed by cert-manager)
         # See: https://cert-manager.io/docs/configuration/acme/dns01/
