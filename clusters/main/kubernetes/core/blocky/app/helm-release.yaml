@@ -110,21 +110,13 @@ spec:
       # -- list of processed domains
       domains:
           # -- Delegated domain
-          - domain: ${DOMAIN_0}
+          - domain: "${DOMAIN_0}"
             # -- Optional configuration option for DNS01 challenge that will redirect all acme
             # challenge requests to external cloud domain (e.g. managed by cert-manager)
             # See: https://cert-manager.io/docs/configuration/acme/dns01/
             dnsChallenge:
               enabled: true
               domain: dns01.clouddns.com
-
-      forward:
-        enabled: false
-        primary: tls://1.1.1.1
-        secondary: tls://1.0.0.1
-        options:
-          - name: tls_servername
-            value: cloudflare-dns.com
                 
     cnpg:
       main:
