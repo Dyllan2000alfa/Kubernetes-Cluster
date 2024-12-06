@@ -29,6 +29,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    ## set stopAll to "true" if you do not want to use blocky
+    # and/or disable its service
+    global:
+      stopAll: false
 
     TZ: America/Chicago
 
@@ -43,8 +47,9 @@ spec:
 
     service:
       dns:
-        type: LoadBalancer
+        externalTrafficPolicy: Local
         loadBalancerIP: ${BLOCKY_IP}
+        type: LoadBalancer
 
     blocking:
       # -- Sets the blocktype
@@ -107,23 +112,35 @@ spec:
             - ads
             
     k8sgateway:
-      enabled: true
       # -- list of processed domains
       domains:
-      - domain: "radarr.tinoco.casa"
+      - domain: "${DOMAIN_0}"
         # -- Optional configuration option for DNS01 challenge that will redirect all acme
         # challenge requests to external cloud domain (e.g. managed by cert-manager)
         # See: https://cert-manager.io/docs/configuration/acme/dns01/
         dnsChallenge:
-          enabled: true
+          enabled: false
           domain: dns01.clouddns.com
+
+      forward:
+        enabled: false
+        primary: tls://1.1.1.1
+        secondary: tls://1.0.0.1
+        options:
+          - name: tls_servername
+            value: cloudflare-dns.com
+
+    # CANNOT be defined in above yaml section
+    queryLog:
+      # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console only
+      type: ""
+
+    configmap:
+      dashboard:
+        enabled: false
+      datasource:
+        enabled: false
                 
     cnpg:
       main:
         enabled: false
-        backups:
-          enabled: true
-          credentials: cloudflare
-        recovery:
-          method: object_store
-          credentials: cloudflare
