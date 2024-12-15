@@ -119,7 +119,7 @@ spec:
         # challenge requests to external cloud domain (e.g. managed by cert-manager)
         # See: https://cert-manager.io/docs/configuration/acme/dns01/
         dnsChallenge:
-          enabled: false
+          enabled: true
           domain: dns01.clouddns.com
 
       forward:
