@@ -51,8 +51,12 @@ spec:
                 # zfs send/received instead of zfs cloned
                 # detachedVolumesFromVolumes: "false"
               mountOptions:
-                - noatime
                 - nfsvers=4
+                - tcp
+                - intr
+                - hard
+                - noatime
+                - nodiratime
                 - nolock
               secrets:
                 provisioner-secret: null
