@@ -199,9 +199,10 @@ spec:
         database: authentik
         mode: recovery
         backups:
-          enabled: true
+          enabled: false
           revision: "1"
           credentials: cloudflare
         recovery:
           method: object_store
+          revision: "1"
           credentials: cloudflare
