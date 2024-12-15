@@ -49,6 +49,19 @@ spec:
         type: LoadBalancer
         loadBalancerIP: ${NULL_IP}
 
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: cloudflare
+            dest:
+              enabled: true
+              cacheCapacity: 10Gi
+            src:
+              enabled: false
+              cacheCapacity: 10Gi
+
     ingress:
       main:
         required: true
