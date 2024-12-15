@@ -58,6 +58,7 @@ spec:
         mountPath: /config/Backups
         volsync:
           - name: backup
+            type: restic
             credentials: cloudflare
             dest:
               enabled: true
