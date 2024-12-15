@@ -143,15 +143,4 @@ spec:
                 
     cnpg:
       main:
-        enabled: true
-        user: blocky
-        database: blocky
-        mode: recovery
-        backups:
-          enabled: false
-          revision: "1"
-          credentials: cloudflare
-        recovery:
-          method: object_store
-          revision: "1"
-          credentials: cloudflare
+        enabled: false
