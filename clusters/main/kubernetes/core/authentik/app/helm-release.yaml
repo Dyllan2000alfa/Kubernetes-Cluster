@@ -125,7 +125,6 @@ spec:
       media:
         accessModes:
           - ReadWriteMany
-        storageClass: heimdall-nfs-csi
         volsync:
           - name: config
             credentials: cloudflare
@@ -139,7 +138,6 @@ spec:
       templates:
         accessModes:
           - ReadWriteMany
-        storageClass: heimdall-nfs-csi
         volsync:
           - name: templates
             credentials: cloudflare
@@ -153,7 +151,6 @@ spec:
       blueprints:
         accessModes:
           - ReadWriteMany
-        storageClass: heimdall-nfs-csi
         volsync:
           - name: blueprints
             credentials: cloudflare
@@ -167,7 +164,6 @@ spec:
       certs:
         accessModes:
           - ReadWriteMany
-        storageClass: heimdall-nfs-csi
         volsync:
           - name: certs
             credentials: cloudflare
@@ -181,7 +177,6 @@ spec:
       geoip:
         accessModes:
           - ReadWriteMany
-        storageClass: heimdall-nfs-csi
         volsync:
           - name: geoip
             credentials: cloudflare
@@ -195,7 +190,6 @@ spec:
     cnpg:
       main:
         enabled: true
-        storageClass: heimdall-nfs-csi
         user: authentik
         database: authentik
         mode: recovery
