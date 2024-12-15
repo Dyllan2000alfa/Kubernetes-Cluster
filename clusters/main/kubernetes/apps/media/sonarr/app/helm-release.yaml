@@ -49,10 +49,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
       series:
         enabled: true
         existingClaim: media-series-nfs-pvc
@@ -74,6 +72,8 @@ spec:
         integrations:
           traefik:
             enabled: true
+            entrypoints:
+              - websecure
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod

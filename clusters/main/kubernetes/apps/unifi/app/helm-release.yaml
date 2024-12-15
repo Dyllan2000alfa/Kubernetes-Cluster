@@ -66,10 +66,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
               enabled: true
-              cacheCapacity: 10Gi
       data:
         volsync:
           - name: data
@@ -77,10 +75,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
               enabled: true
-              cacheCapacity: 10Gi
       certs:
         volsync:
           - name: certs
@@ -88,10 +84,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
 
     ingress:
       main:
@@ -105,6 +99,8 @@ spec:
         integrations:
           traefik:
             enabled: true
+            entrypoints:
+              - websecure
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod

@@ -117,6 +117,8 @@ spec:
         integrations:
           traefik:
             enabled: true
+            entrypoints:
+              - websecure
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod
@@ -131,10 +133,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
 
       templates:
         accessModes:
@@ -145,10 +145,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
 
       blueprints:
         accessModes:
@@ -159,10 +157,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
 
       certs:
         accessModes:
@@ -173,10 +169,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
 
       geoip:
         accessModes:
@@ -187,10 +181,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
 
     cnpg:
       main:
@@ -203,6 +195,7 @@ spec:
           revision: "1"
           credentials: cloudflare
         recovery:
+          enabled: true
           method: object_store
           revision: "1"
           credentials: cloudflare

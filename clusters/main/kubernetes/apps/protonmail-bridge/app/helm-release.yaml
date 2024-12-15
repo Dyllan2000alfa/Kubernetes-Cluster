@@ -57,7 +57,5 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true

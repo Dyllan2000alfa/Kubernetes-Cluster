@@ -49,10 +49,8 @@ spec:
             credentials: cloudflare
             dest:
               enabled: true
-              cacheCapacity: 10Gi
             src:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
       backup:
         enabled: true
         mountPath: /config/Backups
@@ -61,8 +59,6 @@ spec:
             type: restic
             credentials: cloudflare
             dest:
-              enabled: false
-              cacheCapacity: 10Gi
+              enabled: true
             src:
               enabled: true
-              cacheCapacity: 10Gi
