@@ -61,8 +61,8 @@ spec:
             type: restic
             credentials: cloudflare
             dest:
-              enabled: true
+              enabled: false
               cacheCapacity: 10Gi
             src:
-              enabled: false
+              enabled: true
               cacheCapacity: 10Gi
