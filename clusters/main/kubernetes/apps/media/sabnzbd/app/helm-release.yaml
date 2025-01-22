@@ -14,6 +14,17 @@ spec:
         name: truecharts
         namespace: flux-system
       interval: 15m
+  postRenderers:
+  - kustomize:
+      patches:
+        - target:
+            version: v1
+            kind: Deployment
+            name: sabnzbd
+          patch: |
+            - op: add
+              path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
+              value: 1
   timeout: 20m
   maxHistory: 3
   driftDetection:
@@ -41,6 +52,11 @@ spec:
         secretKey: "${S3SECRET}"
         encrKey: "${S3ENCR}"
         
+    #qbitportforward:
+    #  enabled: true
+    #  QBT_USERNAME: "${ADMIN}"
+    #  QBT_PASSWORD: "${ADMIN_PASSWORD}"
+
     addons:
       vpn:
         killSwitch: true
@@ -50,9 +66,6 @@ spec:
           VPN_SERVICE_PROVIDER: protonvpn
           WIREGUARD_PRIVATE_KEY: "${NZB_PRIV}"
           SERVER_COUNTRIES: United States
-          VPN_PORT_FORWARDING: "on"
-          VPN_PORT_FORWARDING_PROVIDER: protonvpn
-          
 
     ingress:
       main:
