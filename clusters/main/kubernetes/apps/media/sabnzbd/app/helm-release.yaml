@@ -51,11 +51,6 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3SECRET}"
         encrKey: "${S3ENCR}"
-        
-    #qbitportforward:
-    #  enabled: true
-    #  QBT_USERNAME: "${ADMIN}"
-    #  QBT_PASSWORD: "${ADMIN_PASSWORD}"
 
     addons:
       vpn:
