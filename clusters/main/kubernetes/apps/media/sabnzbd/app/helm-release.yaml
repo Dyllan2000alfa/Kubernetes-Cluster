@@ -14,17 +14,6 @@ spec:
         name: truecharts
         namespace: flux-system
       interval: 15m
-  postRenderers:
-  - kustomize:
-      patches:
-        - target:
-            version: v1
-            kind: Deployment
-            name: sabnzbd
-          patch: |
-            - op: add
-              path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
-              value: 1
   timeout: 20m
   maxHistory: 3
   driftDetection:
@@ -51,16 +40,6 @@ spec:
         accessKey: "${S3ID}"
         secretKey: "${S3SECRET}"
         encrKey: "${S3ENCR}"
-
-    addons:
-      vpn:
-        killSwitch: true
-        type: gluetun
-        env:
-          VPN_TYPE: wireguard
-          VPN_SERVICE_PROVIDER: protonvpn
-          WIREGUARD_PRIVATE_KEY: "${NZB_PRIV}"
-          SERVER_COUNTRIES: United States
 
     ingress:
       main:
