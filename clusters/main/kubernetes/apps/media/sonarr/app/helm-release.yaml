@@ -55,10 +55,6 @@ spec:
         enabled: true
         existingClaim: media-series-nfs-pvc
         mountPath: "/media/series"
-      anime:
-        enabled: true
-        existingClaim: media-anime-nfs-pvc
-        mountPath: "/media/anime"
 
     ingress:
       main:
