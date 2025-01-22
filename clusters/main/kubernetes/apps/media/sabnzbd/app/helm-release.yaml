@@ -94,3 +94,14 @@ spec:
         enabled: true
         existingClaim: downloads-nfs-pvc
         mountPath: "/downloads"
+
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              securityContext:
+                privileged: true
+                capabilities:
+                  add:
+                    - NET_ADMIN

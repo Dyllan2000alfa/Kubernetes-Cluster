@@ -52,11 +52,6 @@ spec:
         secretKey: "${S3SECRET}"
         encrKey: "${S3ENCR}"
 
-    #qbitportforward:
-    #  enabled: true
-    #  QBT_USERNAME: "${ADMIN}"
-    #  QBT_PASSWORD: "${ADMIN_PASSWORD}"
-
     addons:
       vpn:
         killSwitch: true
@@ -99,3 +94,14 @@ spec:
         enabled: true
         existingClaim: downloads-nfs-pvc
         mountPath: "/downloads"
+
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              securityContext:
+                privileged: true
+                capabilities:
+                  add:
+                    - NET_ADMIN
