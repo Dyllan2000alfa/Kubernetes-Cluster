@@ -15,3 +15,4 @@ resources:
   - volsync/ks.yaml
   - longhorn/ks.yaml
   - democratic-csi
+  - generic-device-plugin/ks.yaml
