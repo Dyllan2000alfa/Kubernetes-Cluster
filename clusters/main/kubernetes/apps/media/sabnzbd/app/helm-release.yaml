@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sabnzbd
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: sabnzbd
+      version: 21.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    TZ: America/Chicago
+
+    credentials:
+      cloudflare:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3SECRET}"
+        encrKey: "${S3ENCR}"
+        
+    addons:
+      vpn:
+        env:
+          VPN_ENDPOINT_IP:
+              name: VPN_ENDPOINT_IP
+              value: 89.187.164.241
+          VPN_ENDPOINT_PORT:
+            name: VPN_ENDPOINT_PORT
+            value: "51820"
+          VPN_PORT_FORWARDING:
+            name: VPN_PORT_FORWARDING
+            value: "on"
+          VPN_PORT_FORWARDING_PROVIDER:
+            name: VPN_PORT_FORWARDING_PROVIDER
+            value: protonvpn
+          VPN_SERVICE_PROVIDER:
+            name: VPN_SERVICE_PROVIDER
+            value: custom
+          VPN_TYPE:
+            name: VPN_TYPE
+            value: wireguard
+          WIREGUARD_ADDRESSES:
+            name: WIREGUARD_ADDRESSES
+            value: 10.2.0.2/32
+          WIREGUARD_PRIVATE_KEY:
+            name: WIREGUARD_PRIVATE_KEY
+            value: "${QBIT_PRIV}"
+          WIREGUARD_PUBLIC_KEY:
+            name: WIREGUARD_PUBLIC_KEY
+            value: "${QBIT_PUB}"
+        killSwitch: true
+        type: gluetun
+
+    ingress:
+      main:
+        required: true
+        enabled: true
+        hosts:
+          - host: sabnzbd.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          traefik:
+            enabled: true
+            entrypoints:
+              - websecure
+          certManager:
+            enabled: true
+            certificateIssuer: tinoco-le-prod
+
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: cloudflare
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      downloads:
+        enabled: true
+        existingClaim: downloads-nfs-pvc
+        mountPath: "/downloads"
