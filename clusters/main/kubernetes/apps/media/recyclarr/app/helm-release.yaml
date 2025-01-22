@@ -34,12 +34,5 @@ spec:
 
     persistence:
       config:
-        autoPermissions:
-          enabled: false
         enabled: true
-        mountPath: /config
-        path: /mnt/Jormungandr/Downloads/recyclarr
-        readOnly: false
-        server: 10.1.0.4
-        targetSelectAll: true
-        type: nfs
+        existingClaim: recyclarr-nfs-pvc

@@ -56,6 +56,11 @@ spec:
         existingClaim: media-books-nfs-pvc
         mountPath: "/media/books"
 
+      downloads:
+        enabled: true
+        existingClaim: downloads-nfs-pvc
+        mountPath: "/downloads"
+
     ingress:
       main:
         required: true

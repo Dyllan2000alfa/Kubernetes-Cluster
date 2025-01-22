@@ -55,6 +55,10 @@ spec:
         enabled: true
         existingClaim: media-series-nfs-pvc
         mountPath: "/media/series"
+      downloads:
+        enabled: true
+        existingClaim: downloads-nfs-pvc
+        mountPath: "/downloads"
 
     ingress:
       main:

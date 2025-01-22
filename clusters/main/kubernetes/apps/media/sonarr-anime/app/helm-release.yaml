@@ -56,6 +56,11 @@ spec:
         existingClaim: media-anime-nfs-pvc
         mountPath: "/media/anime"
 
+      downloads:
+        enabled: true
+        existingClaim: downloads-nfs-pvc
+        mountPath: "/downloads"
+
     ingress:
       main:
         required: true
