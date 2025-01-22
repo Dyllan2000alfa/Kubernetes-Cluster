@@ -50,8 +50,6 @@ spec:
           VPN_SERVICE_PROVIDER: protonvpn
           WIREGUARD_PRIVATE_KEY: "${QBIT_PRIV}"
           SERVER_COUNTRIES: United States
-          VPN_PORT_FORWARDING: "on"
-          VPN_PORT_FORWARDING_PROVIDER: protonvpn
 
     ingress:
       main:
