@@ -45,9 +45,6 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: ${FACTORY_IP}
-      mainudp:
-        type: LoadBalancer
-        loadBalancerIP: ${FACTORY_IP}
 
     persistence:
       config:
