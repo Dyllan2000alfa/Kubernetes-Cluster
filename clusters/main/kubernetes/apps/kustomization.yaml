@@ -9,4 +9,4 @@ resources:
   - nullserv/ks.yaml
   - protonmail-bridge/ks.yaml
   - unifi/ks.yaml
-  - games/ks.yaml
+  - games
