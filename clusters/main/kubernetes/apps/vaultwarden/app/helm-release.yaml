@@ -1,0 +1,182 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: vaultwarden
+      version: 28.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    TZ: America/Chicago
+
+    credentials:
+      cloudflare:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3PREFIX}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3SECRET}"
+        encrKey: "${S3ENCR}"
+
+    vaultwarden:
+      # -- Allow any user to sign-up
+      # see: https://github.com/dani-garcia/bitwarden_rs/wiki/Disable-registration-of-new-users
+      allowSignups: true
+      ## Whitelist domains allowed to sign-up. 'allowSignups' is ignored if set.
+      # signupDomains:
+      #  - domain.tld
+      # -- Verify e-mail before login is enabled.
+      # SMTP must be enabled.
+      verifySignup: false
+      # When a user logs in an email is required to be sent. If sending the email fails the login attempt will fail. SMTP must be enabled.
+      requireEmail: false
+      ## Maximum attempts before an email token is reset and a new email will need to be sent.
+      # emailAttempts: 3
+      ## Email token validity in seconds.
+      # emailTokenExpiration: 600
+      # Allow invited users to sign-up even feature is disabled: https://github.com/dani-garcia/bitwarden_rs/wiki/Disable-invitations
+      allowInvitation: true
+      # Show password hints: https://github.com/dani-garcia/bitwarden_rs/wiki/Password-hint-display
+      ## Default organization name in invitation e-mails that are not coming from a specific organization.
+      # defaultInviteName: ""
+      showPasswordHint: true
+      # Enable Web Vault (static content). https://github.com/dani-garcia/bitwarden_rs/wiki/Disabling-or-overriding-the-Vault-interface-hosting
+      enableWebVault: true
+      # Restrict creation of orgs. Options are: 'all', 'none' or a comma-separated list of users.
+      orgCreationUsers: all
+      ## Limit attachment disk usage per organization.
+      # attachmentLimitOrg:
+      ## Limit attachment disk usage per user.
+      # attachmentLimitUser:
+      ## HaveIBeenPwned API Key. Can be purchased at https://haveibeenpwned.com/API/Key.
+      # hibpApiKey:
+
+      admin:
+        # Enable admin portal.
+        enabled: false
+        # Disabling the admin token will make the admin portal accessible to anyone, use carefully: https://github.com/dani-garcia/bitwarden_rs/wiki/Disable-admin-token
+        disableAdminToken: false
+        ## Token for admin login, will be generated if not defined. https://github.com/dani-garcia/bitwarden_rs/wiki/Enabling-admin-page
+        # token:
+      # Enable SMTP. https://github.com/dani-garcia/bitwarden_rs/wiki/SMTP-configuration
+      smtp:
+        enabled: true
+        # SMTP hostname, required if SMTP is enabled.
+        host: ${SMTP}
+        # SMTP sender e-mail address, required if SMTP is enabled.
+        from: "vault@tinoco.casa"
+        ## SMTP sender name, defaults to 'Bitwarden_RS'.
+        fromName: "Vaultwarden"
+        ## Enable SSL connection.
+        security: starttls
+        ## SMTP port. Defaults to 587 with STARTTLS, 465 with FORCE_TLS, and 25 without SSL.
+        port: 25
+        ## SMTP Authentication Mechanisms. Comma-separated options: 'Plain', 'Login' and 'Xoauth2'. Defaults to 'Plain'.
+        authMechanism: Plain
+        ## Hostname to be sent for SMTP HELO. Defaults to pod name.
+        # heloName: ""
+        ## SMTP timeout.
+        timeout: 15
+        ## Accept SSL session if certificate is valid but hostname doesn't match. DANGEROUS, vulnerable to men-in-the-middle attacks!
+        invalidHostname: true
+        ## Accept invalid certificates. DANGEROUS, vulnerable to men-in-the-middle attacks!
+        invalidCertificate: false
+        ## SMTP username.
+        user: ${PROTONLOGIN}
+        ## SMTP password. Required is user is specified, ignored if no user provided.
+        password: ${PROTONPASS}
+      ## Enable Yubico OTP authentication. https://github.com/dani-garcia/bitwarden_rs/wiki/Enabling-Yubikey-OTP-authentication
+      yubico:
+        enabled: false
+        ## Yubico server. Defaults to YubiCloud.
+        # server:
+        ## Yubico ID and Secret Key.
+        # clientId:
+        # secretKey:
+      ## Enable Mobile Push Notifications. You must obtain and ID and Key here: https://bitwarden.com/host
+      push:
+        enabled: false
+        # installationId:
+        # installationKey:
+      ## Logging options. https://github.com/dani-garcia/bitwarden_rs/wiki/Logging
+      log:
+        # Log to file.
+        file: ""
+        # Log level. Options are "trace", "debug", "info", "warn", "error" or "off".
+        level: "trace"
+        ## Log timestamp format. See https://docs.rs/chrono/0.4.15/chrono/format/strftime/index.html. Defaults to time in milliseconds.
+        # timeFormat: ""
+      icons:
+        # Disables download of external icons. Setting to true will still serve icons from cache (/data/icon_cache). TTL will default to zero.
+        disableDownload: false
+        ## Cache time-to-live for icons fetched. 0 means no purging.
+        # cache: 2592000
+        ## Cache time-to-live for icons that were not available. 0 means no purging.
+        # cacheFailed: 259200
+
+    persistence:
+      data:
+        volsync:
+          - name: config
+            type: restic
+            credentials: cloudflare
+            dest:
+              enabled: true
+            src:
+              enabled: true
+
+    ingress:
+      main:
+        required: true
+        enabled: true
+        hosts:
+          - host: vault.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          traefik:
+            enabled: true
+          certManager:
+            enabled: true
+            certificateIssuer: tinoco-le-prod
+
+    cnpg:
+      main:
+        enabled: true
+        storageClass: heimdall-nvmeof-csi
+        user: vaultwarden
+        database: vaultwarden
+        mode: recovery
+        backups:
+          enabled: false
+          revision: "1"
+          credentials: cloudflare
+        recovery:
+          enabled: true
+          method: object_store
+          revision: "1"
+          credentials: cloudflare
