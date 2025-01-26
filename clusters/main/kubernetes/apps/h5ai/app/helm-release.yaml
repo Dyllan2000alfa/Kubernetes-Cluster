@@ -44,6 +44,7 @@ spec:
     persistence:
       config:
         enabled: true
+        storageClass: heimdall-nvmeof-csi
         volsync:
           - name: config
             type: restic
