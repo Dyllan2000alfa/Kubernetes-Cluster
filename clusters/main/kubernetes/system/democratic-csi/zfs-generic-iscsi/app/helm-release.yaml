@@ -71,8 +71,7 @@ spec:
                     host: 10.1.0.63
                     port: 22
                     username: root
-                    # use either password or key
-                    privateKey: ${PROXMOX_KEY}
+                    privateKey: ENC[AES256_GCM,data:Zc8kORxpHTjG8svekY/HIPcwg4zy2+U21vqdLowrMq50W8fFP6b34XhKdnafTy7975Q56Mtakppy2ZI91C1xIKvLN+YVTkhOyjYXELdJm7/MpCFCmaKu6TjPsASDxEItiD2yllNHnxtUfsXTiYP7P3dPCoZuTg+7Q/ts+GSehoK7sc/mV03ppnckieSkFmts/ap0bmRFfgkukHa5TKUgiv6dcHhhNOq5Zuw3IFqG/jIpUTttcufmT0To1HFV6an1uvArFZvJoUXyt7yK7LMzTme6tE01QMF+BQfTafZo0tjU5mee+lMxL65WpVbGi0dKqhyB0pUR5jpK7WlbVkjlhkK64RhftFupkPbiVM4gCo5HMhXqPPL9pW0i4ck1KyENj2GvBS12PrIfpmq/rpKeQapSVZz+EpO5PUE5aprYzfnhJhd0VT+vpjMN0DAO5t47AV0k2PjF2k+7m68qY/lCYv4l/+BABzMEpQpfHWE8/2F7pM2sNyjXiHVNEGlBWfG8zIqM02t/ng==,iv:EOnWkvXGs7do+6FjtkFQY4TgR6sGIxBpV36RHA5LKpo=,tag:VsC4Ga+z3PN0hHyxgTDnzw==,type:str]
                 zfs:
                     cli:
                         #  sudoEnabled: true
@@ -132,6 +131,27 @@ spec:
                     # MUST ensure uniqueness
                     # full iqn limit is 223 bytes, plan accordingly
                     # default is "{{ name }}"
-                    nameTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+                    nameTemplate: '{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}'
                     namePrefix: csi-
                     nameSuffix: -cluster
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqV21EOXJjUjNpT1Q5Mnp2
+            NTFIQ1hEa1ZMUGpZRlJleFQ3N0I3dHZRQUNJCldWM3Q5Q2dmUmtmc1RySUVKNlpy
+            amNCaktNcHpoTUpxT01COGg0WWdETWsKLS0tIG9aeVZzaWwwdko5dFdMRkFWQysw
+            VlRtc3BUZE8wL1paQ0ZUeDBMQ3BDVzQK9BzWGjHG5e90LLq3HDgB4IZMwOKnfXbs
+            F1DEdJqD63av7jU82x8q9lov9SgMM79mfzS3mviZ+n/6Nq9z4UFzwg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-01-26T01:38:03Z"
+    mac: ENC[AES256_GCM,data:NXh8/4IYv1h498QjRvAxawfbd5qTvVOi/YDPN358qvfZkaBGUNOItsKI/QpYmw21zBr/ZebfQXq27xNazKQXt+7m/KSQPbPvv6UL1+0ypEteYhM18GP+TCQUQV0IGOSxvlTSQ7Bsz8ZVb/xpMKFFN5Rq78Cg1s4AtT56Z2G53nI=,iv:yI6fEL/UCJnt8PlChfAFvHF+rQf1NJtPOq/NP1BK68I=,tag:HNuFO1ArlTHK1HSvV96UMA==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(privateKey))
+    version: 3.9.1

@@ -82,7 +82,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ${PROXMOX_KEY}
+                    privateKey: ENC[AES256_GCM,data:sraRRe/LgfOWH38IeJ0zjXfgWpsWXhBI5EDcyD/IXe04Oi4EFqjl89q6FpEpNvkyM0BEAFw/nejdPwe+AiZDkZvonZ+GaXdcIXGyIl7Wx7n487XrLc3o/lOxZP1Dwq74pxzm/9kKRZpeuSbkxmqhwNvR8X/DLrIXKlOQunWLqiMO+syWGSKr/9WKFIS6ota7obW9d+2ZBcnEOs++4EWNq7Su8mX4sI/gh4A1tu2G8EkQpKm7+IDhHlLmDj064tWnYnd4XD6NZSet0kyHowD6ECez9QzVk7G+wOfd0mAmbj36M8V1jbSt7DTt84R3XMrqYpKVkZao7xzqGNkz2xbOgAerzp/87cqYKlnbFaPmWeoF8KBdErGFVVaCijW2yFkUj7WSMUsXOT30aD/Vc7Pv+XSyT/B3oz6IfpxLwifV+2ZGRxL/Ju2jaoOcao+D0+B8tPDqLoMy7zWZzBf3yG00ySU+i5NSaffdVWtyzVzYH1VJuCTw1z6pQCnUcItYb4SxALdMncv2Sw==,iv:ICWO3QeruqiLcKXWHh5cuCnoGwM7uzWfyJwg7YGAr8Y=,tag:Dd58VtmVg2rwOGBXlfhawQ==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -113,3 +113,24 @@ spec:
                         properties:
                             sharenfs: rw,no_subtree_check,no_root_squash
                     shareHost: 10.1.0.63
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZTjZkN2pkczBKRG44RFV1
+            ellNRldSNVdyd1lMQU9FV0tLR2hmM1daSXhzCkRuWkVKOWpzMTRLVTI2RXZIZG0v
+            T25wMmFKUnI0b2lIdjNBL1dYdExsZjAKLS0tIFZETEJHMC9ZQWQvMGJCMDV6aUZi
+            azR6YXJRc3pwKzNNaGU4a2pnR1Z6VG8KW58peH3b9d8FSRUtgTFF48PMoEsCx+Vv
+            CmKf3Yn4ZSqyixl1p0n5twvRiCefPJ6gL3W5iZbCZOq9EVDxVXGq/A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-01-26T01:38:03Z"
+    mac: ENC[AES256_GCM,data:rtyIPhVdtg65AiqQQJI10OWzP2aZO28wLNjPcR2LIiuF0WPwaLHaeg5FktWjg1m/uUFt/4S3t7GzWXpFqPbUxYFxIFSOs9x66QYbC4sS86vk9LIP38FpPvVWEpPv1RsipjsfC6WvRSiSf6m5+ZC/pRagxKTFpZ37fzMq+N8+sTk=,iv:bqQdj0RphiSczKQLjLLZrKfdSzoZeokFFzoazTq4quY=,tag:tNhpSELaaKRYcGF+vdYoGw==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(privateKey))
+    version: 3.9.1

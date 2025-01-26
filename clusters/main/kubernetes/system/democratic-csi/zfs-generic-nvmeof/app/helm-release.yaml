@@ -30,10 +30,7 @@ spec:
         keepHistory: false
     values:
         csiDriver:
-            # should be globally unique for a given cluster
-            name: "org.democratic-csi.heimdall-nvmeof"
-
-        # add note here about volume expansion requirements
+            name: org.democratic-csi.heimdall-nvmeof
         storageClasses:
             - name: heimdall-nvmeof-csi
               defaultClass: false
@@ -44,32 +41,20 @@ spec:
                 # for block-based storage can be ext3, ext4, xfs
                 # for nfs should be nfs
                 fsType: ext4
-
-                # if true, volumes created from other snapshots will be
-                # zfs send/received instead of zfs cloned
                 detachedVolumesFromSnapshots: "false"
-
-                # if true, volumes created from other volumes will be
-                # zfs send/received instead of zfs cloned
-                # detachedVolumesFromVolumes: "false"
-
               mountOptions: []
               secrets:
-                provisioner-secret:
-                controller-publish-secret:
-                node-stage-secret:
-                node-publish-secret:
-                controller-expand-secret:
-
-        # if your cluster supports snapshots you may enable below
-        volumeSnapshotClasses: []
+                provisioner-secret: null
+                controller-publish-secret: null
+                node-stage-secret: null
+                node-publish-secret: null
+                controller-expand-secret: null
+        volumeSnapshotClasses:
             - name: heimdall-nvmeof-csi
               parameters:
-              # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
               secrets:
-                snapshotter-secret:
-
+                snapshotter-secret: null
         driver:
             config:
                 driver: zfs-generic-nvmeof
@@ -77,57 +62,42 @@ spec:
                     host: 10.1.0.63
                     port: 22
                     username: root
-                    # use either password or key
-                    privateKey: ${PROXMOX_KEY}
-
+                    privateKey: ENC[AES256_GCM,data:SQvarOoOrvR8xUd8utHL5j70dHZGWVvL3gOVG+ZHCnuPSr4jdKRXrLLV+0COx7Qs+nOcjeANdzOxLLWbyVqeOsL7CZce11HZpTNMDc58Nl5cfH5Hhn+jOhbRHXcvAS1IN6p00riZv/1jYNYMKzbLbj5VQCpayKRaLALO/qbJ+xu+S0D/Cp2DNrRTz7hN8YqsjB+FwR91rVl1v7f/1MvK86WYsysEKSOssBljeA6IaZBoEMvxsfVN8s2vrnYhu2e5nPVurZNaWxqgLtKn0XYgNnlQzCXOnpKDoAyj/S+9fmzi4BAHyTHJF2QNHN5K1Ubq3NGxXNoKBLjonhsMY5uhBilCaL2t64qfDGhyEWxAEgMNcpjKsA+qdtGExo9uWdjV8gu02OMbbLg/UNm//yLdvZuxss6zU0zCN0qixFV14iKvZicAI31FNRF9zpvPguhORYl3WuICkl7qfrbZlKvrTKmzygzSxW8Zj3UrlPtwaCHUPzSffCZkcew2mEbONwRoMq6McoRrxg==,iv:bynif/Ot1QFqcI6s/NfpPijraVurClBdl1kWfS36xsM=,tag:sqN636ozJGP1haBgvOdxBw==,type:str]
                 zfs:
-                  # can be used to override defaults if necessary
-                  # the example below is useful for TrueNAS 12
-                  cli:
-                      #  sudoEnabled: true
-                      paths:
-                          zfs: /usr/sbin/zfs
-                          zpool: /usr/sbin/zpool
-                          sudo: /usr/bin/sudo
-                          chroot: /usr/sbin/chroot
-
-                  # can be used to set arbitrary values on the dataset/zvol
-                  # can use handlebars templates with the parameters from the storage class/CO
-                  datasetProperties:
-                      "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
-
-                  datasetParentName: Heimdall/k8s/main-cluster/nvme/pvc
-                  # do NOT make datasetParentName and detachedSnapshotsDatasetParentName overlap
-                  # they may be siblings, but neither should be nested in the other
-                  detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster/nvme/snapshot
-
-                  # "" (inherit), lz4, gzip-9, etc
-                  zvolCompression: inherit
-                  # "" (inherit), on, off, verify
-                  zvolDedup: inherit
-                  zvolEnableReservation: false
-                  # 512, 1K, 2K, 4K, 8K, 16K, 64K, 128K default is 16K
-                  zvolBlocksize: 4K
-
+                    cli:
+                        #  sudoEnabled: true
+                        paths:
+                            zfs: /usr/sbin/zfs
+                            zpool: /usr/sbin/zpool
+                            sudo: /usr/bin/sudo
+                            chroot: /usr/sbin/chroot
+                    datasetProperties:
+                        org.freenas:description: '{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}'
+                    datasetParentName: Heimdall/k8s/main-cluster/nvme/pvc
+                    detachedSnapshotsDatasetParentName: Heimdall/k8s/main-cluster/nvme/snapshot
+                    # "" (inherit), lz4, gzip-9, etc
+                    zvolCompression: inherit
+                    # "" (inherit), on, off, verify
+                    zvolDedup: inherit
+                    zvolEnableReservation: false
+                    # 512, 1K, 2K, 4K, 8K, 16K, 64K, 128K default is 16K
+                    zvolBlocksize: 4K
                 nvmeof:
                     # these are for the node/client aspect
                     transports:
-                      - tcp://10.1.0.63:4420
-                      #- "tcp://127.0.0.1:4420?host-iface=eth0"
-                      #- "tcp://[2001:123:456::1]:4420"
-                      #- "rdma://127.0.0.1:4420"
-                      #- "fc://[nn-0x203b00a098cbcac6:pn-0x203d00a098cbcac6]"
-
+                        - tcp://10.1.0.63:4420
+                        #- "tcp://127.0.0.1:4420?host-iface=eth0"
+                        #- "tcp://[2001:123:456::1]:4420"
+                        #- "rdma://127.0.0.1:4420"
+                        #- "fc://[nn-0x203b00a098cbcac6:pn-0x203d00a098cbcac6]"
                     # MUST ensure uniqueness
                     # full iqn limit is 223 bytes, plan accordingly
                     # default is "{{ name }}"
-                    nameTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+                    nameTemplate: '{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}'
                     namePrefix: csi-
                     nameSuffix: -cluster
-
-                    shareStrategy: "nvmetCli"
+                    shareStrategy: nvmetCli
                     #shareStrategy: "spdkCli"
-
                     # https://documentation.suse.com/es-es/sles/15-SP1/html/SLES-all/cha-nvmeof.html
                     # https://www.linuxjournal.com/content/data-flash-part-iii-nvme-over-fabrics-using-tcp
                     # http://git.infradead.org/users/hch/nvmetcli.git
@@ -139,7 +109,7 @@ spec:
                         # before we start messing with things
                         configIsImportedFilePath: /var/run/nvmet-config-loaded
                         configPath: /etc/nvmet/config.json
-                        basename: "nqn.2003-01.org.linux-nvme"
+                        basename: nqn.2003-01.org.linux-nvme
                         # add more ports here as appropriate if you have multipath
                         ports:
                             - "1"
@@ -150,12 +120,11 @@ spec:
                         #namespace:
                         #  attributes:
                         #    buffered_io: 1
-
                     shareStrategySpdkCli:
                         # spdkcli.py
                         #spdkcliPath: spdkcli
                         configPath: /etc/spdk/spdk.json
-                        basename: "nqn.2003-01.org.linux-nvmeof"
+                        basename: nqn.2003-01.org.linux-nvmeof
                         bdev:
                             type: uring
                             #type: aio
@@ -169,3 +138,24 @@ spec:
                               traddr: server
                               trsvcid: port
                               adrfam: ipv4
+sops:
+    shamir_threshold: 3
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByZU5Oc09FUVF3SVJTTldi
+            bXpPTVVOS00yT0I4cC9OV3k1c3pVL2lPbndBCms2RW9YaVExQTFqOXhORzE4MVZE
+            SW8yZmJDMGZQMjlwSkJFTWtDdUlQMUEKLS0tIFFTeEE0bWVjODVBZ3h4R0M2dThO
+            NHROTlNKWjRqdjVRcGpydVVQNnYzQWsKcL/OEcjE9fflitJVKAnv54ScXbgMa4V+
+            rPnB69OL8Iy7EpCJwXJDS/dli+8FSuN8MCer8Etg9xg/phZ+pFMfYA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-01-26T01:38:03Z"
+    mac: ENC[AES256_GCM,data:XizazqaCPF+N614zG8tNHZI6tLWmjEjK2qEtqDPPipbZWr3+tiZrWuE3toTWDCI3LUurCnPGUTVVAGR5QiDS6cF5GpSQW7BAhL4iElU7g6GEMrj1zzdOB98F+mONEXk23YEt1/CZ9vCQRzFuvtqYclRA24wfPqcDRrLeAmpjXRs=,iv:Hq6mgR6fK1o9SX2DLyYlvjRBEI7EdMJRZaJqg+8nlj0=,tag:5oFnfuLewwAo7pieDAO0fg==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(privateKey))
+    version: 3.9.1
