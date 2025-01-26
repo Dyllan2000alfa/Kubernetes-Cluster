@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   #- zfs-generic-iscsi/ks.yaml
   - zfs-generic-nfs/ks.yaml
+  - zfs-generic-nvmeof/ks.yaml
