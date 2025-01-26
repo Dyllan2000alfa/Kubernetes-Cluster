@@ -62,7 +62,7 @@ spec:
                     host: 10.1.0.63
                     port: 22
                     username: root
-                    privateKey: ENC[AES256_GCM,data:SQvarOoOrvR8xUd8utHL5j70dHZGWVvL3gOVG+ZHCnuPSr4jdKRXrLLV+0COx7Qs+nOcjeANdzOxLLWbyVqeOsL7CZce11HZpTNMDc58Nl5cfH5Hhn+jOhbRHXcvAS1IN6p00riZv/1jYNYMKzbLbj5VQCpayKRaLALO/qbJ+xu+S0D/Cp2DNrRTz7hN8YqsjB+FwR91rVl1v7f/1MvK86WYsysEKSOssBljeA6IaZBoEMvxsfVN8s2vrnYhu2e5nPVurZNaWxqgLtKn0XYgNnlQzCXOnpKDoAyj/S+9fmzi4BAHyTHJF2QNHN5K1Ubq3NGxXNoKBLjonhsMY5uhBilCaL2t64qfDGhyEWxAEgMNcpjKsA+qdtGExo9uWdjV8gu02OMbbLg/UNm//yLdvZuxss6zU0zCN0qixFV14iKvZicAI31FNRF9zpvPguhORYl3WuICkl7qfrbZlKvrTKmzygzSxW8Zj3UrlPtwaCHUPzSffCZkcew2mEbONwRoMq6McoRrxg==,iv:bynif/Ot1QFqcI6s/NfpPijraVurClBdl1kWfS36xsM=,tag:sqN636ozJGP1haBgvOdxBw==,type:str]
+                    privateKey: ENC[AES256_GCM,data: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,iv:X1dmEl1gxEIywbal5e9Llyz2AC35llKmIcZOoSiW69k=,tag:6NG8UuBZNwtiSQh8bGq+pg==,type:str]
                 zfs:
                     cli:
                         #  sudoEnabled: true
@@ -116,10 +116,10 @@ spec:
                         subsystem:
                             attributes:
                                 allow_any_host: 1
-                        # not supported yet in nvmetcli
-                        #namespace:
-                        #  attributes:
-                        #    buffered_io: 1
+                                # not supported yet in nvmetcli
+                                #namespace:
+                                #  attributes:
+                                #    buffered_io: 1
                     shareStrategySpdkCli:
                         # spdkcli.py
                         #spdkcliPath: spdkcli
@@ -148,14 +148,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByZU5Oc09FUVF3SVJTTldi
-            bXpPTVVOS00yT0I4cC9OV3k1c3pVL2lPbndBCms2RW9YaVExQTFqOXhORzE4MVZE
-            SW8yZmJDMGZQMjlwSkJFTWtDdUlQMUEKLS0tIFFTeEE0bWVjODVBZ3h4R0M2dThO
-            NHROTlNKWjRqdjVRcGpydVVQNnYzQWsKcL/OEcjE9fflitJVKAnv54ScXbgMa4V+
-            rPnB69OL8Iy7EpCJwXJDS/dli+8FSuN8MCer8Etg9xg/phZ+pFMfYA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBueno1WmxQdXBnNUkzUVgx
+            Q09CendhV0FSS0Z1eHRBTUJzVmlucmM2MHlBCnJ4TXU0M0VpWDJabmVHNUF1WFJ4
+            SFZNb05CRktmeDZLUzN0MHNxb2VYSU0KLS0tIEczQTVNSnNXd2RSOWp1L3dqRmFF
+            YWRLWFgwY2FMMXd6Uno0WWdKaVJUazgKtOcQzAUca68VYqTJxuJq79DAuBmknZQB
+            vFQ7a+b0ciuUt9bLm+CkPOaVjr6ailw6ywouWaN9Vio8l/Pl1LECTg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-26T01:38:03Z"
-    mac: ENC[AES256_GCM,data:XizazqaCPF+N614zG8tNHZI6tLWmjEjK2qEtqDPPipbZWr3+tiZrWuE3toTWDCI3LUurCnPGUTVVAGR5QiDS6cF5GpSQW7BAhL4iElU7g6GEMrj1zzdOB98F+mONEXk23YEt1/CZ9vCQRzFuvtqYclRA24wfPqcDRrLeAmpjXRs=,iv:Hq6mgR6fK1o9SX2DLyYlvjRBEI7EdMJRZaJqg+8nlj0=,tag:5oFnfuLewwAo7pieDAO0fg==,type:str]
+    lastmodified: "2025-01-26T01:41:13Z"
+    mac: ENC[AES256_GCM,data:aL4sX4qsErqStqnMaOsvGNfoDnxkvA95OK2K1pOgV2WKC4XzySo1mZ9jXRdZJkhaB76Vtweoyz0JS5JUfZU22J1RwsNZfhxwAsOWovzjUNMmyFfKuXhugD5E4DWFFn7NMnpkaSB+8vDBBjBPLUoN9zCv9QvXsp2zhUqn4yW6vJI=,iv:DD9BH74/Gxqilmj1gKqhitFdk+C24F+nILL/s9giu5A=,tag:jd6MFSm+P/n/+cnm8A/KAg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
