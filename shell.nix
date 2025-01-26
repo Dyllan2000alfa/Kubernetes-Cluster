@@ -6,6 +6,7 @@
     kubectl
     kubernetes-helm
     fluxcd
+    sops
   ]);
   runScript = "bash";
 }).env
