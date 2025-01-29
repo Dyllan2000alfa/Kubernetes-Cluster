@@ -45,14 +45,6 @@ spec:
       config:
         enabled: true
         storageClass: heimdall-nfs-csi
-        volsync:
-          - name: config
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
 
       directorystorage:
         enabled: true
