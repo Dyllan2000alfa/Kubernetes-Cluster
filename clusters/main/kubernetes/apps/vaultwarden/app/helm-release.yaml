@@ -188,4 +188,5 @@ spec:
           retentionPolicy: "7d"
         recovery:
           method: object_store
+          revision: "1"
           credentials: cloudflare
