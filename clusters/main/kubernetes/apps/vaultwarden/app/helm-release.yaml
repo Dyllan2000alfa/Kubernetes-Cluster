@@ -33,7 +33,8 @@ spec:
     TZ: America/Chicago
 
     global:
-      stopAll: true
+      fallbackDefaults:
+        storageClass: heimdall-nvmeof-csi
 
     credentials:
       cloudflare:
