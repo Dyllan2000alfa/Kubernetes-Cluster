@@ -33,7 +33,7 @@ spec:
             name: org.democratic-csi.heimdall-nvmeof
         storageClasses:
             - name: heimdall-nvmeof-csi
-              defaultClass: true
+              defaultClass: false
               reclaimPolicy: Delete
               volumeBindingMode: Immediate
               allowVolumeExpansion: true
@@ -52,7 +52,7 @@ spec:
         volumeSnapshotClasses:
             - name: heimdall-nvmeof-csi
               annotations:
-                snapshot.storage.kubernetes.io/is-default-class: "true"
+                snapshot.storage.kubernetes.io/is-default-class: "false"
               parameters:
                 detachedSnapshots: "true"
               secrets:
@@ -64,7 +64,7 @@ spec:
                     host: 10.1.0.63
                     port: 22
                     username: root
-                    privateKey: ENC[AES256_GCM,data:HWCiijWsw+jWFRIVBUNmw9XF46SvARHYWSy6fV85iH2q4QjiCTdO+uiJQW3hL/eOr1W0qNp42k0cfSfJL7icCjhsgOb4mHLM4dVnEfT5fDPV6AT1lsN+w/LwQDOynAB7dRG1drP498yWk64O55W55bBUTlV8eDyLkCZ7os9vnJNvUyad02j1VJESf9IENORJlvQe4cBGG6aM2Wr+4kb+PsOUzgv6ZWoxsFG2t3KDUU79EbrgdBFcQSfwyguPQOZrIqWSQSNigmqaLpGmwYXQZjR2IYkTfsz/hO3e5E883MeewupRN3vGD4MBquST4Px3UWMUt7xc2zmLX8qSC+P3KcoPVHOholnQAHdy8fOgqPizPiNojly9tz2zJTqYa4PLBgI379cothiXn4JU0dnOuuDKnkJbTHl6Z+lW9DdlubmlTPiEDIgSB+81qzalQBPKN8cPGtycCMJ5ifM2E7hSKgLD5jMtMdQKnpAsRPb5JqaXmwsDaapFlz11Sjwk8vDHHO5EU06XTHBQT33Pg6Ny,iv:eXaJJqc9IPQL0iruujpFQA4VqHSwoeDJyjG/1uzemg4=,tag:b1zoisGXhvIcXCs81uaT/g==,type:str]
+                    privateKey: ENC[AES256_GCM,data:xBAqBkJewtQ4IKRYExVMZgJPu/z+rUx2UR5qbxREMKTGF2+O2L+a2EDHqbJnHm97HhEGkgHxH8ymf2qJqgmiaMIaxV9vQsypTn/idzb/f+Z7rV19FvhSTE+BUfj/U2knYrjgNK9r2sdN3cDG9/lIuSYPvku5YdPUegvJfuecdLa05OGxHp+ZCsjhJ8NTDGfuHGOeQwSt6/obDqgHEErARziMkaZkWxJqgYTEUVaSOKZCOm/z23uE6Y/VlueyJaFEZhVJgxwrhU1nh8RVHe0oqnz22iJ3FZN6qdaSskJMWBiHeA4U6n/2tMu7j61qsWOMvtVJS+Aro+ca6SlKhRLcNvW2cCbpGCAZ+54rRhK/IZrnqLxfP/7r29KE0MG9D0UesO7cnU0Rk81wsnhvRSdUC27heLigzFn3+pBoFPLkkS72oqcMRdJF/oJV57Ni6lMkxhtLN7OeJOaibbu9BVMnMAuxJ7CEEspyvGUXaw6LH8pB2WGvnBNQMDCCWi5u6C1l9L+QWwjSMXm1F7mSV6on,iv:mtW+syL7wUNBBoQuMsVlOEXNS7lG2IIHNIcm0SUpBus=,tag:r7tst6MNHU8y2gGjH5MrvQ==,type:str]
                 zfs:
                     cli:
                         #  sudoEnabled: true
@@ -150,14 +150,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRWVQxMGpkMnpjbXRoV2lR
-            SWtRanFySGwrWnN5R1cxV2RqRmtTRHFGSW5FCmNxR3oxbEkwWE5FYitGK3UrcTFM
-            WEV4OUZ2SnUwZUFLY0U4U3pYUW14TlUKLS0tIEk1TjB3Q2tjM3dsS2wyb1IzWHdE
-            d1JDZnFyWFo5bmFwOXV4V3VsUmNxL2sKInfVnNQdu1BUMkS1+f8N2VzhvyO07D2N
-            A7tNVADW5Ufc/8OiHHTRA6aL11ww2dfObaB/hdlGTNXMwlrtSw7w0w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBoWFFZVVliajM2OXR6ZC9U
+            dDJpTnNPNXByeDdTYktMUk41ZzhnU215bVRnCnMvZmVmYllndE15YnB3OEM4MU5S
+            ampCdzh4ZU9FcTFYa1lOQ0JRZTg3KzQKLS0tIFJhdUYzVXVUSXlYcjhYR2ZMb2pE
+            b2pjSGdkNEFnaUxUUUo0NEhyYmF3eEkKDj+xSZToxK0jW7o0hnBNqj2PEZYRjspK
+            M945PYkoGS4gY1F0M6NMzDVbO2tnSUVDgDdFFx8IYFkCDRuLQeZJXA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-29T05:24:19Z"
-    mac: ENC[AES256_GCM,data:vWavFp4L7rV9l2SGu9pgSVjw9gsaUiIrRad/jh8GuH+A3hjNT3FSZcVF4pZ5tHi0TUpcq+ZDS0YeIj4jSPR9EL/f6ceDErYGci7zFVkojyK5WFVnA09rityTw32/CukKEqbWuQthjG9JKHJGQNzjmiaqASyJ1QbwTuyzVtNC3aw=,iv:63wfDKtGZ5ptE3tghl4IBtfJYX78tUYJWW8Uppe8U8s=,tag:1GAziOPQIwsc5/YUPnTADQ==,type:str]
+    lastmodified: "2025-01-29T20:15:08Z"
+    mac: ENC[AES256_GCM,data:Qj+vBuy6zDPbXgJzPtlepKVEkl9FFYisYFQ6H3fdpLHzjZ+5oqVRIGYF9Hd55dNBSF6gjBY7rRD63/Vag41psqleSj3ct8eQ7BvLhltkDsTMuHfWcmKvR8rVR/yBkkYixbN7yX0RznUWfYMoE3UAOgmy9sp/nKTV1/xap/u0pX0=,iv:X+5XuQYnB8nrkdGklxAeHNNVsaeoIv7h8NTnLWQzbg4=,tag:TSvkYmlxzSATcv6DjcJaCQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
