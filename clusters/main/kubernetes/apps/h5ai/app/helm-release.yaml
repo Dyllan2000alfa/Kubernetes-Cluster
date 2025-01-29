@@ -44,7 +44,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: heimdall-nfs-csi
+        storageClass: heimdall-nvmeof-csi
 
       directorystorage:
         enabled: true
