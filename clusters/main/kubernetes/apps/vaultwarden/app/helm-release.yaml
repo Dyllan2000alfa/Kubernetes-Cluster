@@ -32,6 +32,9 @@ spec:
 
     TZ: America/Chicago
 
+    global:
+      stopAll: true
+
     credentials:
       cloudflare:
         type: s3
