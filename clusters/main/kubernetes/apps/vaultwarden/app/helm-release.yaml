@@ -166,6 +166,17 @@ spec:
 
     cnpg:
       main:
-        enabled: true
-        user: vaultwarden
-        database: vaultwarden
+        mode: recovery
+        backups:
+          enabled: false
+          credentials: cloudflare
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 0 21 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false           
+          retentionPolicy: "7d"
+        recovery:
+          method: object_store
+          credentials: cloudflare
