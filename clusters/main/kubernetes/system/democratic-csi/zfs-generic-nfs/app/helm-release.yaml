@@ -36,7 +36,7 @@ spec:
         # add note here about volume expansion requirements
         storageClasses:
             - name: heimdall-nfs-csi
-              defaultClass: true
+              defaultClass: false
               reclaimPolicy: Delete
               volumeBindingMode: Immediate
               allowVolumeExpansion: true
@@ -68,7 +68,7 @@ spec:
         volumeSnapshotClasses:
             - name: heimdall-nfs-snapshot-csi
               annotations:
-                snapshot.storage.kubernetes.io/is-default-class: "true"
+                snapshot.storage.kubernetes.io/is-default-class: "false"
               parameters:
                 #  # if true, snapshots will be created with zfs send/receive
                 detachedSnapshots: "true"
@@ -82,7 +82,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:v7K+KGcwI7phU/rqSTMGtOLkoGY56AsR+dwqDZs6OaCKbJxeMtblhU5ZRmteSkvcBBqnw7kJTxHjYVqHJNFV14A5Fevhcf0yu8ELMC2lRZQYW65+C0C59X3GrAN1go2tC1z0Cf3RKL0ULlK7Q4TRX10QxnER08ocWR+GHqZQolO7VIcDeLFXDbjG91ZRaBLEB/eJKFeiZCv3xgWRnFjj16QCi7gV4KaPBd3lZKHmfOLy1GBNgc+gVjd0CBAZ5IWeWxJ2UJnAy1c6mhdQnUmjxaM1FKvVta+KOOj8U9dMuZRkTcVT4m/6MEUZ9IN8fo5zsG4cBljIPzsMGmUrY+lb9TAhHrQhzZcBSq68qoW/+CzKOtoK882IgzwChMkqQSaWrriHL7LenQog2G6sXFHW4pC66IYfcVhsJp0FOVUBzNxPSDv/oYLGc2CzwJijCKtFGDY/Mii/DdzvOGgwSHppytS3P6pOJiXOWmFjmz67+CJGg2udgk/TawyRuEdLEiHlDP/r/eh0WXq2Ws2DrJy+,iv:wWRvweH6PU7g9xf9VUw0WxxL8FOmlG97Z/IwBfDv1WU=,tag:l4KZw1qegSLe8q9ijqhEVw==,type:str]
+                    privateKey: ENC[AES256_GCM,data:iXoBVI5R1jVoGMrj+9UKkR69c+i5Dg6CAhc4Nbq9FqTKMewZd6zxY9c9JJyMlaaclj1+dDsnUbko9Fa8GIUOLoWShjHaE561pXLP84HGC8XRiuMwjtfWQ/Wx3X4oUOgxbEVXAF9n0AGdDOdsWf0NXWkVLjEXYdlLgKnC3qmXcCytj811umH/Z/334JSSHdPKFOjcLznpx1f0CVuFHoTBRHD6ssXou0FsC7C3UX5QUPUl6p3rITti2qU/aS1g9F9k26o8cpHG2yVcvLV+YZIqct6WBIshjJcjxALQfcr3xNRCroQK4nl7zB1mb8Pw2ahH4VDw0mr8Dfg/WaiT7WlSXQ8Wru8w4mIiBwR/70k84je+F8igvdO3zQ72QGMqsiFR8eo6x3Fem/Ek8aXAYcde65fF7gz53Dd02Mo9Rb9Ko9KGRspk7aN2LeBlEYNj81E0uLfH7j94LrhnkU+AbCLU3FoSqQw6JKK5ke8wEfjvWSixdRuHZKz9qBRYVFVqf++PFwH98eowrbtcD9GN63S4,iv:Mnr7FiUqy6jwvEZiTjRwETR46I8AqYPNRJOThYrFldg=,tag:1FFsHLmy9ZLRAP121WVcgA==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -123,14 +123,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBURnh2Szgzd3Vaby9zZFAr
-            T2QyTmRVKzdpRWRTZkpMQXR5QnRXbnMzb3k0ClBuTk9HQVFwa0NSUk05UlJRMEdS
-            dE9GY2kwUFNWV2VBWStwTGpocVVzdmMKLS0tIEF2cXlXZWQyeTMwVGlmdnU0Ukg0
-            N0h6a0lIWmNvZExjem5yS2U0aU1CdWcKy+9mg7Vf7VYjApux8GtIuGVPZaV1ai7s
-            21IxWwVtVspg/aS4PUcI8+hzw9ZrLB7cexTurAkZnyczNVLvnsva+A==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArY0F0Q2tRQWdIUm8vS2hs
+            SWxPMXRTOFFhOEVPWjN4OC8wWHliaktSNlZvCnVOWXFYWi84Q1hLUUdmNURtbENz
+            YUs2QVZqM0hQVWdXSjBQU3hqYlp2YUEKLS0tIHpCRVlrZTdHK1d0K0ZqVFlJNkFo
+            RytkM2t3RFVRaTl0ek1yUXhNMVlEWFUK8O881FwViGVdk8ESvsQpR/7EL4sdNNWH
+            EJm/P5bZsJbcY8+2FMtzX9xWcsf6yNP2nIHjGCkdYaCP2FMmB7cc2g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-26T03:57:15Z"
-    mac: ENC[AES256_GCM,data:h7WQxGH0WR7npgWoQUtQXM1EZuURJOugrq9oDJO2S8B2jfwbM+XHg8v1/PRRz4LCFWFo/E4oypCcxK9KxhKjOFsofMT4CeTnFcykQvkfXAOqYWi1w8UYgQWX62/MNC0SE0LO06a0xBrSiY+fzf272+/Zb60NTBA7fnMtlmcW1+w=,iv:hDW7gLtc8ZtaVpWYkhMXH+yBg/c2yFn7DnjNVOaFaTU=,tag:KLKPRANYHIl+OaNK/csCXA==,type:str]
+    lastmodified: "2025-01-29T05:24:19Z"
+    mac: ENC[AES256_GCM,data:8xhHLvEugMpqNBKsOcKz+dESR/5SWOzJ+AF/4/Pq9IT27QeHwuxCLykNBns+9+W1ve1GFQpCP+Va1ApP6o/lcF9YC1H/DGt1NlrplL6i29Xj4rP/DN4QgL4yFTcTZ9ipd4BZLnG9WSXNmJytPoFgECBApQWoKRcytdvlCGAcE6U=,iv:byl3uJ/kN8pTWmEQOhOoF/6qEdns8ojspyRrJ1VFE3Q=,tag:fcmx1HZO2Enl0AsfoYFesQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.1
