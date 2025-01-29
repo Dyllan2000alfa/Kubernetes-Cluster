@@ -167,10 +167,11 @@ spec:
     cnpg:
       main:
         enabled: true
-        storageClass: heimdall-nvmeof-csi
         user: vaultwarden
         database: vaultwarden
         mode: recovery
+        storage:
+          storageClass: heimdall-nvmeof-csi
         backups:
           enabled: false
           revision: "1"
