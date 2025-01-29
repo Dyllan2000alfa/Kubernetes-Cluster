@@ -166,6 +166,11 @@ spec:
 
     cnpg:
       main:
+        enabled: true
+        user: vaultwarden
+        database: vaultwarden
+        password: PLACEHOLDERPASSWORD
+        pgVersion: 15
         mode: recovery
         backups:
           enabled: false

@@ -34,6 +34,7 @@ spec:
       selfSigned:
         enabled: true
         name: selfsigned
+        
       ACME:
         - name: tinoco-le-prod
           # Used for both logging in to the DNS provider AND ACME registration
