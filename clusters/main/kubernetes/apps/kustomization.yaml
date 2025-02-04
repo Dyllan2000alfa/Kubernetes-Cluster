@@ -10,4 +10,4 @@ resources:
   - protonmail-bridge/ks.yaml
   - unifi/ks.yaml
   - games
-  #- vaultwarden/ks.yaml
+  - vaultwarden/ks.yaml
