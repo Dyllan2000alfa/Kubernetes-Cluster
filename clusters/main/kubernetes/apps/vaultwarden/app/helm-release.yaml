@@ -34,7 +34,7 @@ spec:
 
     global:
       fallbackDefaults:
-        storageClass: heimdall-nvmeof-csi
+        storageClass: heimdall-nfs-csi
 
     credentials:
       cloudflare:
@@ -170,6 +170,7 @@ spec:
 
     cnpg:
       main:
+        enabled: true
         mode: recovery
         cluster:
           singleNode: true
