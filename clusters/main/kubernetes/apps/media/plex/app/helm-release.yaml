@@ -98,3 +98,8 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod
+
+    resources:
+      limits:
+        cpu: 20000m
+        memory: 16Gi
