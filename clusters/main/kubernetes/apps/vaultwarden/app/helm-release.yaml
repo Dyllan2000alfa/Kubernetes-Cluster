@@ -170,12 +170,13 @@ spec:
 
     cnpg:
       main:
-        enabled: true
+        mode: recovery
+        cluster:
+          singleNode: true
         user: vaultwarden
         database: vaultwarden
         password: PLACEHOLDERPASSWORD
         pgVersion: 15
-        mode: recovery
         backups:
           enabled: false
           credentials: cloudflare
