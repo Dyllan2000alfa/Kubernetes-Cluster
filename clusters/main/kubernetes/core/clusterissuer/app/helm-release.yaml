@@ -54,4 +54,4 @@ spec:
           certificateIssuer: tinoco-le-prod
           hosts:
             - tinoco.casa
-            - '*.tinoco.casa
+            - '*.tinoco.casa'
