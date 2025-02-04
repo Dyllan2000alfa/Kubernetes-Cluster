@@ -176,10 +176,9 @@ spec:
           singleNode: true
         user: vaultwarden
         database: vaultwarden
-        password: PLACEHOLDERPASSWORD
         pgVersion: 15
         backups:
-          enabled: false
+          enabled: true
           credentials: cloudflare
           scheduledBackups:
             - name: daily-backup
