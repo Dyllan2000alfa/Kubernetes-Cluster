@@ -44,3 +44,14 @@ spec:
           type: cloudflare
           # for cloudflare
           cfapitoken: ${DOMAIN_0_CLOUDFLARE_TOKEN}
+
+    clusterCertificates:
+      replicationNamespaces: '.*'
+      certificates:
+        - name: tinoco-wildcard
+          enabled: true
+          # name of previously configured single domain certificate
+          certificateIssuer: tinoco-le-prod
+          hosts:
+            - tinoco.casa
+            - '*.tinoco.casa
