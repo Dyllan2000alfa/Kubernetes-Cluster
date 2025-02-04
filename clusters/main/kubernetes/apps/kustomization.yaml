@@ -11,3 +11,4 @@ resources:
   - unifi/ks.yaml
   - games
   - vaultwarden/ks.yaml
+  - cloudflared/ks.yaml
