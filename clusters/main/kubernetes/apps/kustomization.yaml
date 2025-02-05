@@ -12,3 +12,4 @@ resources:
   - games
   - vaultwarden/ks.yaml
   - cloudflared/ks.yaml
+  - nextcloud/ks.yaml
