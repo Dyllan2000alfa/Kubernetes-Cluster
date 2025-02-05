@@ -54,7 +54,7 @@ spec:
       books:
         enabled: true
         existingClaim: media-books-nfs-pvc
-        mountPath: "/media/books"
+        mountPath: "/config/Calibre Library"
 
       downloads:
         enabled: true
