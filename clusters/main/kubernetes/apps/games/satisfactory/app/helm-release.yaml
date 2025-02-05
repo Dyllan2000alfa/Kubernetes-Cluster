@@ -80,4 +80,4 @@ spec:
     resources:
       limits:
         cpu: 20000m
-        memory: 16Gi
+        memory: 24Gi
