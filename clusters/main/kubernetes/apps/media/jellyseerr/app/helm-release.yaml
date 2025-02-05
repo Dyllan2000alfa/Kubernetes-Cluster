@@ -77,7 +77,8 @@ spec:
 
         service:
         # -- Enable a service for the code-server add-on.
-            type: "ClusterIP"
+            type: "LoadBalancer"
+            loadBalancerIP: "10.1.0.128"
             # Specify the default port information
             ports:
                 codeserver:
