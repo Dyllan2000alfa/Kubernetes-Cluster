@@ -204,6 +204,7 @@ spec:
         cluster:
           singleNode: true
         user: nextcloud
+        password: "${NC_DATABASE}"
         database: nextcloud
         pgVersion: 15
         backups:
