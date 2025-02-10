@@ -41,16 +41,16 @@ spec:
         secretKey: "${S3SECRET}"
         encrKey: "${S3ENCR}"
 
-    persistence:
-      config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
+    #persistence:
+    #  config:
+    #    volsync:
+    #      - name: config
+    #        type: restic
+    #        credentials: cloudflare
+    #        dest:
+    #          enabled: true
+    #        src:
+    #          enabled: true
 
     ingress:
       main:
