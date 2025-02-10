@@ -6,7 +6,7 @@ resources:
   - media-nfs-pvc.yaml
   #- jellyfin/ks.yaml
   - calibre/ks.yaml
-  #- plex/ks.yaml
+  - plex/ks.yaml
   - prowlarr/ks.yaml
   - radarr/ks.yaml
   - readarr/ks.yaml
@@ -15,5 +15,5 @@ resources:
   - sonarr-anime/ks.yaml
   - qbittorrent/ks.yaml
   - sabnzbd/ks.yaml
-  #- jellyseerr/ks.yaml
+  - jellyseerr/ks.yaml
   - overseerr/ks.yaml
