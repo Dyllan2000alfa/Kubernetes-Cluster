@@ -4,7 +4,7 @@ resources:
   - namespace.yaml
   - downloads-nfs-pvc.yaml
   - media-nfs-pvc.yaml
-  #- jellyfin/ks.yaml
+  - jellyfin/ks.yaml
   - calibre/ks.yaml
   #- plex/ks.yaml
   - prowlarr/ks.yaml
