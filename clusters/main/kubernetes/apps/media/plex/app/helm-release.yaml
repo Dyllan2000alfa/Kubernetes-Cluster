@@ -64,9 +64,9 @@ spec:
             type: restic
             credentials: cloudflare
             dest:
-              enabled: true
-            src:
               enabled: false
+            src:
+              enabled: true
       series:
         enabled: true
         existingClaim: media-series-nfs-pvc
