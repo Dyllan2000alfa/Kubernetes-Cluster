@@ -197,6 +197,11 @@ spec:
             enabled: true
             certificateIssuer: tinoco-le-prod
 
+    redis:
+      enabled: true
+      includeCommon: true
+      username: default
+
     cnpg:
       main:
         enabled: true
