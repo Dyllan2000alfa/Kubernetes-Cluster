@@ -187,7 +187,6 @@ spec:
     cnpg:
       main:
         enabled: true
-        storageClass: heimdall-nvmeof-csi
         user: authentik
         database: authentik
         mode: recovery
