@@ -82,7 +82,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ENC[AES256_GCM,data:0vyJTvYn+b/brSVZ2eYDOCDyjSLMI6/ULlxVhX9Y3tL+5/0FENbhxXyKgbvzDkfe/zVv8wsSsaNIgYD1WI6NCqXtj93VvKCrd3SYHS+5mGPPIpVAP5E/hvr2oPC5Z3tsJkdC6wnzVZCQlYynmI/Ee2gsLTUN3kWAB5DMxisBPe+57B4Bf352FdEqvEhzyHclvBlIEVJS5M5XdyIivNtWuZGYyoZopXdZ2fWYA6nGN6KIJDYUhtdeYjOTw3e03kNiSxYKL2+M29Jo4Y4AAbaD8hMlSHDpEDisNKiJMngHckyxv7pYPgjIW2e5/p1mNLizwTHpMe7aWRedvjs/WB6iEo9nfjXV8Kb+1oh5LnVvTFDVnSslitHtFcnakvvPLkl6QOKijLMXvAZbp+0JRMXNiiFqnTOGE5as3t7WKE3yvcJYPvC26Q+Pa4bq5lvG4KFU/u590Lv7ZI3RXFEOE8xFImoh0vqfPPG90OB/AwxS1Bp7+vlg3kS7MwpA1xwvJRW8Fw1WnpnGM5dQX9sYVJ8F,iv:1I5wMksxCcNWCK6eDQmTnYtJ0WVZOqSTszycNBlkBi8=,tag:Dj9B5oJTBwNU3v87AZregg==,type:str]
+                    privateKey: ENC[AES256_GCM,data:bUYJ9hRoGU4MAMDzDx93kltI01wK8sQeBsGd79NlWz2dQsbrjS1FkU/MakCGUe4B7KSI99+uGnt0Z8PbnACUe7F3uxGc1WGmKexRpDELR0/2h3S+GQ4IcYgUZHa99uRs0lLaufcksXINGUYUuC8kQKMxxnAXc+JWZD0bYhGMB8Ko3QG2UzU0WXPi93aqJ4iHkcfX055eKvmOsgdUAobPACewOVRedwo9Aoic7DXJ5c8d5H5YKZ1ZaGO28GMX+G2dTWmj4gonrN94cLdcDAa5lC72hpXY0p8z9eVMXSxGcxOknwzVvVbkvJu3fLSAxGiJkhKMzdjq3KzotQiQj3h62Dig/bbvmDIlaBdddKhgxS/fjkvPnR8YC2N+kmcpb0qhuZOTbu6unqZ16Y+HT/MSQEouUsdUbQHU7eO8rcJEhf+7BIVEE+5sA8af1rj5UDyWvCPjxGNf0/YqOb1gd6MEYflpz3xtf+JNcSozJ5rXC1t/YsAkcL9ZBeBT7lCzoMFr9eLnl2inpXu6uonM4DYQ,iv:0IVsYxcZBWbRyAi4FEuFjma+cWSEWb4vSQ30zKIKrcw=,tag:TL0q5RF+sQEa3hL/VdK/XA==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -123,14 +123,14 @@ sops:
         - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFY0VUQXlIS1Q5d0pLbFlX
-            QTFZYVdWc2xZM0NZaklLV3FZekxBWmZxVlNFCkpLQnlnVi8yMStYbk8rN05ETnph
-            Z2ZOcy8wczBpU2F5RHYwSnJKZ05jMGcKLS0tIE5zMDd6V1VEdnJFSk9COGJlZlNP
-            MmV0R0lsUTZwUlplQ251VTdJNjJtRmcKMxbA6KYqFM5NfBpBgAA6Z61s9/w5OjDA
-            o4hbMCrKYtvKAMkAdJmijVECzzJta8JIuwM1QgztF+K6GZymsw5PQQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnbTV1dlBHMVZ6b3owRG9i
+            NnA1TlhuUTIrZy9ydUExK0dVNDgyOXhCYkNZCjlkdnI2SjNTd3pIVmcwY3d2ZDJB
+            cGIrMXY1WjZCa2lRQmxRZUpPNDdhNGcKLS0tIHlsWjhkL1VLNEFxK080OHp4djJV
+            Yzk5V2R2S3dhOWFuWnd1aEgzV1VNN00KX8wyoj3qFpONVpunhuI9NrsqUozcYVrS
+            QTlJbkSDGHpvpWBsyovVxkLrcFHXtKvIZDYLtfDpOtAp31pm4WMfaw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-14T16:42:40Z"
-    mac: ENC[AES256_GCM,data:wqrZTK+xXxl8MVmYiYarsf8Q6yGizaK8XtXk4MLYWbXXzlzd+LxJZItJ42HbkjtBdtUFPWSh9yYgEsiK6kvs6nx2kyWshJ/g4JSIieHe4igqI1MKoiarwDhEY8Jq2aUh1ja5P8+bH81Vn0+QsAyxWgeuV4bH31aqWFpkSTFo3f4=,iv:DTS1WRHwr3NP+KyvdLNjsvnfOHuXgatTs75QwSatyX0=,tag:M68Ab1RLdNwmcEee774iew==,type:str]
+    lastmodified: "2025-02-14T17:01:14Z"
+    mac: ENC[AES256_GCM,data:TQspTgzFQYWOQNONMURU+qsVcvozxtyQOMrjYl8YyuiMg4KnVrSoXwttf0NQIz+OMNHZASAaYw43J+Ns9CKcP/uEyMtE4EquJdGJ9M8sLxx9nFyKLaNCo8mNzC3iecWpyJxc84RShLrd+FSp9WM5oabvKR0VY+o98YGuLa1s+3w=,iv:CdYYbgk1Y83LCaboDG41ktVrPBID/dNseLjnxIza/Qc=,tag:cFJRJiGNERQoQX2O1/eN4w==,type:str]
     pgp: []
     encrypted_regex: ((?i)(privateKey))
     version: 3.9.4
