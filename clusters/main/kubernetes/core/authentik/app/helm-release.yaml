@@ -187,15 +187,23 @@ spec:
     cnpg:
       main:
         enabled: true
+        mode: recovery
+        cluster:
+          singleNode: true
         user: authentik
         database: authentik
-        mode: recovery
+        pgVersion: 15
         backups:
           enabled: false
-          revision: "1"
           credentials: cloudflare
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 0 21 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false           
+          retentionPolicy: "7d"
         recovery:
-          enabled: true
           method: object_store
           revision: "1"
           credentials: cloudflare
