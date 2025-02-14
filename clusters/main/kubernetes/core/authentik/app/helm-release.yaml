@@ -191,6 +191,7 @@ spec:
         cluster:
           singleNode: true
         user: authentik
+        password: "${AUTHENTIKDATABASE}"
         database: authentik
         pgVersion: 15
         backups:
