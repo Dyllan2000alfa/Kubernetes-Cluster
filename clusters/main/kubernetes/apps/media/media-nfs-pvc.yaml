@@ -12,8 +12,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media"
+    server: 10.1.0.63
+    path: "/Jormungandr/Media"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -48,8 +48,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media/Series"
+    server: 10.1.0.63
+    path: "Jormungandr/Media/Series"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -84,8 +84,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media/Movies"
+    server: 10.1.0.63
+    path: "/Jormungandr/Media/Movies"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -120,8 +120,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media/Music"
+    server: 10.1.0.63
+    path: "/Jormungandr/Media/Music"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -156,8 +156,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media/Books"
+    server: 10.1.0.63
+    path: "/Jormungandr/Media/Books"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -192,8 +192,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media/Porn"
+    server: 10.1.0.63
+    path: "/Jormungandr/Media/Porn"
   mountOptions:
     - nfsvers=4
     - tcp
@@ -228,8 +228,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.1.0.4
-    path: "/mnt/Jormungandr/Media/Anime"
+    server: 10.1.0.63
+    path: "/Jormungandr/Media/Anime"
   mountOptions:
     - nfsvers=4
     - tcp
