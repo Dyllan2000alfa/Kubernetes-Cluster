@@ -49,7 +49,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 10.1.0.63
-    path: "Jormungandr/Media/Series"
+    path: "/Jormungandr/Media/Series"
   mountOptions:
     - nfsvers=4
     - tcp
