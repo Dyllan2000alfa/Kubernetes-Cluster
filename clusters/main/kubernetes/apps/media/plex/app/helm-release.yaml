@@ -67,18 +67,18 @@ spec:
               enabled: false
             src:
               enabled: true
-      series:
-        enabled: true
-        existingClaim: media-series-nfs-pvc
-        mountPath: "/media/series"
-      movies:
-        enabled: true
-        existingClaim: media-movies-nfs-pvc
-        mountPath: "/media/movies"
-      anime:
-        enabled: true
-        existingClaim: media-anime-nfs-pvc
-        mountPath: "/media/anime"
+      #series:
+      #  enabled: true
+      #  existingClaim: media-series-nfs-pvc
+      #  mountPath: "/media/series"
+      #movies:
+      #  enabled: true
+      #  existingClaim: media-movies-nfs-pvc
+      #  mountPath: "/media/movies"
+      #anime:
+      #  enabled: true
+      #  existingClaim: media-anime-nfs-pvc
+      #  mountPath: "/media/anime"
 
 
     ingress:

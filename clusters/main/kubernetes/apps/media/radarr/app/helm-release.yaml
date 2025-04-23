@@ -51,10 +51,10 @@ spec:
               enabled: true
             src:
               enabled: true
-      movies:
-        enabled: true
-        existingClaim: media-movies-nfs-pvc
-        mountPath: "/media/movies"
+      #movies:
+      #  enabled: true
+      #  existingClaim: media-movies-nfs-pvc
+      #  mountPath: "/media/movies"
 
       downloads:
         enabled: true
