@@ -58,7 +58,7 @@ spec:
         type: gluetun
         env:
           VPN_SERVICE_PROVIDER: protonvpn
-          OPENVPN_USER: "${VPN_USER}"
+          OPENVPN_USER: zHlRL5gr5LmlqvyA
           OPENVPN_PASSWORD: "${VPN_PASSWORD}"
           SERVER_COUNTRIES: United States
           PORT_FORWARD_ONLY: true
