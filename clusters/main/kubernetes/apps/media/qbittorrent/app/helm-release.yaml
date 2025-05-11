@@ -59,7 +59,7 @@ spec:
         env:
           VPN_SERVICE_PROVIDER: protonvpn
           OPENVPN_USER: zHlRL5gr5LmlqvyA
-          OPENVPN_PASSWORD: "${VPN_PASSWORD}"
+          OPENVPN_PASSWORD: jTlI2HG1CRkUpkN7si8saL8NsLp2xewP
           SERVER_COUNTRIES: United States
           PORT_FORWARD_ONLY: true
           VPN_PORT_FORWARDING: false
