@@ -16,3 +16,4 @@ resources:
   - longhorn/ks.yaml
   - democratic-csi
   - generic-device-plugin/ks.yaml
+  - kube-prometheus-stack/ks.yaml

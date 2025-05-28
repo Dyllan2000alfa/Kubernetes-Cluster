@@ -64,7 +64,7 @@ spec:
                     host: 10.1.0.63
                     port: 22
                     username: root
-                    privateKey: ENC[AES256_GCM,data:+XNcNEAS/MJBeMIrpRhegJeZRb81oj3eRuj8lVZMhk4GyzLruC2Y/oA3HIVytYmMfeMDTtgphMs6i67Kn7ct0tizJtbxJTg/KZWvNBNuEGqk5mOeJCGNnuuYFpDhneqMTK2ks886TtA6jhEqIkqqwRLwbbwMsknOHtZpRog8SQbtFEo3m+cic5CAwH1+gcszyJSBevXq2/kc6vUel0wgYdW+jnp5ZY2aYjtHBVec5+ILj9AV0uoJ/AeT0YB2mCzLO8swkchy0kKUlcjbId4L1S44/v/fkI/t/Af3p9KCrVq8W1ozKIAKfo/D5UsiBz1CrIm+S0CyuqYRKf25PnSRbW2Jf5AccuxxCBoxJnKxXRthIU5flm0VqdpVl5cxqdEg0USvQm4XHwtmCbc+C6TprXiB5yNg6ok2R8sTJ1bXgOGE1TeaP9F+zBVymXfGA7FiJ9s4wwsnFrJPknnGYVXAwPNPo+b1qtHHcVHzb/JL/LZTYbfYbAPqWe5Zp8YBia72j3p8vN2fBObdkyLTGm4+,iv:1DxG0rZvy0ZpGcGdXPFjQtOH0Y3JZ58B5yJXOieyr/U=,tag:2kUpPtzwvTxH/khE71uvwQ==,type:str]
+                    privateKey: ${PRIVATE_KEY}
                 zfs:
                     cli:
                         #  sudoEnabled: true
@@ -140,24 +140,3 @@ spec:
                               traddr: server
                               trsvcid: port
                               adrfam: ipv4
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqTFducUQ3b2NUYUs5Slpo
-            QU9ydXdNamlOdC9rSVYxaktZMUhtQlhkQUNzCnI0WitrSlBldVI1Qmx3V1g3S29I
-            c1BVb1Q0cUhUZ3IzdGpLWGphbS9XZGMKLS0tIE1kTmFNYVpHdXRRM0ladlMwL09y
-            ZXJvVFNoOUtaTkNhVmhNZk5BdW5zTEEK6P2EChjQvEX7ZgvSHgbDzYa7Jn15mveW
-            sf1/5GtoToSMu5B/GqtFaTHHAN5WjAkROTh1VvGJItgHCp2U8a8PRg==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-03-14T04:31:25Z"
-    mac: ENC[AES256_GCM,data:5HqgoAF9tmATT27D8pGpkRVSII3BS5gVgV2LrAN/C7PK6DWVmZtUJBWQsfSqus87mOzCRl6EHPADV3wxXJQlxo84ZQTUV/vQKwdrZJ//5czUx3jPYH5CWetr0Gg6YOYieX6e1iqz7SXzjFj8tBGEZCSFY5Qefah5otw88r9wlo0=,iv:yaSSKqChHUh/hyT7h7gUIvVJPja1V5KR3OteGgrSR9Q=,tag:nB97URRivdFBHLtixmaviA==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(privateKey))
-    version: 3.9.4

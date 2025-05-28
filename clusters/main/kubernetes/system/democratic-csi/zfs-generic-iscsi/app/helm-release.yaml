@@ -71,7 +71,7 @@ spec:
                     host: 10.1.0.63
                     port: 22
                     username: root
-                    privateKey: ENC[AES256_GCM,data:N6gHlrmDx7YqcVDblZzB9lCi3GNePA7GlbLHrHTJF0h8fv5F4gkrpwZLsakfY+jW/GnTCJhsjIZ98NTkf11rJlLBpmLRxCtJR8wAc26D0x3wFzZxTXpg5K6qvcLag5+PughQcmgteNBh913Q8EdXAATCVQEI3Z30ydi8mZlYKz2T95KdD9c02BS7q+g9w33KbBeFmudHv5yvhQ83TMPBIvwjuhmWIlxXwp6LM+EfZ1nr5ZUk5G30s6GV24frP96jZYDBw0mHEHDxYq5At2+RdgDOJaEqUctcM//gisg4uhHOZIvJmFx8gWH/vz3mBn4xJ8shrKnJKsAIv2pPKnfeTEDK9y9ognVyMz2ZeEiWgCYS+Mb/HvffvvLgSusI2X9oQ3VVlq4QRCB9OeWzFSVnIfK+gqDrLVvw+S7LQz6Z1Vnacd6LvztDW06A0ZJ0nC75A6mSj5DVaakySAcyQnBGbRYVkjteBgcXrMw6cw3SULrtkUepMzO8Std/gHGTyiPI4WFQZr+ari/RqF0gIEW8,iv:rJXzi0qpszq51ereZP4RBH22SXmDj33l3Ls9vLpofu0=,tag:+5B3bRzljYKPvtwWzY2YBQ==,type:str]
+                    privateKey: ${PRIVATE_KEY}
                 zfs:
                     cli:
                         #  sudoEnabled: true
@@ -134,24 +134,3 @@ spec:
                     nameTemplate: '{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}'
                     namePrefix: csi-
                     nameSuffix: -cluster
-sops:
-    shamir_threshold: 3
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqV0dnOWluREx0M2ZMUHNH
-            dUR3MTk2d21JKzlyRHcvVU5idzlMNDZUcUJFCnRZSWRHVUNPSHZDanJjd3hROGZ4
-            T3ZNZytRR2RJbk42Nk5RVnlDOFcyOWsKLS0tIEpRRlZFelMwelVQREhDRXRUUWVH
-            TUZMckhIR0hpcEhRNVN4Y3VwRWxTVTQK99QpLNQPbiSzg9v7c4gnGQa9R2C6oKTP
-            PXr12+Nmcg/+udMP30WpiDryhG0VKe9WRQGxligyjWN0KMBNHYRgrA==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-03-14T04:31:25Z"
-    mac: ENC[AES256_GCM,data:m/ASTu5yRsRq2Kd6XqlELS7TNhtPgr48W5Vl94mSeYRb3tkVqmeE+5kCbgJ8+2i3sf9wXgFvDUs3vbQNw9SxNFxdL+5bdPOOCniWaeDpqrtIj3MwwIHJoBN5qNODxdfSZ4GN4wzUWDulEsJGoLAXUuyZjE1ZdKAyagRkLuN38g8=,iv:IScSWFte31VCiwuERasFOUb1+ndURjDTCzGuFUVfydU=,tag:C14GVtdwBLJYtxXsANkynA==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(privateKey))
-    version: 3.9.4

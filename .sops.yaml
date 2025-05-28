@@ -12,6 +12,6 @@ creation_rules:
     age: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
     
 ## DO NOT REMOVE: Personal setting go under this line
-  - path_regex: ^clusters.*democratic-csi.*helm-release.yaml
-    age: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
-    encrypted_regex: "((?i)(privateKey))"
+  #- path_regex: ^clusters.*democratic-csi.*helm-release.yaml
+  #  age: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+  #  encrypted_regex: "((?i)(privateKey))"
