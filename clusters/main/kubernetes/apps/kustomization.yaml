@@ -14,3 +14,4 @@ resources:
   - cloudflared/ks.yaml
   - nextcloud/ks.yaml
   - firefox-syncserver/ks.yaml
+  - netbootxyz/ks.yaml
