@@ -81,7 +81,7 @@ spec:
                     port: 22
                     username: root
                     # use either password or key
-                    privateKey: ${PRIVATE_KEY}
+                    privateKey: ENC[AES256_GCM,data:gVDhab2u7XKI24p8ZryIZOjrlinJGnMds3hNvZTanTN38+1rYscJvMjOlBrFYAP1WpyOWeloJgj1+KyH7uneTjPixQ5pXyDbmQ06M3BHmgpjrrnfhAUSnQbsl76U2ZITluGdmC6kHRi+SRG1rDGpuYRH5KNqtRi8rmm36O5I8TBkSryLIMh4jEQ8b0cQihc3+krfOGwvD5migJxR/+4GUy6O9tVQHSSIXXqSs7ikL1DqgtvwZ43ING61fQ3cASA0n8n/S1J69zq4JWg4hD21MlM2cd8d0aYR5Q49/VDjKA+XFE9xEAEEMwSISZOdMrPygPSXDedHdhFqERnwH+IvQoACs94UYRDs5exX0mzzTQK+UvuKMyEoBucWcBd1tJJQcph3i5GgNc4/4OqDNDA6FSLyeBOFq694DRBbZmPKWYGRHhAE9CR1LIis8UYoxET52FCrdurYaQdC1cdNARE7l4fYBaDwRzSJnieJT+1xTB3sr9BEGkknpK9d9aKfODmi97K9LoqNwQt/SIG+GnXE,iv:7Ox1QfJ6YT9GRUriq0dA7lP2eWm7jYVNna7XtU/6s+s=,tag:iEShxnUvA8ZTWzxDuIj2kg==,type:str]
                 zfs:
                     # can be used to override defaults if necessary
                     # the example below is useful for TrueNAS 12
@@ -112,3 +112,19 @@ spec:
                         properties:
                             sharenfs: rw,no_subtree_check,no_root_squash
                     shareHost: 10.1.0.63
+sops:
+    shamir_threshold: 3
+    age:
+        - recipient: age1agltukf6ellg2guets9gq4th2nmunc965uflry7fdahtj7ea8uxq8q54ae
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBibmY2K1hBbXVKcVUzWC9T
+            RE5yWXo5YVBUSzRITkRmc0NORjA1SUVNRjFNCnlraFV1WGN6TlpjRVI3Q0hKcWNC
+            cUEreVpLdDRTQzd0QzZtSlY3ZU83MGsKLS0tIFZBOUhYV2QySm41bXlOWE1EeHll
+            MGhxTmVBVTdETFZpWUM2RE9HVlpnNDgKwHyOePCKjUXzn2hP8QB0fPKa68/Oa+6u
+            kAfjQA0sCsPWeNdkP4b876XSGieR6hjiOWMgjOun6K8iAI0hn1IW5A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-06-11T23:23:55Z"
+    mac: ENC[AES256_GCM,data:LFvnpSRkRrqZOOTba7OPma/vIJBzqrtC663iramVlEPGozeQhKvvkwRzoE2oFWmjMG4CJR5QUfkMgN7YsM+QVNcF0+fnAOKedrpxuymlkryx4P7tsFKn2Y9IkCSO3p16xnOqZ5hQpMI10wWak7kWgHbPHQw6jb435ydPba7zwB0=,iv:HIQ8FWV5QqGX6Yax9iOXm/O8YI5HwFnReZRZH9DPjPI=,tag:4119f1DRzPK9dTArmtriCA==,type:str]
+    encrypted_regex: ((?i)(privateKey))
+    version: 3.10.1
