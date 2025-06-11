@@ -77,3 +77,7 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod
+
+    addons:
+      codeserver:
+        enabled: false
