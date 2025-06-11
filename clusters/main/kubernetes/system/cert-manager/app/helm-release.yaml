@@ -23,4 +23,9 @@ spec:
         crds: CreateReplace
         remediation:
             retries: 3
-    values: null
+    values:
+      crds:
+        enabled: true
+      dns01RecursiveNameservers: "10.1.0.1:53,1.1.1.1:53,1.0.0.1:53"
+      dns01RecursiveNameserversOnly: false
+      enableCertificateOwnerRef: true
