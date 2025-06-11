@@ -66,34 +66,3 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod
-
-    addons:
-      codeserver:
-        # -- Enable running a code-server container in the pod
-        enabled: true
-
-        service:
-        # -- Enable a service for the code-server add-on.
-            type: "LoadBalancer"
-            loadBalancerIP: "10.1.0.128"
-            # Specify the default port information
-            ports:
-                codeserver:
-                  port: 12321
-
-        ingress:
-          # -- Enable an ingress for the code-server add-on.
-          enabled: true
-          hosts:
-          - host: codeserver.jellyseerr.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
-        integrations:
-          traefik:
-            enabled: true
-            entrypoints:
-              - websecure
-          certManager:
-            enabled: true
-            certificateIssuer: tinoco-le-prod
