@@ -82,6 +82,8 @@ spec:
               - path: /
                 pathType: Prefix
         integrations:
+          traefik:
+            enabled: false
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod
