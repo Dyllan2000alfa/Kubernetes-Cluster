@@ -71,16 +71,13 @@ spec:
       main:
         required: true
         enabled: true
+        ingressClassName: internal
         hosts:
           - host: qbittorrent.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
         integrations:
-          traefik:
-            enabled: true
-            entrypoints:
-              - websecure
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod

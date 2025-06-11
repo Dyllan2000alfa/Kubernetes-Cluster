@@ -64,14 +64,13 @@ spec:
       main:
         required: true
         enabled: true
+        ingressClassName: internal
         hosts:
           - host: null.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
         integrations:
-          traefik:
-            enabled: true
           certManager:
             enabled: true
             certificateIssuer: tinoco-le-prod
