@@ -36,20 +36,3 @@ spec:
       tftp:
         type: LoadBalancer
         loadBalancerIP: ${NETBOOT_IP}
-
-    ingress:
-      assets:
-        enabled: true
-        hosts:
-          - host: netbootxyz.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
-        integrations:
-          traefik:
-            enabled: true
-            entrypoints:
-              - websecure
-          certManager:
-            enabled: true
-            certificateIssuer: tinoco-le-prod
