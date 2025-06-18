@@ -5,4 +5,4 @@ resources:
   - system-upgrade-controller-plans/ks.yaml
   - authentik/ks.yaml
   - blocky/ks.yaml
-  #- clusterissuer/ks.yaml
+  - clusterissuer/ks.yaml
