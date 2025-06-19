@@ -54,8 +54,8 @@ spec:
 
     ingress:
       main:
-        required: true
-        enabled: true
+        required: false
+        enabled: false
         ingressClassName: internal
         hosts:
           - host: jellyseerr.${DOMAIN_0}
@@ -66,5 +66,5 @@ spec:
           traefik:
             enabled: false
           certManager:
-            enabled: true
+            enabled: false
             certificateIssuer: domain-0-le-prod
