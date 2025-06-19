@@ -72,4 +72,4 @@ spec:
             enabled: false
           certManager:
             enabled: true
-            certificateIssuer: tinoco-le-prod
+            certificateIssuer: domain-0-le-prod
