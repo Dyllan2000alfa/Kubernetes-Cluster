@@ -59,8 +59,8 @@ spec:
 
     ingress:
       main:
-        required: false
-        enabled: false
+        required: true
+        enabled: true
         ingressClassName: internal
         hosts:
           - host: calibre.${DOMAIN_0}
@@ -69,7 +69,7 @@ spec:
                 pathType: Prefix
         integrations:
           traefik:
-            enabled: false
+            enabled: true
           certManager:
             enabled: false
             certificateIssuer: domain-0-le-prod

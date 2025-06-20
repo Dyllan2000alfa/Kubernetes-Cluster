@@ -55,8 +55,8 @@ spec:
 
     ingress:
       main:
-        required: false
-        enabled: false
+        required: true
+        enabled: true
         ingressClassName: internal
         hosts:
           - host: games.${DOMAIN_0}
@@ -67,5 +67,5 @@ spec:
           traefik:
             enabled: false
           certManager:
-            enabled: false
+            enabled: true
             certificateIssuer: domain-0-le-prod
