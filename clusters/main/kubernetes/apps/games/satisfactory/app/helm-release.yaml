@@ -46,16 +46,16 @@ spec:
         type: LoadBalancer
         loadBalancerIP: ${FACTORY_IP}
 
-    persistence:
-      config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: false
-            src:
-              enabled: true
+#    persistence:
+#      config:
+#        volsync:
+#          - name: config
+#            type: restic
+#            credentials: cloudflare
+#            dest:
+#              enabled: false
+#            src:
+#              enabled: true
     
     workload:
       main:
