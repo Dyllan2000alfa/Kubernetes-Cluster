@@ -55,6 +55,16 @@ spec:
         secretKey: "${S3SECRET}"
         encrKey: "${S3ENCR}"
 
+    qbitportforward:
+      enabled: false
+      QBT_USERNAME: "admin"
+      QBT_PASSWORD: "adminadmin"
+
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: 10.1.0.147
+
     addons:
       vpn:
         killSwitch: true
