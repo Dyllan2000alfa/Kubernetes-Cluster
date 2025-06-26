@@ -45,6 +45,15 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: ${FACTORY_IP}
+      message:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${FACTORY_IP}
+        ports:
+          main:
+            enabled: true
+            port: 8888
+            protocol: tcp
 
 #    persistence:
 #      config:
@@ -67,15 +76,11 @@ spec:
                 DEBUG: false
                 DISABLESEASONALEVENTS: false
                 LOG: true
-                MAXOBJECTS: 2162688
                 MAXPLAYERS: 4
                 MAXTICKRATE: 30
-                ROOTLESS: false
                 SERVERSTREAMING: true
                 SKIPUPDATE: false
                 STEAMBETA: false
-                TIMEOUT: 30
-                VMOVERRIDE: false
 
     resources:
       limits:
