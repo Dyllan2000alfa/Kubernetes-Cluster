@@ -43,14 +43,19 @@ spec:
 
     service:
       main:
-        type: LoadBalancer
-        loadBalancerIP: ${FACTORY_IP}
-      message:
         enabled: true
         type: LoadBalancer
         loadBalancerIP: ${FACTORY_IP}
         ports:
           main:
+            enabled: true
+            port: 7777
+            protocol: tcp
+          mainudp:
+            enabled: true
+            port: "{{ .Values.service.main.ports.main.port }}"
+            protocol: udp
+          mainmessage:
             enabled: true
             port: 8888
             protocol: tcp
