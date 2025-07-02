@@ -34,8 +34,6 @@ spec:
       service:
         externalTrafficPolicy: Local
         annotations:
-          # TODO: Maybe play with this
-          # internal-dns.alpha.kubernetes.io/hostname: external.${DOMAIN_0}
           metallb.io/ip-allocated-from-pool: main
           metallb.io/loadBalancerIPs: ${NGINX_EXTERNAL_IP}
       ingressClassByName: true
@@ -64,12 +62,8 @@ spec:
         use-forwarded-headers: "true"
       metrics:
         enabled: true
-        # serviceMonitor:
-        #   enabled: true
-        #   namespaceSelector:
-        #     any: true
       extraArgs:
-        default-ssl-certificate: "clusterissuer/certificate-issuer-domain-0-wildcard"
+        default-ssl-certificate: "clusterissuer/certificate-issuer-general-wildcard"
         publish-status-address: ${NGINX_EXTERNAL_IP}
       terminationGracePeriodSeconds: 120
       publishService:

@@ -55,10 +55,6 @@ spec:
             enabled: true
             port: "{{ .Values.service.main.ports.main.port }}"
             protocol: udp
-          message:
-            enabled: true
-            port: 8888
-            protocol: tcp
 
 #    persistence:
 #      config:
