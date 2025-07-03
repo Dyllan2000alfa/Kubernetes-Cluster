@@ -183,20 +183,19 @@ spec:
 
     ingress:
       main:
-        required: true
         enabled: true
         ingressClassName: internal
-        hosts:
-          - host: cloud.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
         integrations:
           traefik:
             enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: cloud.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
 
     redis:
       enabled: true

@@ -54,17 +54,16 @@ spec:
 
     ingress:
       main:
-        required: true
         enabled: true
         ingressClassName: internal
-        hosts:
-          - host: overseerr.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
         integrations:
           traefik:
             enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: overseerr.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix

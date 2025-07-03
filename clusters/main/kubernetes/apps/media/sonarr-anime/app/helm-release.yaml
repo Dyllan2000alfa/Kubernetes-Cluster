@@ -63,20 +63,19 @@ spec:
 
     ingress:
       main:
-        required: true
         enabled: true
         ingressClassName: internal
-        hosts:
-          - host: sonarr-anime.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
         integrations:
           traefik:
             enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: sonarr-anime.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
 
     addons:
       codeserver:
