@@ -56,9 +56,7 @@ spec:
         encrKey: "${S3ENCR}"
 
     qbitportforward:
-      enabled: false
-      QBT_USERNAME: "admin"
-      QBT_PASSWORD: "adminadmin"
+      enabled: true
 
     service:
       main:
