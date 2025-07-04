@@ -57,6 +57,8 @@ spec:
 
     qbitportforward:
       enabled: true
+      QBT_USERNAME: "${QBIT_USER}"
+      QBT_PASSWORD: "${QBIT_PASS}"
 
     service:
       main:

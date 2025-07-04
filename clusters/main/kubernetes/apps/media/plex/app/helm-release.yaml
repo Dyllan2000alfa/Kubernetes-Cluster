@@ -80,7 +80,6 @@ spec:
         existingClaim: media-anime-nfs-pvc
         mountPath: "/media/anime"
 
-
     ingress:
       main:
         enabled: true
