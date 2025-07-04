@@ -76,7 +76,3 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-
-    addons:
-      codeserver:
-        enabled: false

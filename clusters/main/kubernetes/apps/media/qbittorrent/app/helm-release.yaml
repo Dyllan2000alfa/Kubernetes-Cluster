@@ -65,8 +65,11 @@ spec:
 
     addons:
       vpn:
-        killSwitch: true
         type: gluetun
+        killSwitch: true
+        excludedNetworks_IPv4:
+          - "172.16.0.0/16"
+          - "10.1.0.0/23"
         env:
           VPN_SERVICE_PROVIDER: protonvpn
           OPENVPN_USER: zHlRL5gr5LmlqvyA+pmp
