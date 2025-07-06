@@ -66,8 +66,8 @@ spec:
         env:
           VPN_SERVICE_PROVIDER: "protonvpn"
           VPN_TYPE: "openvpn"
-          OPENVPN_USER: "test"
-          OPENVPN_PASSWORD: "${VPN_USER}"
+          OPENVPN_USER: "${VPN_PASS}"
+          OPENVPN_PASSWORD: "Test"
           SERVER_COUNTRIES: United States
           PORT_FORWARD_ONLY: true
           VPN_PORT_FORWARDING: true
