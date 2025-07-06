@@ -3,8 +3,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: democratic-csi
+  name: metallb
   namespace: flux-system
 spec:
-  interval: 2hm
-  url: https://democratic-csi.github.io/charts/
+  type: oci
+  interval: 2h
+  url: oci://quay.io/metallb/chart
