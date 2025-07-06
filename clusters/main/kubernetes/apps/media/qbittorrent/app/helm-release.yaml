@@ -65,8 +65,8 @@ spec:
           - "10.1.0.0/23"
         env:
           VPN_SERVICE_PROVIDER: protonvpn
-          OPENVPN_USER: "${OPENVPN_USER}+pmp"
-          OPENVPN_PASSWORD: "${OPENVPN_PASSWORD}"
+          OPENVPN_USER: "${VPN_USER}"+pmp
+          OPENVPN_PASSWORD: "${VPN_PASS}"
           SERVER_COUNTRIES: United States
           PORT_FORWARD_ONLY: true
           VPN_PORT_FORWARDING: true
