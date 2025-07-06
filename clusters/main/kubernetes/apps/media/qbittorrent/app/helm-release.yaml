@@ -67,7 +67,7 @@ spec:
           VPN_SERVICE_PROVIDER: "protonvpn"
           VPN_TYPE: "openvpn"
           OPENVPN_USER: "${VPN_USER}+pmp"
-          OPENVPN_USER: "${VPN_USER}+pmp"
+          OPENVPN_PASSWORD: "${VPN_USER}+pmp"
           SERVER_COUNTRIES: United States
           PORT_FORWARD_ONLY: true
           VPN_PORT_FORWARDING: true
