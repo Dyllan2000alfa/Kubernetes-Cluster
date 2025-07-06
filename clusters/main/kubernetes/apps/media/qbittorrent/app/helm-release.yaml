@@ -57,17 +57,11 @@ spec:
       QBT_USERNAME: "${QBIT_USER}"
       QBT_PASSWORD: "${QBIT_PASS}"
 
-    service:
-      main:
-        type: LoadBalancer
-        loadBalancerIP: 10.1.0.147
-
     addons:
       vpn:
         type: gluetun
         killSwitch: true
         excludedNetworks_IPv4:
-          - "172.16.0.0/16"
           - "10.1.0.0/23"
         env:
           VPN_SERVICE_PROVIDER: protonvpn
@@ -76,6 +70,7 @@ spec:
           SERVER_COUNTRIES: United States
           PORT_FORWARD_ONLY: true
           VPN_PORT_FORWARDING: true
+          FIREWALL_INPUT_PORTS: 10095,8000
 
     ingress:
       main:
