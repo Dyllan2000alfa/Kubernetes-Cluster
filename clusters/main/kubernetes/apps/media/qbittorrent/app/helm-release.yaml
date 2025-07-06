@@ -61,15 +61,6 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: 10.1.0.147
-      proxy:
-        enabled: true
-        ports:
-          gluetun:
-            enabled: true
-            port: 8888
-            protocol: "http"
-            targetPort: 8888
-        type: "ClusterIP"
 
     addons:
       vpn:
@@ -79,10 +70,6 @@ spec:
           - "172.16.0.0/16"
           - "10.1.0.0/23"
         env:
-          HTTPPROXY: "on"
-          FIREWALL_INPUT_PORTS: 10095,8888
-          HTTPPROXY_LOG: "on"
-          HTTPPROXY_LISTENING_ADDRESS: :8888
           VPN_SERVICE_PROVIDER: protonvpn
           OPENVPN_USER: zHlRL5gr5LmlqvyA+pmp
           OPENVPN_PASSWORD: jTlI2HG1CRkUpkN7si8saL8NsLp2xewP
