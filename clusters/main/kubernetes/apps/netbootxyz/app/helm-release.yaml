@@ -35,4 +35,6 @@ spec:
     service:
       tftp:
         type: LoadBalancer
-        loadBalancerIP: ${NETBOOT_IP}
+        loadBalancerIPs:
+          - ${NETBOOT_IP1}
+          - ${NETBOOT_IP2}

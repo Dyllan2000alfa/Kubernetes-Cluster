@@ -33,9 +33,17 @@ spec:
             - name: main
               addressPools:
                 - main
+            - name: lan
+              addressPools:
+                - lan
         ipAddressPools:
             - name: main
               autoAssign: false
               avoidBuggyIPs: true
               addresses:
                 - ${METALLB_RANGE}
+            - name: lan
+              autoAssign: false
+              avoidBuggyIPs: true
+              addresses:
+                - ${METALLB_LAN_RANGE}
