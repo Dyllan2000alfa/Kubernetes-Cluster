@@ -105,10 +105,11 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - host: authentik.${DOMAIN_0}
+          - host: auth.${DOMAIN_0}
+          - host: "*.${DOMAIN_0}"
             paths:
-              - path: /
-                pathType: Prefix
+            - path: /outpost.goauthentik.io
+              pathType: Prefix
         integrations:
           traefik:
             enabled: false
@@ -176,7 +177,7 @@ spec:
               enabled: true
             src:
               enabled: true
-              
+
     redis:
       enabled: true
 
