@@ -43,11 +43,9 @@ spec:
 
     authentik:
       credentials:
-        # Only works on initial install
         email: ${AUTHENTIKLOGIN}
         password: ${AUTHENTIKPASS}
-        # Optional, only set if you want to use it
-        bootstrapToken: ""
+
       general:
         disableUpdateCheck: false
         disableStartupAnalytics: true
@@ -64,6 +62,7 @@ spec:
         footerLinks:
           - name: Authentik
             href: https://${DOMAIN_0}
+
       email:
         host: ${SMTP}
         port: 25
@@ -72,18 +71,12 @@ spec:
         useTLS: false
         useSSL: false
         timeout: 10
-        from: ""
-      ldap:
-        tlsCiphers: "null"
-        taskTimeoutHours: 2
+        from: "auth@tinoco.casa"
+
       logging:
         # info, debug, warning, error, trace
         logLevel: info
-      errorReporting:
-        enabled: false
-        sendPII: false
-        environment: customer
-        sentryDSN: ""
+
       geoip:
         enabled: false
         # Ignored if enabled is true
@@ -94,6 +87,7 @@ spec:
         frequency: 8
         accountID: ""
         licenseKey: ""
+      
       outposts:
         proxy:
           enabled: false
@@ -102,7 +96,7 @@ spec:
           enabled: false
           token: ${AUTHENTIKRAD}
         ldap:
-          enabled: true
+          enabled: false
           token: ${AUTHENTIKLDAP}
     
     ingress:
@@ -182,6 +176,9 @@ spec:
               enabled: true
             src:
               enabled: true
+              
+    redis:
+      enabled: true
 
     cnpg:
       main:
@@ -190,7 +187,7 @@ spec:
         cluster:
           singleNode: true
         user: authentik
-        #password: "${AUTHENTIK_DATABASE}"
+        password: "${AUTHENTIK_DATABASE}"
         database: authentik
         pgVersion: 15
         backups:
