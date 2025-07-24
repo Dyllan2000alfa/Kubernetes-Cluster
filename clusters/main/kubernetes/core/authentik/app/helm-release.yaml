@@ -117,91 +117,9 @@ spec:
             enabled: true
             certificateIssuer: domain-0-le-prod
 
-    persistence:
-      media:
-        accessModes:
-          - ReadWriteMany
-        volsync:
-          - name: config
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
-
-      templates:
-        accessModes:
-          - ReadWriteMany
-        volsync:
-          - name: templates
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
-
-      blueprints:
-        accessModes:
-          - ReadWriteMany
-        volsync:
-          - name: blueprints
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
-
-      certs:
-        accessModes:
-          - ReadWriteMany
-        volsync:
-          - name: certs
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
-
-      geoip:
-        accessModes:
-          - ReadWriteMany
-        volsync:
-          - name: geoip
-            type: restic
-            credentials: cloudflare
-            dest:
-              enabled: true
-            src:
-              enabled: true
-
     redis:
       enabled: true
 
     cnpg:
       main:
         enabled: true
-        mode: recovery
-        cluster:
-          singleNode: true
-        user: authentik
-        password: "${AUTHENTIK_DATABASE}"
-        database: authentik
-        pgVersion: 15
-        backups:
-          enabled: false
-          credentials: cloudflare
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 0 21 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false           
-          retentionPolicy: "7d"
-        recovery:
-          method: object_store
-          revision: "1"
-          credentials: cloudflare

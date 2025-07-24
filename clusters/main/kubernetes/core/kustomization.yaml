@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - metallb-config/ks.yaml
   - system-upgrade-controller-plans/ks.yaml
-  - authentik/ks.yaml
+  #- authentik/ks.yaml
   - blocky/ks.yaml
   - clusterissuer/ks.yaml
